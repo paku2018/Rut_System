@@ -1,0 +1,553 @@
+[56952] Log opened at 2021-12-06 00:57:17
+[56952] I: Connecting to configured address/port: 127.0.0.1:9000.
+[56952] E: Time-out connecting to client (Waited: 200 ms). :-(
+[56952] Log closed at 2021-12-06 00:57:17
+
+[52720] Log opened at 2021-12-06 00:58:22
+[52720] I: Connecting to configured address/port: 127.0.0.1:9000.
+[52720] E: Time-out connecting to client (Waited: 200 ms). :-(
+[52720] Log closed at 2021-12-06 00:58:22
+
+[62900] Log opened at 2021-12-06 00:58:23
+[62900] I: Connecting to configured address/port: 127.0.0.1:9000.
+[62900] E: Time-out connecting to client (Waited: 200 ms). :-(
+[62900] Log closed at 2021-12-06 00:58:24
+
+[61344] Log opened at 2021-12-06 00:58:25
+[61344] I: Connecting to configured address/port: 127.0.0.1:9000.
+[61344] E: Time-out connecting to client (Waited: 200 ms). :-(
+[61344] Log closed at 2021-12-06 00:58:25
+
+[62580] Log opened at 2021-12-06 00:59:50
+[62580] I: Connecting to configured address/port: 127.0.0.1:9000.
+[62580] E: Time-out connecting to client (Waited: 200 ms). :-(
+[62580] Log closed at 2021-12-06 00:59:50
+
+[28236] Log opened at 2021-12-06 01:00:07
+[28236] I: Connecting to configured address/port: 127.0.0.1:9000.
+[28236] E: Time-out connecting to client (Waited: 200 ms). :-(
+[28236] Log closed at 2021-12-06 01:00:08
+
+[15552] Log opened at 2021-12-06 01:00:09
+[15552] I: Connecting to configured address/port: 127.0.0.1:9000.
+[15552] E: Time-out connecting to client (Waited: 200 ms). :-(
+[15552] Log closed at 2021-12-06 01:00:10
+
+[47692] Log opened at 2021-12-06 01:00:31
+[47692] I: Connecting to configured address/port: 127.0.0.1:9000.
+[47692] E: Time-out connecting to client (Waited: 200 ms). :-(
+[47692] Log closed at 2021-12-06 01:00:31
+
+[47464] Log opened at 2021-12-06 04:27:34
+[47464] I: Connecting to configured address/port: 127.0.0.1:9000.
+[47464] E: Time-out connecting to client (Waited: 200 ms). :-(
+[47464] Log closed at 2021-12-06 04:27:35
+
+[56612] Log opened at 2021-12-06 04:38:27
+[56612] I: Connecting to configured address/port: 127.0.0.1:9000.
+[56612] E: Time-out connecting to client (Waited: 200 ms). :-(
+[56612] Log closed at 2021-12-06 04:38:27
+
+[54848] Log opened at 2021-12-06 07:35:49
+[54848] I: Connecting to configured address/port: 127.0.0.1:9000.
+[54848] E: Time-out connecting to client (Waited: 200 ms). :-(
+[54848] Log closed at 2021-12-06 07:35:49
+
+[54648] Log opened at 2021-12-06 07:36:02
+[54648] I: Connecting to configured address/port: 127.0.0.1:9000.
+[54648] E: Time-out connecting to client (Waited: 200 ms). :-(
+[54648] Log closed at 2021-12-06 07:36:02
+
+[31660] Log opened at 2021-12-06 08:29:33
+[31660] I: Connecting to configured address/port: 127.0.0.1:9000.
+[31660] E: Time-out connecting to client (Waited: 200 ms). :-(
+[31660] Log closed at 2021-12-06 08:29:34
+
+[70424] Log opened at 2021-12-06 15:01:56
+[70424] I: Connecting to configured address/port: 127.0.0.1:9000.
+[70424] E: Time-out connecting to client (Waited: 200 ms). :-(
+[70424] Log closed at 2021-12-06 15:01:56
+
+[16208] Log opened at 2021-12-06 15:01:57
+[16208] I: Connecting to configured address/port: 127.0.0.1:9000.
+[16208] E: Time-out connecting to client (Waited: 200 ms). :-(
+[16208] Log closed at 2021-12-06 15:01:58
+
+[68940] Log opened at 2021-12-06 15:03:02
+[68940] I: Connecting to configured address/port: 127.0.0.1:9000.
+[68940] E: Time-out connecting to client (Waited: 200 ms). :-(
+[68940] Log closed at 2021-12-06 15:03:02
+
+[58432] Log opened at 2021-12-06 15:03:31
+[58432] I: Connecting to configured address/port: 127.0.0.1:9000.
+[58432] E: Time-out connecting to client (Waited: 200 ms). :-(
+[58432] Log closed at 2021-12-06 15:03:31
+
+[59852] Log opened at 2021-12-06 15:06:37
+[59852] I: Connecting to configured address/port: 127.0.0.1:9000.
+[59852] E: Time-out connecting to client (Waited: 200 ms). :-(
+[59852] Log closed at 2021-12-06 15:06:37
+
+[69148] Log opened at 2021-12-06 15:06:38
+[69148] I: Connecting to configured address/port: 127.0.0.1:9000.
+[69148] E: Time-out connecting to client (Waited: 200 ms). :-(
+[69148] Log closed at 2021-12-06 15:06:38
+
+[70220] Log opened at 2021-12-06 15:06:47
+[70220] I: Connecting to configured address/port: 127.0.0.1:9000.
+[70220] E: Time-out connecting to client (Waited: 200 ms). :-(
+[70220] Log closed at 2021-12-06 15:06:47
+
+[63700] Log opened at 2021-12-06 15:07:25
+[63700] I: Connecting to configured address/port: 127.0.0.1:9000.
+[63700] E: Time-out connecting to client (Waited: 200 ms). :-(
+[63700] Log closed at 2021-12-06 15:07:25
+
+[70264] Log opened at 2021-12-06 15:17:31
+[70264] I: Connecting to configured address/port: 127.0.0.1:9000.
+[70264] E: Time-out connecting to client (Waited: 200 ms). :-(
+[70264] Log closed at 2021-12-06 15:17:31
+
+[71984] Log opened at 2021-12-07 02:19:48
+[71984] I: Connecting to configured address/port: 127.0.0.1:9000.
+[71984] E: Time-out connecting to client (Waited: 200 ms). :-(
+[71984] Log closed at 2021-12-07 02:19:48
+
+[10912] Log opened at 2021-12-07 04:53:55
+[10912] I: Connecting to configured address/port: 127.0.0.1:9000.
+[10912] I: Connected to client. :-)
+[10912] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///D:/Dev/restSystem/artisan" language="PHP" xdebug:language_version="7.3.13" protocol_version="1.0" appid="10912" idekey="mails"><engine version="2.9.4"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2020 by Derick Rethans]]></copyright></init>
+
+[10912] <- feature_set -i 1 -n show_hidden -v 1
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="show_hidden" success="1"></response>
+
+[10912] <- feature_set -i 2 -n max_depth -v 1
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="max_depth" success="1"></response>
+
+[10912] <- feature_set -i 3 -n max_children -v 100
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="max_children" success="1"></response>
+
+[10912] <- feature_set -i 4 -n extended_properties -v 1
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="extended_properties" success="1"></response>
+
+[10912] <- feature_set -i 5 -n notify_ok -v 1
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="notify_ok" success="1"></response>
+
+[10912] <- feature_set -i 6 -n resolved_breakpoints -v 1
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="6" feature="resolved_breakpoints" success="1"></response>
+
+[10912] <- stdout -i 7 -c 1
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stdout" transaction_id="7" success="1"></response>
+
+[10912] <- status -i 8
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="status" transaction_id="8" status="starting" reason="ok"></response>
+
+[10912] <- step_into -i 9
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="step_into" transaction_id="9" status="break" reason="ok"><xdebug:message filename="file:///D:/Dev/restSystem/artisan" lineno="4"></xdebug:message></response>
+
+[10912] <- eval -i 10 -- aXNzZXQoJF9TRVJWRVJbJ1BIUF9JREVfQ09ORklHJ10p
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="10"><property type="bool"><![CDATA[0]]></property></response>
+
+[10912] <- eval -i 11 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9OQU1FJ10p
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="11"><property type="bool"><![CDATA[0]]></property></response>
+
+[10912] <- eval -i 12 -- aXNzZXQoJF9TRVJWRVJbJ1NTSF9DT05ORUNUSU9OJ10p
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="12"><property type="bool"><![CDATA[0]]></property></response>
+
+[10912] <- eval -i 13 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9BRERSJ10p
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="13"><property type="bool"><![CDATA[0]]></property></response>
+
+[10912] <- stack_get -i 14
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stack_get" transaction_id="14"><stack where="{main}" level="0" type="file" filename="file:///D:/Dev/restSystem/artisan" lineno="4"></stack></response>
+
+[10912] <- run -i 15
+[10912] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="15" status="stopping" reason="ok"></response>
+
+[10912] <- run -i 16
+[10912] Log closed at 2021-12-07 04:53:56
+
+[4552] Log opened at 2021-12-07 06:26:37
+[4552] I: Connecting to configured address/port: 127.0.0.1:9000.
+[4552] I: Connected to client. :-)
+[4552] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///D:/Dev/restSystem/artisan" language="PHP" xdebug:language_version="7.3.13" protocol_version="1.0" appid="4552" idekey="mails"><engine version="2.9.4"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2020 by Derick Rethans]]></copyright></init>
+
+[4552] <- feature_set -i 1 -n show_hidden -v 1
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="show_hidden" success="1"></response>
+
+[4552] <- feature_set -i 2 -n max_depth -v 1
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="max_depth" success="1"></response>
+
+[4552] <- feature_set -i 3 -n max_children -v 100
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="max_children" success="1"></response>
+
+[4552] <- feature_set -i 4 -n extended_properties -v 1
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="extended_properties" success="1"></response>
+
+[4552] <- feature_set -i 5 -n notify_ok -v 1
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="notify_ok" success="1"></response>
+
+[4552] <- feature_set -i 6 -n resolved_breakpoints -v 1
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="6" feature="resolved_breakpoints" success="1"></response>
+
+[4552] <- stdout -i 7 -c 1
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stdout" transaction_id="7" success="1"></response>
+
+[4552] <- status -i 8
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="status" transaction_id="8" status="starting" reason="ok"></response>
+
+[4552] <- step_into -i 9
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="step_into" transaction_id="9" status="break" reason="ok"><xdebug:message filename="file:///D:/Dev/restSystem/artisan" lineno="4"></xdebug:message></response>
+
+[4552] <- eval -i 10 -- aXNzZXQoJF9TRVJWRVJbJ1BIUF9JREVfQ09ORklHJ10p
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="10"><property type="bool"><![CDATA[0]]></property></response>
+
+[4552] <- eval -i 11 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9OQU1FJ10p
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="11"><property type="bool"><![CDATA[0]]></property></response>
+
+[4552] <- eval -i 12 -- aXNzZXQoJF9TRVJWRVJbJ1NTSF9DT05ORUNUSU9OJ10p
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="12"><property type="bool"><![CDATA[0]]></property></response>
+
+[4552] <- eval -i 13 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9BRERSJ10p
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="13"><property type="bool"><![CDATA[0]]></property></response>
+
+[4552] <- stack_get -i 14
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stack_get" transaction_id="14"><stack where="{main}" level="0" type="file" filename="file:///D:/Dev/restSystem/artisan" lineno="4"></stack></response>
+
+[4552] <- run -i 15
+[4552] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="15" status="stopping" reason="ok"></response>
+
+[4552] <- run -i 16
+[4552] Log closed at 2021-12-07 06:26:38
+
+[13336] Log opened at 2021-12-07 06:36:56
+[13336] I: Connecting to configured address/port: 127.0.0.1:9000.
+[13336] I: Connected to client. :-)
+[13336] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///D:/Dev/restSystem/artisan" language="PHP" xdebug:language_version="7.3.13" protocol_version="1.0" appid="13336" idekey="mails"><engine version="2.9.4"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2020 by Derick Rethans]]></copyright></init>
+
+[13336] <- feature_set -i 1 -n show_hidden -v 1
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="show_hidden" success="1"></response>
+
+[13336] <- feature_set -i 2 -n max_depth -v 1
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="max_depth" success="1"></response>
+
+[13336] <- feature_set -i 3 -n max_children -v 100
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="max_children" success="1"></response>
+
+[13336] <- feature_set -i 4 -n extended_properties -v 1
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="extended_properties" success="1"></response>
+
+[13336] <- feature_set -i 5 -n notify_ok -v 1
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="notify_ok" success="1"></response>
+
+[13336] <- feature_set -i 6 -n resolved_breakpoints -v 1
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="6" feature="resolved_breakpoints" success="1"></response>
+
+[13336] <- stdout -i 7 -c 1
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stdout" transaction_id="7" success="1"></response>
+
+[13336] <- status -i 8
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="status" transaction_id="8" status="starting" reason="ok"></response>
+
+[13336] <- step_into -i 9
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="step_into" transaction_id="9" status="break" reason="ok"><xdebug:message filename="file:///D:/Dev/restSystem/artisan" lineno="4"></xdebug:message></response>
+
+[13336] <- eval -i 10 -- aXNzZXQoJF9TRVJWRVJbJ1BIUF9JREVfQ09ORklHJ10p
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="10"><property type="bool"><![CDATA[0]]></property></response>
+
+[13336] <- eval -i 11 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9OQU1FJ10p
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="11"><property type="bool"><![CDATA[0]]></property></response>
+
+[13336] <- eval -i 12 -- aXNzZXQoJF9TRVJWRVJbJ1NTSF9DT05ORUNUSU9OJ10p
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="12"><property type="bool"><![CDATA[0]]></property></response>
+
+[13336] <- eval -i 13 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9BRERSJ10p
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="13"><property type="bool"><![CDATA[0]]></property></response>
+
+[13336] <- stack_get -i 14
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stack_get" transaction_id="14"><stack where="{main}" level="0" type="file" filename="file:///D:/Dev/restSystem/artisan" lineno="4"></stack></response>
+
+[13336] <- run -i 15
+[13336] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="15" status="stopping" reason="ok"></response>
+
+[13336] <- run -i 16
+[13336] Log closed at 2021-12-07 06:36:57
+
+[12132] Log opened at 2021-12-07 06:39:58
+[12132] I: Connecting to configured address/port: 127.0.0.1:9000.
+[12132] I: Connected to client. :-)
+[12132] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///D:/Dev/restSystem/artisan" language="PHP" xdebug:language_version="7.3.13" protocol_version="1.0" appid="12132" idekey="mails"><engine version="2.9.4"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2020 by Derick Rethans]]></copyright></init>
+
+[12132] <- feature_set -i 1 -n show_hidden -v 1
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="show_hidden" success="1"></response>
+
+[12132] <- feature_set -i 2 -n max_depth -v 1
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="max_depth" success="1"></response>
+
+[12132] <- feature_set -i 3 -n max_children -v 100
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="max_children" success="1"></response>
+
+[12132] <- feature_set -i 4 -n extended_properties -v 1
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="extended_properties" success="1"></response>
+
+[12132] <- feature_set -i 5 -n notify_ok -v 1
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="notify_ok" success="1"></response>
+
+[12132] <- feature_set -i 6 -n resolved_breakpoints -v 1
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="6" feature="resolved_breakpoints" success="1"></response>
+
+[12132] <- stdout -i 7 -c 1
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stdout" transaction_id="7" success="1"></response>
+
+[12132] <- status -i 8
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="status" transaction_id="8" status="starting" reason="ok"></response>
+
+[12132] <- step_into -i 9
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="step_into" transaction_id="9" status="break" reason="ok"><xdebug:message filename="file:///D:/Dev/restSystem/artisan" lineno="4"></xdebug:message></response>
+
+[12132] <- eval -i 10 -- aXNzZXQoJF9TRVJWRVJbJ1BIUF9JREVfQ09ORklHJ10p
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="10"><property type="bool"><![CDATA[0]]></property></response>
+
+[12132] <- eval -i 11 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9OQU1FJ10p
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="11"><property type="bool"><![CDATA[0]]></property></response>
+
+[12132] <- eval -i 12 -- aXNzZXQoJF9TRVJWRVJbJ1NTSF9DT05ORUNUSU9OJ10p
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="12"><property type="bool"><![CDATA[0]]></property></response>
+
+[12132] <- eval -i 13 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9BRERSJ10p
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="13"><property type="bool"><![CDATA[0]]></property></response>
+
+[12132] <- stack_get -i 14
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stack_get" transaction_id="14"><stack where="{main}" level="0" type="file" filename="file:///D:/Dev/restSystem/artisan" lineno="4"></stack></response>
+
+[12132] <- run -i 15
+[12132] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="15" status="stopping" reason="ok"></response>
+
+[12132] <- run -i 16
+[12132] Log closed at 2021-12-07 06:39:59
+
+[13652] Log opened at 2021-12-07 07:24:45
+[13652] I: Connecting to configured address/port: 127.0.0.1:9000.
+[13652] I: Connected to client. :-)
+[13652] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///D:/Dev/restSystem/artisan" language="PHP" xdebug:language_version="7.3.13" protocol_version="1.0" appid="13652" idekey="mails"><engine version="2.9.4"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2020 by Derick Rethans]]></copyright></init>
+
+[13652] <- feature_set -i 1 -n show_hidden -v 1
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="show_hidden" success="1"></response>
+
+[13652] <- feature_set -i 2 -n max_depth -v 1
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="max_depth" success="1"></response>
+
+[13652] <- feature_set -i 3 -n max_children -v 100
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="max_children" success="1"></response>
+
+[13652] <- feature_set -i 4 -n extended_properties -v 1
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="extended_properties" success="1"></response>
+
+[13652] <- feature_set -i 5 -n notify_ok -v 1
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="notify_ok" success="1"></response>
+
+[13652] <- feature_set -i 6 -n resolved_breakpoints -v 1
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="6" feature="resolved_breakpoints" success="1"></response>
+
+[13652] <- stdout -i 7 -c 1
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stdout" transaction_id="7" success="1"></response>
+
+[13652] <- status -i 8
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="status" transaction_id="8" status="starting" reason="ok"></response>
+
+[13652] <- step_into -i 9
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="step_into" transaction_id="9" status="break" reason="ok"><xdebug:message filename="file:///D:/Dev/restSystem/artisan" lineno="4"></xdebug:message></response>
+
+[13652] <- eval -i 10 -- aXNzZXQoJF9TRVJWRVJbJ1BIUF9JREVfQ09ORklHJ10p
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="10"><property type="bool"><![CDATA[0]]></property></response>
+
+[13652] <- eval -i 11 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9OQU1FJ10p
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="11"><property type="bool"><![CDATA[0]]></property></response>
+
+[13652] <- eval -i 12 -- aXNzZXQoJF9TRVJWRVJbJ1NTSF9DT05ORUNUSU9OJ10p
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="12"><property type="bool"><![CDATA[0]]></property></response>
+
+[13652] <- eval -i 13 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9BRERSJ10p
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="13"><property type="bool"><![CDATA[0]]></property></response>
+
+[13652] <- stack_get -i 14
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stack_get" transaction_id="14"><stack where="{main}" level="0" type="file" filename="file:///D:/Dev/restSystem/artisan" lineno="4"></stack></response>
+
+[13652] <- run -i 15
+[13652] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="15" status="stopping" reason="ok"></response>
+
+[13652] <- run -i 16
+[13652] Log closed at 2021-12-07 07:24:46
+
+[19172] Log opened at 2021-12-07 15:18:59
+[19172] I: Connecting to configured address/port: 127.0.0.1:9000.
+[19172] I: Connected to client. :-)
+[19172] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///D:/Dev/restSystem/artisan" language="PHP" xdebug:language_version="7.3.13" protocol_version="1.0" appid="19172" idekey="mails"><engine version="2.9.4"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2020 by Derick Rethans]]></copyright></init>
+
+[19172] <- feature_set -i 1 -n show_hidden -v 1
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="show_hidden" success="1"></response>
+
+[19172] <- feature_set -i 2 -n max_depth -v 1
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="max_depth" success="1"></response>
+
+[19172] <- feature_set -i 3 -n max_children -v 100
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="max_children" success="1"></response>
+
+[19172] <- feature_set -i 4 -n extended_properties -v 1
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="extended_properties" success="1"></response>
+
+[19172] <- feature_set -i 5 -n notify_ok -v 1
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="notify_ok" success="1"></response>
+
+[19172] <- feature_set -i 6 -n resolved_breakpoints -v 1
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="6" feature="resolved_breakpoints" success="1"></response>
+
+[19172] <- stdout -i 7 -c 1
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stdout" transaction_id="7" success="1"></response>
+
+[19172] <- status -i 8
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="status" transaction_id="8" status="starting" reason="ok"></response>
+
+[19172] <- step_into -i 9
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="step_into" transaction_id="9" status="break" reason="ok"><xdebug:message filename="file:///D:/Dev/restSystem/artisan" lineno="4"></xdebug:message></response>
+
+[19172] <- eval -i 10 -- aXNzZXQoJF9TRVJWRVJbJ1BIUF9JREVfQ09ORklHJ10p
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="10"><property type="bool"><![CDATA[0]]></property></response>
+
+[19172] <- eval -i 11 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9OQU1FJ10p
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="11"><property type="bool"><![CDATA[0]]></property></response>
+
+[19172] <- eval -i 12 -- aXNzZXQoJF9TRVJWRVJbJ1NTSF9DT05ORUNUSU9OJ10p
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="12"><property type="bool"><![CDATA[0]]></property></response>
+
+[19172] <- eval -i 13 -- aXNzZXQoJF9TRVJWRVJbJ1NFUlZFUl9BRERSJ10p
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="eval" transaction_id="13"><property type="bool"><![CDATA[0]]></property></response>
+
+[19172] <- stack_get -i 14
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stack_get" transaction_id="14"><stack where="{main}" level="0" type="file" filename="file:///D:/Dev/restSystem/artisan" lineno="4"></stack></response>
+
+[19172] <- run -i 15
+[19172] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="15" status="stopping" reason="ok"></response>
+
+[19172] <- run -i 16
+[19172] Log closed at 2021-12-07 15:19:00
+
+[16424] Log opened at 2021-12-07 15:39:03
+[16424] I: Connecting to configured address/port: 127.0.0.1:9000.
+[16424] E: Time-out connecting to client (Waited: 200 ms). :-(
+[16424] Log closed at 2021-12-07 15:39:04
+
+[15304] Log opened at 2021-12-07 15:39:05
+[15304] I: Connecting to configured address/port: 127.0.0.1:9000.
+[15304] E: Time-out connecting to client (Waited: 200 ms). :-(
+[15304] Log closed at 2021-12-07 15:39:05
+
+[15040] Log opened at 2021-12-07 15:40:15
+[15040] I: Connecting to configured address/port: 127.0.0.1:9000.
+[15040] E: Time-out connecting to client (Waited: 200 ms). :-(
+[15040] Log closed at 2021-12-07 15:40:15
+
+[1004] Log opened at 2021-12-07 15:41:37
+[1004] I: Connecting to configured address/port: 127.0.0.1:9000.
+[1004] E: Time-out connecting to client (Waited: 200 ms). :-(
+[1004] Log closed at 2021-12-07 15:41:37
+
+[20264] Log opened at 2021-12-08 00:57:57
+[20264] I: Connecting to configured address/port: 127.0.0.1:9000.
+[20264] E: Time-out connecting to client (Waited: 200 ms). :-(
+[20264] Log closed at 2021-12-08 00:57:57
+
+[17392] Log opened at 2021-12-08 09:26:35
+[17392] I: Connecting to configured address/port: 127.0.0.1:9000.
+[17392] E: Time-out connecting to client (Waited: 200 ms). :-(
+[17392] Log closed at 2021-12-08 09:26:35
+
+[15228] Log opened at 2021-12-08 09:37:20
+[15228] I: Connecting to configured address/port: 127.0.0.1:9000.
+[15228] E: Time-out connecting to client (Waited: 200 ms). :-(
+[15228] Log closed at 2021-12-08 09:37:20
+
+[21372] Log opened at 2021-12-09 08:19:00
+[21372] I: Connecting to configured address/port: 127.0.0.1:9000.
+[21372] E: Time-out connecting to client (Waited: 200 ms). :-(
+[21372] Log closed at 2021-12-09 08:19:00
+
+[28808] Log opened at 2021-12-09 08:19:16
+[28808] I: Connecting to configured address/port: 127.0.0.1:9000.
+[28808] E: Time-out connecting to client (Waited: 200 ms). :-(
+[28808] Log closed at 2021-12-09 08:19:17
+
+[34440] Log opened at 2021-12-09 08:19:18
+[34440] I: Connecting to configured address/port: 127.0.0.1:9000.
+[34440] E: Time-out connecting to client (Waited: 200 ms). :-(
+[34440] Log closed at 2021-12-09 08:19:18
+
+[32880] Log opened at 2021-12-09 08:20:33
+[32880] I: Connecting to configured address/port: 127.0.0.1:9000.
+[32880] E: Time-out connecting to client (Waited: 200 ms). :-(
+[32880] Log closed at 2021-12-09 08:20:33
+
+[31500] Log opened at 2021-12-09 08:29:40
+[31500] I: Connecting to configured address/port: 127.0.0.1:9000.
+[31500] E: Time-out connecting to client (Waited: 200 ms). :-(
+[31500] Log closed at 2021-12-09 08:29:40
+
+[26812] Log opened at 2021-12-09 10:00:27
+[26812] I: Connecting to configured address/port: 127.0.0.1:9000.
+[26812] E: Time-out connecting to client (Waited: 200 ms). :-(
+[26812] Log closed at 2021-12-09 10:00:27
+
+[36168] Log opened at 2021-12-09 14:32:23
+[36168] I: Connecting to configured address/port: 127.0.0.1:9000.
+[36168] E: Time-out connecting to client (Waited: 200 ms). :-(
+[36168] Log closed at 2021-12-09 14:32:23
+
+[19960] Log opened at 2021-12-09 14:32:24
+[19960] I: Connecting to configured address/port: 127.0.0.1:9000.
+[19960] E: Time-out connecting to client (Waited: 200 ms). :-(
+[19960] Log closed at 2021-12-09 14:32:24
+
+[33896] Log opened at 2021-12-09 14:32:33
+[33896] I: Connecting to configured address/port: 127.0.0.1:9000.
+[33896] E: Time-out connecting to client (Waited: 200 ms). :-(
+[33896] Log closed at 2021-12-09 14:32:34
+
+[35820] Log opened at 2021-12-09 14:36:32
+[35820] I: Connecting to configured address/port: 127.0.0.1:9000.
+[35820] E: Time-out connecting to client (Waited: 200 ms). :-(
+[35820] Log closed at 2021-12-09 14:36:32
+
+[23080] Log opened at 2021-12-09 15:08:24
+[23080] I: Connecting to configured address/port: 127.0.0.1:9000.
+[23080] E: Time-out connecting to client (Waited: 200 ms). :-(
+[23080] Log closed at 2021-12-09 15:08:24
+
+[26444] Log opened at 2021-12-09 16:44:16
+[26444] I: Connecting to configured address/port: 127.0.0.1:9000.
+[26444] E: Time-out connecting to client (Waited: 200 ms). :-(
+[26444] Log closed at 2021-12-09 16:44:16
+
+[43112] Log opened at 2021-12-10 13:33:11
+[43112] I: Connecting to configured address/port: 127.0.0.1:9000.
+[43112] E: Time-out connecting to client (Waited: 200 ms). :-(
+[43112] Log closed at 2021-12-10 13:33:11
+
+[12500] Log opened at 2021-12-10 13:33:15
+[12500] I: Connecting to configured address/port: 127.0.0.1:9000.
+[12500] E: Time-out connecting to client (Waited: 200 ms). :-(
+[12500] Log closed at 2021-12-10 13:33:15
+
+[39556] Log opened at 2021-12-10 13:34:27
+[39556] I: Connecting to configured address/port: 127.0.0.1:9000.
+[39556] E: Time-out connecting to client (Waited: 200 ms). :-(
+[39556] Log closed at 2021-12-10 13:34:27
+
+[46496] Log opened at 2021-12-10 13:37:35
+[46496] I: Connecting to configured address/port: 127.0.0.1:9000.
+[46496] E: Time-out connecting to client (Waited: 200 ms). :-(
+[46496] Log closed at 2021-12-10 13:37:35
+
+[19928] Log opened at 2021-12-13 03:44:36
+[19928] I: Connecting to configured address/port: 127.0.0.1:9000.
+[19928] E: Time-out connecting to client (Waited: 200 ms). :-(
+[19928] Log closed at 2021-12-13 03:44:36
+
