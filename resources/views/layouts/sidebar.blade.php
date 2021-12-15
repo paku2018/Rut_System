@@ -90,6 +90,20 @@
                         </a>
                     </li>
                 @endif
+                @if($user->role == "cashier")
+                    <li class="nav-item {{($link=="tables")?'active':''}}">
+                        <a href="{{route('cashier.tables')}}">
+                            <i class="fas fa-table"></i>
+                            <p>@lang('tables')</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{($link=="report")?'active':''}}">
+                        <a href="#">
+                            <i class="fas fa-file-alt"></i>
+                            <p>@lang('report')</p>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

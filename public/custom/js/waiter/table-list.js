@@ -18,23 +18,33 @@ $(document).on('click','.table-box', function () {
                 if(data.status == "closed"){
                     $("input[name=orderType][value='0']").prop('checked', true);
                     $('#optionModal').modal('show');
-                }else{
+                }else if(data.status == "open"){
                     let orders = response.orders;
                     let code = '';
                     let total = 0;
                     for (let i=0; i<orders.length; i++){
-                        code += '<tr>'
-                        code += '<td>' + orders[i].client.name + '</td>'
-                        code += '<td>' + orders[i].product.name + '</td>'
-                        code += '<td>' + orders[i].product.sale_price + '</td>'
-                        code += '<td>' + orders[i].order_count + '</td>'
-                        code += '</tr>'
+                        let val = orders[i].product.sale_price * orders[i].order_count;
+                        code += ' <div class="d-flex justify-content-between">\n' +
+                            '                                    <h4 class="text-danger mb-1">' + orders[i].product.name + '</h4>\n' +
+                            '                                    <h4 class="mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
+                            '                                </div>'
 
-                        total += orders[i].product.sale_price * orders[i].order_count;
+                        total += val;
                     }
-                    $('#detail-body').html(code);
+                    $('#assigned-orders').html(code);
                     $('#detail-total').html(total);
+                    checkCount()
+                    $('.btn-pend').prop('disabled', false)
                     $('#detailModal').modal('show')
+                }else{
+                    swal(langs('messages.wait_cashier_close_table'), {
+                        icon: "info",
+                        buttons : {
+                            confirm : {
+                                className: 'btn btn-black'
+                            }
+                        }
+                    })
                 }
             }else{
                 swal(langs('messages.server_error'), {
@@ -73,6 +83,7 @@ $(document).on('click','.btn-next', function () {
                             '<td><input type="checkbox" name="select_all" class="all"></td>\n' +
                             '<td>' + langs('messages.client') + '</td>\n' +
                             '<td>' + langs('messages.product') + '</td>\n' +
+                            '<td>' + langs('messages.image') + '</td>\n' +
                             '<td>' + langs('messages.price') + '</td>\n' +
                             '<td>' + langs('messages.count') + '</td>\n' +
                             '</tr>\n';
@@ -81,6 +92,7 @@ $(document).on('click','.btn-next', function () {
                             code += '<td><input type="checkbox" name="items_'+data[i].id+'" class="items" data-value="'+ data[i].id +'" data-price="'+ data[i].product.sale_price +'" data-count="'+ data[i].order_count +'" value="'+ data[i].id +'"></td>'
                             code += '<td>' + data[i].client.name + '</td>'
                             code += '<td>' + data[i].product.name + '</td>'
+                            code += '<td> <img src="' + data[i].product.image + '" alt="no_img" class="preview-image"></td>'
                             code += '<td>' + data[i].product.sale_price + '</td>'
                             code += '<td>' + data[i].order_count + '</td>'
                             code += '</tr>'
@@ -110,7 +122,10 @@ $(document).on('click','.btn-next', function () {
     }
     else{
         checkCount();
-        $('#newModal').modal('show');
+        $('#assigned-orders').html('');
+        $('#detail-total').html(0)
+        $('.btn-pend').prop('disabled', true)
+        setTimeout(function(){$('#detailModal').modal('show');}, 500);
     }
 })
 $(document).on('click', '.all', function () {
@@ -231,21 +246,25 @@ $('.plus-btn').on('click', function(e) {
 });
 
 function checkCount(){
-    let client = $('#client').val();
-    if (!client){
-        $('.btn-order').prop('disabled', true)
-        return;
-    }
+    let new_total = 0;
     let count = 0;
     $('.order_count').each(function () {
         let val = $(this).val();
         if(val > 0){
             count ++;
+            let price = $(this).data('price')
+            new_total += val * price
         }
     })
     if (count > 0){
         $('.btn-order').prop('disabled', false)
     }else{
+        $('.btn-order').prop('disabled', true)
+    }
+    $('#new-total').html(new_total)
+
+    let client = $('#client').val();
+    if (!client){
         $('.btn-order').prop('disabled', true)
     }
 }
@@ -299,5 +318,58 @@ $(document).on('click','.btn-order', function () {
                 });
             }
         },
+    });
+})
+
+$(document).on('click','.btn-pend', function () {
+    showLoading()
+    let formData = new FormData();
+    formData.append('tableId',tableId);
+    formData.append('_token',_token);
+    $.ajax({
+        url: path_pend_table,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            hideLoading()
+            if(response.result){
+                $('#detailModal').modal('hide');
+                swal(langs('messages.success'), {
+                    icon: "success",
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-success'
+                        }
+                    }
+                }).then((confirmed) => {
+                    location.reload();
+                });
+            }else{
+                swal(langs('messages.server_error'), {
+                    icon: "error",
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((confirmed) => {
+                    location.reload();
+                });
+            }
+        },
+    });
+})
+
+$(document).ready(function () {
+    $('#dt_table').DataTable({
+        "pageLength": 10,
+        "lengthChange": false,
+        "bFilter": false,
+        "order": [[ 1, 'asc' ]],
+        "aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [ 0, 3 ] }
+        ]
     });
 })

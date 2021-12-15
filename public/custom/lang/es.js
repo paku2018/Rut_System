@@ -18,14 +18,18 @@ var lang = {
         'input_greater_0': 'Ingrese un valor mayor que 0.',
         'product_will_delete': 'Este Producto se eliminará.',
         'server_error': 'Error del Servidor',
-        'success': 'Success',
+        'success': 'Éxito',
         'ok': 'OK',
         'code_not_valid': 'El código no es válido.',
         'resent_code': 'Nosotros enviamos un código de nuevo.',
-        'client': 'Client',
-        'product': 'Product',
-        'count': 'Count',
-        'price': 'Price',
-        'total': 'Total'
+        'client': 'Cliente',
+        'product': 'Producto',
+        'count': 'Contar',
+        'price': 'Precio',
+        'total': 'Total',
+        'wait_cashier_close_table': 'Esperando mesa de cierre de caja.',
+        'image': 'Imagen',
+        'no_orders_yet': 'No hay ordenes',
+        'table_will_close': 'Esta mesa estará cerrada.'
     }
 }

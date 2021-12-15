@@ -94,5 +94,11 @@ Route::group(['middleware'=>'checkMember'],function () {
     Route::group(['prefix' => 'waiter', 'as' => 'waiter.'], function () {
         Route::get('/tables', [App\Http\Controllers\Member\TableController::class, 'index'])->name('tables');
         Route::post('/createOrder', [App\Http\Controllers\Member\OrderController::class, 'createAndAssign'])->name('create-order');
+        Route::post('/pendTable', [App\Http\Controllers\Member\TableController::class, 'pend'])->name('pend-table');
+    });
+
+    Route::group(['prefix' => 'cashier', 'as' => 'cashier.'], function () {
+        Route::get('/tables', [App\Http\Controllers\Member\TableController::class, 'cashierIndex'])->name('tables');
+        Route::post('/closeTable', [App\Http\Controllers\Member\TableController::class, 'close'])->name('close-table');
     });
 });

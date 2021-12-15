@@ -19,7 +19,7 @@ class CheckMember
     {
         if(Auth::guard()->check() === false){
             return redirect('/login');
-        }elseif (Auth::user()->role != 'waiter' && Auth::user()->role == 'cashier'){
+        }elseif (Auth::user()->role != 'waiter' && Auth::user()->role != 'cashier'){
             return redirect('/home');
         }
         return $next($request);

@@ -107,3 +107,20 @@
     max-width: 100px;
     max-height: 50px
 }
+
+.border-radius-20{
+    border-radius: 20px;
+}
+.order-image{
+    width: 80px;
+}
+.view-order-list{
+    max-height: 500px;
+    overflow-y: auto;
+}
+.detail{
+    border-bottom: 1px dashed black;
+}
+.b-b-grey{
+    border-bottom: 1px solid grey;
+}
