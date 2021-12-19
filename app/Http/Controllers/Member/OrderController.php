@@ -38,7 +38,6 @@ class OrderController extends Controller
         try{
             $tableId = $request->tableId;
             $table = Table::find($tableId);
-            $clientId = $request->client;
             $items = $request->items;
             $items = json_decode($items);
             foreach ($items as $key => $item){
@@ -47,8 +46,8 @@ class OrderController extends Controller
                         'restaurant_id' => $table->restaurant_id,
                         'product_id' => $key,
                         'order_count' => $item,
-                        'user_id' => $clientId,
                         'status' => 'open',
+                        'client_id' => $table->current_client_id,
                         'assigned_table_id' => $tableId
                     ];
                     Order::create($data);

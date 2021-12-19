@@ -199,5 +199,9 @@
     "order_list": "Lista de ordens",
     "add_order": "Agregar nuevo orden",
     "close_table": "Cerrar mesa",
-    "provisional_close": "Provisional cerrado"
+    "provisional_close": "Provisional cerrado",
+    "verify_your_email": "Verify your email",
+    "order": "Order",
+    "verification_code": "Verification Code",
+    "delivery": "Delivery"
 }

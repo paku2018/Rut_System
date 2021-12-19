@@ -60,10 +60,10 @@
                     <div class="form-group form-action-d-flex mb-3" style="justify-content: flex-end !important;">
                         <button type="submit" class="btn btn-black btn-round col-md-5 float-right mt-3 mt-sm-0 fw-bold">@lang('login')</button>
                     </div>
-                    <div class="login-account">
-                        <span class="msg">@lang('no_account') ?</span>
-                        <a href="{{route('register')}}" class="msg">@lang('register')</a>
-                    </div>
+{{--                    <div class="login-account">--}}
+{{--                        <span class="msg">@lang('no_account') ?</span>--}}
+{{--                        <a href="{{route('register')}}" class="msg">@lang('register')</a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </form>

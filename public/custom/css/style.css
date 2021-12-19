@@ -124,3 +124,8 @@
 .b-b-grey{
     border-bottom: 1px solid grey;
 }
+
+.btn-circle{
+    border-radius: 25px;
+    padding: 10px 20px;
+}

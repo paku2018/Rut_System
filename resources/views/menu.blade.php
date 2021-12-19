@@ -40,15 +40,6 @@
                             <h6 class="tm-site-description">@lang('please_order_here')</h6>
                         </div>
                     </div>
-                    <nav class="col-md-6 col-12 tm-nav">
-                        <ul class="tm-nav-ul">
-                            <li class="tm-nav-li"><a href="#" class="tm-nav-link active">Home</a></li>
-                            @if(\Illuminate\Support\Facades\Auth::check() == false)
-                                <li class="tm-nav-li"><a href="{{route('login')}}" class="tm-nav-link">@lang('login')</a></li>
-                                <li class="tm-nav-li"><a href="{{route('register')}}" class="tm-nav-link">@lang('register')</a></li>
-                            @endif
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
@@ -83,14 +74,68 @@
                     </article>
                 @endforeach
                 <div class="order-box text-center col-12">
-                    <button type="button" class="btn btn-order">@lang('order_now')</button>
-                    <input type="hidden" id="logged-status" value="{{\Illuminate\Support\Facades\Auth::check()}}">
+                    <button type="button" class="btn btn-order" id="order">@lang('order_now')</button>
                 </div>
-                @if(\Illuminate\Support\Facades\Auth::check() == false)
-                    <div class="alert mb-4 col-12">
-                        <h5 class="text-danger text-center">Before ordering, please make sure to <a href="{{ route('login') }}">@lang('login')</a></h5>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-labelledby="verifyModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="verifyModalLongTitle">@lang('order_info')</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                @endif
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="email">@lang('email')<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="email" name="email" required onchange="checkConfirmBtn()">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="v_code">@lang('verification_code')<span class="text-danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="v_code" name="v_code" onchange="checkConfirmBtn()">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-info" id="send_code">@lang('send_code')</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check pl-0">
+                                <label class="form-radio-label">
+                                    <input class="form-radio-input" type="radio" name="orderType" value="0" checked onchange="checkOrderType()">
+                                    <span class="form-radio-sign">@lang('table')</span>
+                                </label>
+                                <label class="form-radio-label ml-3">
+                                    <input class="form-radio-input" type="radio" name="orderType" value="1" onchange="checkOrderType()">
+                                    <span class="form-radio-sign">@lang('delivery')</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 table-option">
+                            <div class="form-group">
+                                <label for="table">@lang('table')<span class="text-danger">*</span></label>
+                                <select class="form-control" id="table" name="table" required onchange="checkConfirmBtn()">
+                                    <option value="" disabled selected>@lang('select')</option>
+                                    @foreach($tables as $table)
+                                        <option value="{{$table->id}}">@lang('table')-{{$table->t_number}}({{$table->name}})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-order" id="confirm-order">@lang('order_now')</button>
+                        <button type="button" class="btn btn-round btn-secondary btn-circle" data-dismiss="modal">@lang('cancel')</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -101,9 +146,12 @@
 </div>
 <script src="{{ asset('custom/front/js/jquery.min.js') }}?v=202112061555"></script>
 <script src="{{ asset('custom/front/js/parallax.min.js') }}?v=202112061555"></script>
+<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
 <script>
     var _token = '{{csrf_token()}}'
     var path_order = '{{route('order')}}'
+    var path_mail = '{{route('send-verification-mail')}}'
 </script>
 <script src="{{ asset('custom/front/js/menu.js') }}?v=202112061555"></script>
 </body>

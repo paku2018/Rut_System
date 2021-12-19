@@ -18,3 +18,11 @@ function sendVerifyEmail($code, $email){
     );
     Mail::to($email)->send(new \App\Mail\VerifyEmail($details));
 }
+
+function sendOrderVerifyEmail($code, $email){
+    $details = array(
+        'code'=> $code,
+        'title'=>'Verificación por correo'
+    );
+    Mail::to($email)->send(new \App\Mail\OrderVerifyEmail($details));
+}

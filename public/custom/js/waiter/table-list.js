@@ -15,10 +15,7 @@ $(document).on('click','.table-box', function () {
             hideLoading()
             if(response.result){
                 let data = response.data;
-                if(data.status == "closed"){
-                    $("input[name=orderType][value='0']").prop('checked', true);
-                    $('#optionModal').modal('show');
-                }else if(data.status == "open"){
+                if(data.status == "open" || data.status == "closed"){
                     let orders = response.orders;
                     let code = '';
                     let total = 0;
@@ -262,11 +259,6 @@ function checkCount(){
         $('.btn-order').prop('disabled', true)
     }
     $('#new-total').html(new_total)
-
-    let client = $('#client').val();
-    if (!client){
-        $('.btn-order').prop('disabled', true)
-    }
 }
 
 $(document).on('click','.btn-order', function () {
@@ -279,10 +271,8 @@ $(document).on('click','.btn-order', function () {
             items[id] = val;
         }
     })
-    let client = $('#client').val();
     let formData = new FormData();
     formData.append('items',JSON.stringify(items));
-    formData.append('client',client);
     formData.append('tableId',tableId);
     formData.append('_token',_token);
     $.ajax({
@@ -366,7 +356,6 @@ $(document).ready(function () {
     $('#dt_table').DataTable({
         "pageLength": 10,
         "lengthChange": false,
-        "bFilter": false,
         "order": [[ 1, 'asc' ]],
         "aoColumnDefs": [
             { 'bSortable': false, 'aTargets': [ 0, 3 ] }

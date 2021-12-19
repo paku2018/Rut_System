@@ -15,9 +15,8 @@ class TableController extends Controller
     public function index(){
         $resId = Auth::user()->restaurant_id;
         $tables = Table::where('restaurant_id', $resId)->get();
-        $clients = User::where('role','client')->get();
         $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
-        return view('member.table.index',compact('tables','clients','products'));
+        return view('member.table.index',compact('tables','products'));
     }
 
     public function getTableInfo(Request $request){

@@ -19,6 +19,8 @@ class CreateTablesTable extends Migration
             $table->integer('t_number');
             $table->string('name');
             $table->enum('status', ['open', 'closed', 'pend'])->default('closed');
+            $table->integer('current_client_id')->nullable();
+            $table->enum('type', ['real', 'delivery'])->default('real');
             $table->timestamps();
         });
     }

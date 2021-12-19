@@ -24,11 +24,13 @@ Route::post('/verify/resend_code', [App\Http\Controllers\HomeController::class, 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/restaurant-menu/{code}', [App\Http\Controllers\HomeController::class, 'menu'])->name('restaurant-menu');
+Route::post('/send-mail', [App\Http\Controllers\HomeController::class, 'sendVerificationMail'])->name('send-verification-mail');
+Route::post('/order', [App\Http\Controllers\HomeController::class, 'order'])->name('order');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('profile.update');
-    Route::post('/order', [App\Http\Controllers\HomeController::class, 'order'])->name('order');
 });
 
 Route::group(['as' =>'admin.','prefix'=>'admin','middleware'=>'checkAdmin'],function () {

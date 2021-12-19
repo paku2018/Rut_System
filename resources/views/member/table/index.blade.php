@@ -153,17 +153,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="form-group d-flex align-items-center">
-                                            <label for="client" class="mb-0 mr-2">@lang('client')<span class="required-label">*</span></label>
-                                            <select class="form-control" id="client" name="client" style="max-width: 350px" onchange="checkCount()">
-                                                <option value="" selected disabled>@lang('select')</option>
-                                                @foreach($clients as $client)
-                                                    <option value="{{$client->id}}">{{$client->name."[".$client->email."]"}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
                                         <div class="table-responsive">
                                             <table class="table table-striped" id="dt_table">
                                                 <thead>
@@ -224,5 +213,5 @@
         let path_pend_table = '{{route('waiter.pend-table')}}'
         let _token = '{{csrf_token()}}'
     </script>
-    <script src="{{asset('custom/js/waiter/table-list.js')}}"></script>
+    <script src="{{asset('custom/js/waiter/table-list.js')}}?v=202112181555"></script>
 @endsection

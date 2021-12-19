@@ -13,7 +13,9 @@ class Table extends Model
         'restaurant_id',
         't_number',
         'name',
-        'status'
+        'status',
+        'current_client_id',
+        'type'
     ];
 
     public function restaurant()

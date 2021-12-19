@@ -30,6 +30,13 @@ var lang = {
         'wait_cashier_close_table': 'Esperando mesa de cierre de caja.',
         'image': 'Imagen',
         'no_orders_yet': 'No hay ordenes',
-        'table_will_close': 'Esta mesa estará cerrada.'
+        'table_will_close': 'Esta mesa estará cerrada.',
+        'warning': 'Warning',
+        'input_email': 'Input Email',
+        'order_info': 'Order Information',
+        'table': 'Table',
+        'delivery': 'Delivery',
+        'verify_code_incorrect': 'Verify Code is incorrect.',
+        'cannot_order_this_table': 'Cannot order this table.'
     }
 }
