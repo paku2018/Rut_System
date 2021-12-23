@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Client;
 use App\Models\Order;
 use App\Models\Product;
@@ -34,6 +35,9 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+        if (!$user){
+            return redirect()->route('login');
+        }
         if ($user->email_verified_at == null){
             return redirect()->route('verify');
         }
@@ -45,7 +49,6 @@ class HomeController extends Controller
                 $link = $role.".home";
                 break;
             case 'waiter':
-            case 'cashier':
                 $link = $role.".tables";
                 break;
             default:
@@ -58,6 +61,9 @@ class HomeController extends Controller
                 return redirect()->route('restaurant-menu',$resCode);
             else
                 abort(404);
+        }elseif ($link == ''){
+            auth()->logout();
+            return redirect()->route('login');
         }else{
             return redirect()->route($link);
         }
@@ -91,10 +97,11 @@ class HomeController extends Controller
             $resId = substr($code, 7, strlen($code)-10);
             $restaurant = Restaurant::find($resId);
             if ($restaurant){
+                $categories = Category::where('restaurant_id', $resId)->orderBy('order','ASC')->get();
                 $products = Product::where('restaurant_id', $resId)->where('status', 1)->orderBy('created_at', 'desc')->get();
                 $tables = Table::where('restaurant_id', $resId)->where('status', '!=', 'pend')->get();
 
-                return view('menu', compact('restaurant','products','tables'));
+                return view('menu', compact('restaurant','products','tables', 'categories'));
             }else{
                 abort(404);
             }

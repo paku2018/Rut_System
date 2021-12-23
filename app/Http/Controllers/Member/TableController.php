@@ -14,7 +14,13 @@ class TableController extends Controller
 {
     public function index(){
         $resId = Auth::user()->restaurant_id;
-        $tables = Table::where('restaurant_id', $resId)->get();
+        $tables = Table::where('restaurant_id', $resId)->where(function ($q){
+            $q->where('type', 'real')
+                ->orWhere(function ($query){
+                   $query->where('type', '!=', 'real')
+                       ->where('status', '!=', 'closed');
+                });
+        })->orderBy('type', 'asc')->get();
         $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
         return view('member.table.index',compact('tables','products'));
     }
@@ -43,13 +49,5 @@ class TableController extends Controller
         $resId = Auth::user()->restaurant_id;
         $tables = Table::where('restaurant_id', $resId)->get();
         return view('member.table.index_cashier',compact('tables'));
-    }
-
-    public function close(Request $request){
-        $tableId = $request->tableId;
-        $order_update = Order::where('assigned_table_id', $tableId)->where('status','open')->update(['status'=>'done']);
-        $update = Table::where('id', $tableId)->update(['status'=>'closed']);
-
-        return response()->json(['status'=>true, 'result'=>true]);
     }
 }

@@ -1,6 +1,6 @@
 $('#dt_table').DataTable({
     "pageLength": 10,
-    "order": [[ 1, 'asc' ]]
+    "order": [[ 2, 'asc' ]]
 });
 function delCategory(id) {
     swal({

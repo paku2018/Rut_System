@@ -1,6 +1,6 @@
 $('#dt_table').DataTable({
     "pageLength": 10,
-    "order": [[ 0, 'desc' ]]
+    "order": [[ 3, 'asc' ]]
 });
 function delProduct(id) {
     swal({

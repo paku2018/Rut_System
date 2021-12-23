@@ -39,6 +39,7 @@
                                     <tr>
                                         <th>@lang('ID')</th>
                                         <th>@lang('name')</th>
+                                        <th>@lang('sort')</th>
                                         <th>@lang('creation_date')</th>
                                         <th class="text-center">@lang('action')</th>
                                     </tr>
@@ -48,6 +49,7 @@
                                         <tr>
                                             <td>{{$one->id}}</td>
                                             <td>{{$one->name}}</td>
+                                            <td>{{$one->order}}</td>
                                             <td>{{$one->created_at}}</td>
                                             <td class="text-center">
                                                 <div class="form-button-action">
@@ -78,5 +80,5 @@
         var path_delete = '{{ route('restaurant.categories.delete') }}';
         var _token = '{{csrf_token()}}'
     </script>
-    <script src="{{asset('custom/js/resAdmin/category-list.js')}}?v=202112061555"></script>
+    <script src="{{asset('custom/js/resAdmin/category-list.js')}}?v=202112221555"></script>
 @endsection

@@ -55,10 +55,15 @@ class ProductController extends Controller
             $data['restaurant_id'] = session()->get('resId');
             if (!isset($request->status))
                 $data['status'] = 0;
-            if($request->hasFile('image')){
-                $image = $request->image->store('product','public');
-                $data['image'] = asset('storage')."/".$image;
+            if ($request->delete_image == 1){
+                $data['image'] = null;
+            }else{
+                if($request->hasFile('image')){
+                    $image = $request->image->store('product','public');
+                    $data['image'] = asset('storage')."/".$image;
+                }
             }
+
             $result = Product::updateOrCreate(['id'=>$data['id']], $data);
 
             return Redirect::route('restaurant.products.list');

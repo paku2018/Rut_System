@@ -59,6 +59,7 @@
     width: 100%;
     bottom: 5px;
     left: 0;
+    z-index: 1000;
 }
 .table-box .table-action i{
     cursor: pointer;
@@ -128,4 +129,44 @@
 .btn-circle{
     border-radius: 25px;
     padding: 10px 20px;
+}
+
+.menu-list{
+    padding-left: 1rem;
+    min-height: 200px;
+}
+.expand-box {
+    list-style-type: none;
+}
+
+.expand-box ul{
+    list-style-type: none;
+}
+
+.caret {
+    cursor: pointer;
+    user-select: none;
+    font-size: 1.2rem;
+}
+
+.caret::before {
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.caret-down::before {
+    transform: rotate(90deg);
+}
+
+.nested {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+.view{
+    cursor: pointer;
 }

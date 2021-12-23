@@ -40,6 +40,7 @@
                                         <th>@lang('ID')</th>
                                         <th>@lang('name')</th>
                                         <th>@lang('category')</th>
+                                        <th>@lang('sort')</th>
                                         <th>@lang('purchase_price')</th>
                                         <th>@lang('sale_price')</th>
                                         <th>@lang('description')</th>
@@ -53,6 +54,7 @@
                                             <td>{{$one->id}}</td>
                                             <td>{{$one->name}}</td>
                                             <td>{{$one->category?$one->category->name:''}}</td>
+                                            <td>{{$one->category?$one->category->order:''}}</td>
                                             <td>{{$one->purchase_price}}</td>
                                             <td>{{$one->sale_price}}</td>
                                             <td>{{$one->desc}}</td>
@@ -90,5 +92,5 @@
         var path_change = '{{route('restaurant.products.change')}}'
         var _token = '{{csrf_token()}}'
     </script>
-    <script src="{{asset('custom/js/resAdmin/product-list.js')}}?v=202112061555"></script>
+    <script src="{{asset('custom/js/resAdmin/product-list.js')}}?v=202112221555"></script>
 @endsection

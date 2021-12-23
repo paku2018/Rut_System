@@ -37,6 +37,7 @@ var lang = {
         'table': 'Table',
         'delivery': 'Delivery',
         'verify_code_incorrect': 'Verify Code is incorrect.',
-        'cannot_order_this_table': 'Cannot order this table.'
+        'cannot_order_this_table': 'Cannot order this table.',
+        'field_digits': 'El campo debe ser un dígito'
     }
 }

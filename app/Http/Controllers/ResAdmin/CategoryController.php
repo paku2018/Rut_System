@@ -48,8 +48,20 @@ class CategoryController extends Controller
 
     public function store(Request $request){
         try{
-            $data = $request->only('id','name');
+            $data = $request->only('id','name','order');
             $data['restaurant_id'] = session()->get('resId');
+
+            //check if there is same order
+            if($data['id'] != 0){
+                $exist = Category::where('restaurant_id', $data['restaurant_id'])->where('id', '!=', $data['id'])->where('order', $data['order'])->first();
+            }else{
+                $exist = Category::where('restaurant_id', $data['restaurant_id'])->where('order', $data['order'])->first();
+            }
+            if($exist){
+                session()->flash('order_exist',true);
+                return Redirect::back();
+            }
+
             $result = Category::updateOrCreate(['id'=>$data['id']], $data);
 
             return Redirect::route('restaurant.categories.list');

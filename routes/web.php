@@ -31,6 +31,7 @@ Route::post('/order', [App\Http\Controllers\HomeController::class, 'order'])->na
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/getTableInfo', [App\Http\Controllers\Member\TableController::class, 'getTableInfo'])->name('get-table-info');
 });
 
 Route::group(['as' =>'admin.','prefix'=>'admin','middleware'=>'checkAdmin'],function () {
@@ -85,13 +86,14 @@ Route::group(['middleware'=>'checkResAdmin'],function () {
         Route::post('/products/change', [App\Http\Controllers\ResAdmin\ProductController::class, 'change'])->name('products.change');
 
         Route::get('/qrcode', [App\Http\Controllers\ResAdmin\HomeController::class, 'qrcode'])->name('qrcode');
+
+        Route::post('/closeTable', [App\Http\Controllers\ResAdmin\TableController::class, 'close'])->name('close-table');
     });
 });
 
 Route::group(['middleware'=>'checkMember'],function () {
     Route::post('/getOrders', [App\Http\Controllers\Member\OrderController::class, 'getData'])->name('get-order-data');
     Route::post('/assignOrder', [App\Http\Controllers\Member\OrderController::class, 'assign'])->name('assign-orders');
-    Route::post('/getTableInfo', [App\Http\Controllers\Member\TableController::class, 'getTableInfo'])->name('get-table-info');
 
     Route::group(['prefix' => 'waiter', 'as' => 'waiter.'], function () {
         Route::get('/tables', [App\Http\Controllers\Member\TableController::class, 'index'])->name('tables');
@@ -99,8 +101,7 @@ Route::group(['middleware'=>'checkMember'],function () {
         Route::post('/pendTable', [App\Http\Controllers\Member\TableController::class, 'pend'])->name('pend-table');
     });
 
-    Route::group(['prefix' => 'cashier', 'as' => 'cashier.'], function () {
-        Route::get('/tables', [App\Http\Controllers\Member\TableController::class, 'cashierIndex'])->name('tables');
-        Route::post('/closeTable', [App\Http\Controllers\Member\TableController::class, 'close'])->name('close-table');
-    });
+//    Route::group(['prefix' => 'cashier', 'as' => 'cashier.'], function () {
+//        Route::get('/tables', [App\Http\Controllers\Member\TableController::class, 'cashierIndex'])->name('tables');
+//    });
 });

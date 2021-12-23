@@ -82,11 +82,15 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group form-show-validation">
-                                            <label for="image">@lang('product_image')<span class="required-label">*</span></label>
+                                            <label for="image">@lang('product_image')</label>
                                             <div class="input-file input-file-image d-flex align-items-center">
                                                 <img class="img-upload-preview" id="preview" width="100" height="100" src="{{isset($data->image)?$data->image:asset('assets/img/product-empty.png')}}" alt="preview" onerror="src='{{asset('assets/img/product-empty.png')}}'">
                                                 <input type="file" class="form-control form-control-file" id="image" name="image" accept="image/*">
-                                                <label for="image" class="btn btn-black btn-round btn-sm ml-3"><i class="fa fa-file-image"></i> @lang('upload')</label>
+                                                <label for="image" class="btn btn-black btn-round btn-sm mx-3"><i class="fa fa-file-image"></i> @lang('upload')</label>
+                                                @if(isset($data))
+                                                    <label class="btn btn-danger btn-round btn-sm text-white btn-delete"><i class="fa fa-trash"></i> @lang('delete')</label>
+                                                @endif
+                                                <input type="hidden" name="delete_image" id="delete_image" value="0">
                                             </div>
                                         </div>
                                     </div>
@@ -115,5 +119,5 @@
 @endsection
 @section('page-js')
     <script src="{{asset('assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
-    <script src="{{asset('custom/js/resAdmin/product.js')}}?v=202112061555"></script>
+    <script src="{{asset('custom/js/resAdmin/product.js')}}?v=202112221555"></script>
 @endsection

@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->integer('restaurant_id');
             $table->string('name');
+            $table->integer('order');
             $table->timestamps();
         });
     }

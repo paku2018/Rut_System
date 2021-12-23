@@ -7,6 +7,7 @@ use App\Models\Restaurant;
 use App\Models\RestaurantManger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class RestaurantController extends Controller
 {
@@ -22,6 +23,7 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::find($id);
         session()->put('resId', $id);
 
-        return view('resAdmin.restaurant.detail', compact('restaurant'));
+        return Redirect::route('restaurant.tables.list');
+        //return view('resAdmin.restaurant.detail', compact('restaurant'));
     }
 }

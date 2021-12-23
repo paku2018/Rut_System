@@ -66,8 +66,8 @@
                                     <label for="role" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('role')<span class="required-label">*</span></label>
                                     <div class="col-lg-6 col-md-9 col-sm-8">
                                         <select class="form-control selectpicker" id="role" name="role" required>
+                                            <option value="" selected disabled>@lang('select')</option>
                                             <option value="waiter" {{isset($data)&&$data->role=="waiter"?'selected':''}}>@lang('waiter')</option>
-                                            <option value="cashier" {{isset($data)&&$data->role=="cashier"?'selected':''}}>@lang('cashier')</option>
                                         </select>
                                     </div>
                                 </div>

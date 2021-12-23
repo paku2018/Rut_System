@@ -51,32 +51,50 @@
             <p class="col-12 text-center">Dear guests, you are welcomed at our restaurant. We greatly appreciate your choice of dining with us and we promise to serve you with our excellence. Welcome you and have a fine dining experience.</p>
         </header>
 
-        <!-- Gallery -->
-        <div class="row tm-gallery">
-            <div id="tm-gallery-page-pizza" class="tm-gallery-page">
-                @foreach($products as $product)
-                    <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                        <figure>
-                            <img src="{{$product->image}}" alt="Image" class="img-fluid tm-gallery-img" />
-                            <figcaption>
-                                <h4 class="tm-gallery-title">{{$product->name}}</h4>
-                                <p class="tm-gallery-description">{{$product->desc}}</p>
-                                <div class="tm-gallery-bottom d-flex align-items-center justify-content-between">
-                                    <p class="tm-gallery-price">${{number_format($product->sale_price,0)}}</p>
-                                    <div class="quantity">
-                                        <button class="minus-btn" type="button" name="button">-</button>
-                                        <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" value="0" min="0">
-                                        <button class="plus-btn" type="button" name="button">+</button>
+        <div class="menu-list">
+            @foreach($categories as $category)
+                <ul class="expand-box">
+                    <li>
+                        <p class="caret font-weight-bold mb-2">{{$category->name}}</p>
+                        <ul class="nested">
+                            <li>
+                                <!-- Gallery -->
+                                <div class="tm-gallery">
+                                    <div class="tm-gallery-page">
+                                        @foreach($products as $product)
+                                            @if($product->category_id == $category->id)
+                                                <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                                                <figure>
+                                                    @if($product->image)
+                                                        <img src="{{$product->image}}" alt="Image" class="img-fluid tm-gallery-img" />
+                                                    @endif
+                                                    <figcaption>
+                                                        <h4 class="tm-gallery-title font-weight-bold">{{$product->name}}</h4>
+                                                        <p class="tm-gallery-description">{{$product->desc}}</p>
+                                                        <div class="tm-gallery-bottom d-flex align-items-center justify-content-between">
+                                                            <p class="tm-gallery-price">${{number_format($product->sale_price,0)}}</p>
+                                                            <div class="quantity">
+                                                                <button class="minus-btn" type="button" name="button">-</button>
+                                                                <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" value="0" min="0">
+                                                                <button class="plus-btn" type="button" name="button">+</button>
+                                                            </div>
+                                                        </div>
+                                                    </figcaption>
+                                                </figure>
+                                            </article>
+                                            @endif
+                                        @endforeach
                                     </div>
                                 </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                @endforeach
+                                <!-- End Gallery -->
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            @endforeach
                 <div class="order-box text-center col-12">
                     <button type="button" class="btn btn-order" id="order">@lang('order_now')</button>
                 </div>
-            </div>
         </div>
 
         <!-- Modal -->
@@ -153,6 +171,6 @@
     var path_order = '{{route('order')}}'
     var path_mail = '{{route('send-verification-mail')}}'
 </script>
-<script src="{{ asset('custom/front/js/menu.js') }}?v=202112061555"></script>
+<script src="{{ asset('custom/front/js/menu.js') }}?v=202112221555"></script>
 </body>
 </html>

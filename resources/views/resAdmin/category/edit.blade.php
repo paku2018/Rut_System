@@ -44,11 +44,21 @@
                                         <h5 class="text-center">@lang('server_error') @lang('try_again')</h5>
                                     </div>
                                 @endif
-
+                                @if(session()->has('order_exist'))
+                                    <div class="custom-error">
+                                        <h5 class="text-center">@lang('cannot_assign_this_order') @lang('select_another_one')</h5>
+                                    </div>
+                                @endif
                                 <div class="form-group form-show-validation row">
                                     <label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('name')<span class="required-label">*</span></label>
                                     <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="name" name="name" value="{{isset($data)?$data->name:''}}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group form-show-validation row">
+                                    <label for="order" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('sort')<span class="required-label">*</span></label>
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                        <input type="text" class="form-control" id="order" name="order" value="{{isset($data)?$data->order:''}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -69,5 +79,5 @@
 @endsection
 @section('page-js')
     <script src="{{asset('assets/js/plugin/selectpicker/js/bootstrap-select.min.js')}}"></script>
-    <script src="{{asset('custom/js/resAdmin/category.js')}}?v=202112061555"></script>
+    <script src="{{asset('custom/js/resAdmin/category.js')}}?v=202112221555"></script>
 @endsection
