@@ -15,18 +15,22 @@ $(document).on('click','.table-box', function () {
             hideLoading()
             if(response.result){
                 let data = response.data;
-                if(data.status == "open" || data.status == "closed"){
+                if(data.status == "open" || data.status == "closed" || data.status == "ordered"){
                     let orders = response.orders;
                     let code = '';
                     let total = 0;
-                    for (let i=0; i<orders.length; i++){
-                        let val = orders[i].product.sale_price * orders[i].order_count;
-                        code += ' <div class="d-flex justify-content-between">\n' +
-                            '                                    <h4 class="text-danger mb-1">' + orders[i].product.name + '</h4>\n' +
-                            '                                    <h4 class="mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
-                            '                                </div>'
+                    if (orders.length > 0){
+                        if(data.status == "ordered")
+                            code += '<div class="w-100 text-right mb-2"><button class="btn btn-black btn-round btn-deliver btn-sm"><i class="fa fa-check mr-2"></i>' + langs('messages.mark_as_deliver') + '</button></div>'
+                        for (let i=0; i<orders.length; i++){
+                            let val = orders[i].product.sale_price * orders[i].order_count;
+                            code += ' <div class="d-flex justify-content-between">\n' +
+                                '                                    <h4 class="text-danger mb-1">' + orders[i].product.name + '</h4>\n' +
+                                '                                    <h4 class="mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
+                                '                                </div>'
 
-                        total += val;
+                            total += val;
+                        }
                     }
                     $('#assigned-orders').html(code);
                     $('#detail-total').html(total);
@@ -165,6 +169,48 @@ function disableAssign(){
 $(document).on('click','.items', function () {
     disableAssign()
 })
+
+$(document).on('click','.btn-deliver', function () {
+    showLoading()
+    let formData = new FormData();
+    formData.append('_token',_token);
+    formData.append('tableId',tableId);
+    $.ajax({
+        url: path_mark_deliver,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            hideLoading()
+            if(response.result){
+                $('#detailModal').modal('hide');
+                swal(langs('messages.success'), {
+                    icon: "success",
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-success'
+                        }
+                    }
+                }).then((confirmed) => {
+                    location.reload();
+                });
+            }else{
+                swal(langs('messages.server_error'), {
+                    icon: "error",
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((confirmed) => {
+                    location.reload();
+                });
+            }
+        },
+    });
+})
+
 $(document).on('click','.btn-assign', function () {
     showLoading()
     let selected = [];

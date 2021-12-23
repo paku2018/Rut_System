@@ -172,7 +172,7 @@ class HomeController extends Controller
                 $table = Table::find($tableId);
                 if($table->status == "pend"){
                     return response()->json(['result'=>true, 'success'=>false, 'error'=>'table_disable']);
-                }else if($table->status == "open" && $table->current_client_id != $client->id){
+                }else if(($table->status == "open" || $table->status == "ordered") && $table->current_client_id != $client->id){
                     return response()->json(['result'=>true, 'success'=>false, 'error'=>'table_disable']);
                 }
             }else{
@@ -183,7 +183,7 @@ class HomeController extends Controller
                     'name' => 'Virtual-'.$client->id."-".date('His'),
                     'current_client_id' => $client->id,
                     'type' => 'delivery',
-                    'status' => 'open'
+                    'status' => 'ordered'
                 ];
                 $table = Table::create($table_data);
             }
@@ -204,7 +204,7 @@ class HomeController extends Controller
                 }
             }
             if ($orderType == 0){
-                $update_table = Table::where('id', $tableId)->update(['status'=>'open', 'current_client_id'=>$client->id]);
+                $update_table = Table::where('id', $tableId)->update(['status'=>'ordered', 'current_client_id'=>$client->id]);
             }
 
             //remove client v_code

@@ -72,7 +72,7 @@ $(document).on('click','.table-box', function () {
                             }
                         }
                     })
-                }else if(data.status == "open" || data.status == "pend"){
+                }else if(data.status == "open" || data.status == "pend" || data.status == "ordered"){
                     let orders = response.orders;
                     let code = '';
                     let total = 0;

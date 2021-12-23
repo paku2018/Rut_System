@@ -28,10 +28,7 @@ class TableController extends Controller
     public function getTableInfo(Request $request){
         $tableId = $request->tableId;
         $table = Table::with('restaurant')->find($tableId);
-        $orders = array();
-        if ($table->status == "open" || $table->status == "pend"){
-            $orders = Order::with('client','product')->where('status','open')->where('assigned_table_id', $tableId)->get();
-        }
+        $orders = Order::with('client','product')->where('status','open')->where('assigned_table_id', $tableId)->get();
 
         return response()->json(['result'=>true, 'data'=>$table, 'orders'=> $orders]);
     }
@@ -49,5 +46,12 @@ class TableController extends Controller
         $resId = Auth::user()->restaurant_id;
         $tables = Table::where('restaurant_id', $resId)->get();
         return view('member.table.index_cashier',compact('tables'));
+    }
+
+    public function deliver(Request $request){
+        $tableId = $request->tableId;
+        $update = Table::where('id', $tableId)->update(['status'=>'open']);
+
+        return response()->json(['status'=>true, 'result'=>true]);
     }
 }

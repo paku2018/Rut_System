@@ -18,7 +18,7 @@ class CreateTablesTable extends Migration
             $table->integer('restaurant_id');
             $table->integer('t_number');
             $table->string('name');
-            $table->enum('status', ['open', 'closed', 'pend'])->default('closed');
+            $table->enum('status', ['open', 'closed', 'pend', 'ordered'])->default('closed');
             $table->integer('current_client_id')->nullable();
             $table->enum('type', ['real', 'delivery'])->default('real');
             $table->timestamps();

@@ -49,8 +49,32 @@
                                     <div class="col-12">
                                         <div class="table-group">
                                             @foreach($tables as $table)
+                                                @php
+                                                    switch ($table->status){
+                                                        case "open":
+                                                            $class = "bg-success-gradient success-shadow";
+                                                            $title = __("open");
+                                                            break;
+                                                        case "ordered":
+                                                            $class = "bg-warning-gradient";
+                                                            $title = __("ordered");
+                                                            break;
+                                                        case "pend":
+                                                            $class = "bg-danger-gradient";
+                                                            $title = __("provisional_close");
+                                                            break;
+                                                        case "closed":
+                                                            $class = "bg-black";
+                                                            $title = __("available");
+                                                            break;
+                                                        default:
+                                                            $class = '';
+                                                            $title = '';
+                                                            break;
+                                                    }
+                                                @endphp
                                                 <div class="table-box" data-index="{{$table->id}}">
-                                                    <div class="table-status {{$table->status=="open"?'bg-success-gradient success-shadow':($table->status=="closed"?'bg-warning-gradient':'bg-danger-gradient')}}" title="{{$table->status=="open"?__('open'):($table->status=="closed"?__('closed'):__('provisional_close'))}}"></div>
+                                                    <div class="table-status {{$class}}" title="{{$title}}"></div>
                                                     <h6 class="text-center mb-0">@lang('table')-{{$table->t_number}}</h6>
                                                     <h5 class="text-center">{{$table->name}}</h5>
                                                     <div class="table-action d-flex align-items-center justify-content-center">

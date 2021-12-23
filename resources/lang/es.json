@@ -223,5 +223,7 @@
     "electronic_ballot": "Electronic ballot",
     "invoice": "Invoice",
     "receipt": "Receipt",
-    "payment_error": "There was an error in processing payment."
+    "payment_error": "There was an error in processing payment.",
+    "available": "Available",
+    "ordered": "Ordered"
 }

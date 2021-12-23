@@ -53,7 +53,7 @@ class OrderController extends Controller
                     Order::create($data);
                 }
             }
-            $update = Table::where('id', $tableId)->update(['status'=>'open']);
+            $update = Table::where('id', $tableId)->update(['status'=>'ordered']);
             $result = true;
         }catch (\Exception $e){
             Log::info('order create error:'.$e->getMessage());

@@ -38,6 +38,7 @@ var lang = {
         'delivery': 'Delivery',
         'verify_code_incorrect': 'Verify Code is incorrect.',
         'cannot_order_this_table': 'Cannot order this table.',
-        'field_digits': 'El campo debe ser un dígito'
+        'field_digits': 'El campo debe ser un dígito',
+        'mark_as_deliver': 'Mark as delivered'
     }
 }
