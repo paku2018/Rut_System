@@ -191,7 +191,9 @@
                                                 @foreach($products as $product)
                                                     <tr>
                                                         <td>
-                                                            <img src="{{$product->image}}" alt="no_img" class="preview-image">
+                                                            @if($product->image)
+                                                                <img src="{{$product->image}}" alt="no_img" class="preview-image">
+                                                            @endif
                                                         </td>
                                                         <td>{{$product->name}}</td>
                                                         <td>{{number_format($product->sale_price,2)}}</td>
@@ -206,6 +208,12 @@
                                                 @endforeach
                                                 </tbody>
                                             </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="comment">@lang('comment')</label>
+                                            <textarea class="form-control" id="comment" name="comment"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex align-items-center justify-content-between mt-2">

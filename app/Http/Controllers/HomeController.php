@@ -198,6 +198,7 @@ class HomeController extends Controller
                         'order_count' => $item,
                         'client_id' => $client->id,
                         'assigned_table_id' => $table->id,
+                        'comment' => $request->comment,
                         'status' => 'open'
                     ];
                     Order::create($data);

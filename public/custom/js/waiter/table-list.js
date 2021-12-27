@@ -317,9 +317,11 @@ $(document).on('click','.btn-order', function () {
             items[id] = val;
         }
     })
+    let comment = $('#comment').val();
     let formData = new FormData();
     formData.append('items',JSON.stringify(items));
     formData.append('tableId',tableId);
+    formData.append('comment',comment);
     formData.append('_token',_token);
     $.ajax({
         url: path_create_orders,

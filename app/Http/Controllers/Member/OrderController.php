@@ -48,6 +48,7 @@ class OrderController extends Controller
                         'order_count' => $item,
                         'status' => 'open',
                         'client_id' => $table->current_client_id,
+                        'comment' => $request->comment,
                         'assigned_table_id' => $tableId
                     ];
                     Order::create($data);

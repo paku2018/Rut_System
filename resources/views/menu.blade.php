@@ -148,6 +148,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="comment">@lang('comment')</label>
+                                <textarea class="form-control" id="comment" name="comment"></textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-order" id="confirm-order">@lang('order_now')</button>

@@ -153,12 +153,14 @@ $(document).on('click','#confirm-order', function () {
     let code = $('#v_code').val();
     let orderType = $('input[name=orderType]:checked').val();
     let tableId = $('#table').val();
+    let comment = $('#comment').val();
     let formData = new FormData();
     formData.append('items',JSON.stringify(items));
     formData.append('email',email);
     formData.append('code',code);
     formData.append('orderType',orderType);
     formData.append('tableId',tableId);
+    formData.append('comment',comment);
     formData.append('_token',_token);
 
     showLoading()

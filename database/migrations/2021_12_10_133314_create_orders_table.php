@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('client_id')->nullable();
             $table->integer('assigned_table_id')->nullable();
             $table->enum('status', ['open', 'done', 'cancel', 'ignore'])->default('open');
+            $table->text('comment')->nullable();
             $table->integer('final_payment_id')->nullable();
             $table->timestamps();
         });

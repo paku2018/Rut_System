@@ -29,16 +29,16 @@ var lang = {
         'total': 'Total',
         'wait_cashier_close_table': 'Esperando mesa de cierre de caja.',
         'image': 'Imagen',
-        'no_orders_yet': 'No hay ordenes',
+        'no_orders_yet': 'No hay pedidos',
         'table_will_close': 'Esta mesa estará cerrada.',
-        'warning': 'Warning',
-        'input_email': 'Input Email',
-        'order_info': 'Order Information',
-        'table': 'Table',
-        'delivery': 'Delivery',
-        'verify_code_incorrect': 'Verify Code is incorrect.',
-        'cannot_order_this_table': 'Cannot order this table.',
+        'warning': 'Advertencia',
+        'input_email': 'Entrada de Email',
+        'order_info': 'Información del pedido',
+        'table': 'Mesa',
+        'delivery': 'Entrega',
+        'verify_code_incorrect': 'Verifique que el código sea incorrecto.',
+        'cannot_order_this_table': 'No se puede pedir esta mesa.',
         'field_digits': 'El campo debe ser un dígito',
-        'mark_as_deliver': 'Mark as delivered'
+        'mark_as_deliver': 'Marcar como entregado'
     }
 }
