@@ -143,20 +143,20 @@
     list-style-type: none;
 }
 
-.caret {
+.expand-box .caret {
     cursor: pointer;
     user-select: none;
     font-size: 1.2rem;
 }
 
-.caret::before {
+.expand-box .caret::before {
     content: "\25B6";
     color: black;
     display: inline-block;
     margin-right: 6px;
 }
 
-.caret-down::before {
+.expand-box .caret-down::before {
     transform: rotate(90deg);
 }
 

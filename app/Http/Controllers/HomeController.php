@@ -213,7 +213,7 @@ class HomeController extends Controller
             $client->save();
             return response()->json(['result'=>true, 'success'=>true]);
         }catch (\Exception $e){
-            return response()->json(['result'=>true, 'success'=>false]);
+            return response()->json(['result'=>true, 'success'=>false, 'error'=>$e->getMessage()]);
         }
     }
 
