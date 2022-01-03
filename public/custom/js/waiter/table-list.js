@@ -410,3 +410,9 @@ $(document).ready(function () {
         ]
     });
 })
+
+$(document).on('click', '.btn-print', function () {
+    var url = HOST_URL + '/exportPdf/' + tableId;
+
+    window.open(url, '_blank');
+})

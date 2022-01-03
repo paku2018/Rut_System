@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('profile.update');
     Route::post('/getTableInfo', [App\Http\Controllers\Member\TableController::class, 'getTableInfo'])->name('get-table-info');
+    Route::get('/exportPdf/{id}', [App\Http\Controllers\HomeController::class, 'exportPdf'])->name('export-pdf');
 });
 
 Route::group(['as' =>'admin.','prefix'=>'admin','middleware'=>'checkAdmin'],function () {
@@ -88,6 +89,11 @@ Route::group(['middleware'=>'checkResAdmin'],function () {
         Route::get('/qrcode', [App\Http\Controllers\ResAdmin\HomeController::class, 'qrcode'])->name('qrcode');
 
         Route::post('/closeTable', [App\Http\Controllers\ResAdmin\TableController::class, 'close'])->name('close-table');
+
+        Route::group(['prefix' => 'statistics', 'as' => 'statistics.'], function () {
+            Route::get('/sales', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'salesIndex'])->name('sales');
+            Route::post('/sales/getData', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'getSalesData'])->name('sales.get-data');
+        });
     });
 });
 

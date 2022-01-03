@@ -61,10 +61,35 @@
                     </a>
                 </li>
                 <li class="nav-item {{$link=="statistics"?'active':''}}">
-                    <a href="#">
-                        <i class="fas fa-chart-line"></i>
+                    <a data-toggle="collapse" href="#statistics">
+                        <i class="fas fa-chart-area"></i>
                         <p>@lang('statistics')</p>
+                        <span class="caret"></span>
                     </a>
+                    <div class="collapse {{$link=="statistics"?'show':''}}" id="statistics">
+                        <ul class="nav nav-collapse">
+                            <li class="{{$link=="statistics"&&$sublink=="sales"?'active':''}}">
+                                <a href="{{ route('restaurant.statistics.sales') }}">
+                                    <span class="sub-item">@lang('sales')</span>
+                                </a>
+                            </li>
+                            <li class="{{$link=="statistics"&&$sublink=="home_sales"?'active':''}}">
+                                <a href="#">
+                                    <span class="sub-item">@lang('home_sales')</span>
+                                </a>
+                            </li>
+                            <li class="{{$link=="statistics"&&$sublink=="best_selling_product"?'active':''}}">
+                                <a href="#">
+                                    <span class="sub-item">@lang('best_selling_product')</span>
+                                </a>
+                            </li>
+                            <li class="{{$link=="statistics"&&$sublink=="breakdown"?'active':''}}">
+                                <a href="#">
+                                    <span class="sub-item">@lang('breakdown')</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
             <div class="text-center mt-3">

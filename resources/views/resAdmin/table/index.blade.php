@@ -122,6 +122,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-black btn-round btn-print">@lang('print')</button>
                     <button type="button" class="btn btn-black btn-round btn-confirm">@lang('confirm_payment')</button>
                     <button type="button" class="btn btn-round" data-dismiss="modal">@lang('cancel')</button>
                 </div>
@@ -145,19 +146,19 @@
                             <div class="col-12">
                                 <div class="form-group form-show-validation">
                                     <label for="consumption">@lang('consumption')<span class="required-label">*</span></label>
-                                    <input type="text" class="form-control" id="consumption" name="consumption" required>
+                                    <input type="number" class="form-control" id="consumption" name="consumption" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group form-show-validation">
                                     <label for="tip">@lang('tip')</label>
-                                    <input type="text" class="form-control" id="tip" name="tip">
+                                    <input type="number" class="form-control" id="tip" name="tip">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group form-show-validation">
                                     <label for="shipping">@lang('shipping')</label>
-                                    <input type="text" class="form-control" id="shipping" name="shipping">
+                                    <input type="number" class="form-control" id="shipping" name="shipping">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -250,6 +251,7 @@
         let path_table_info = '{{route('get-table-info')}}'
         let path_close_table = '{{route('restaurant.close-table')}}'
         let _token = '{{csrf_token()}}'
+        let HOST_URL = "{{ url('/') }}"
     </script>
-    <script src="{{asset('custom/js/resAdmin/table-list.js')}}?v=202112221555"></script>
+    <script src="{{asset('custom/js/resAdmin/table-list.js')}}?v=202201041555"></script>
 @endsection

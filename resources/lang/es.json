@@ -227,5 +227,13 @@
     "available": "Disponible",
     "ordered": "Ordenado",
     "order_info": "Información del pedido",
-    "comment": "Comentario"
+    "comment": "Comentario",
+    "statistics": "Estadísticas",
+    "sales": "Ventas",
+    "home_sales": "Venta de hogares",
+    "best_selling_product": "Productos más vendidos",
+    "breakdown": "Desglose",
+    "start_date": "Fecha de inicio",
+    "end_date": "Fecha final",
+    "print": "Impresión"
 }

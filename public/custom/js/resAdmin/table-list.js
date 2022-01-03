@@ -115,6 +115,8 @@ $(document).on('click','.table-box .table-action', function (e) {
 $(document).on('click','.btn-confirm', function (e) {
     $('#detailModal').modal('hide')
     $('#tableId').val(tableId);
+    let total = $('#detail-total').html();
+    $('#consumption').val(total)
     $('#confirmModal').modal('show')
 })
 
@@ -122,7 +124,14 @@ $("#confirmForm").validate({
     validClass: "success",
     rules: {
         consumption:{
-            required: true
+            required: true,
+            number: true,
+        },
+        tip:{
+            number: true
+        },
+        shipping:{
+            number: true
         },
         payment_method:{
             required: true
@@ -134,6 +143,13 @@ $("#confirmForm").validate({
     messages: {
         consumption:{
             required: langs('messages.field_required'),
+            number: langs('messages.input_valid_number'),
+        },
+        tip:{
+            number: langs('messages.input_valid_number'),
+        },
+        shipping:{
+            number: langs('messages.input_valid_number'),
         },
         payment_method:{
             required: langs('messages.field_required'),
@@ -211,4 +227,8 @@ $(document).on('click','.btn-close', function () {
     });
 })
 
+$(document).on('click', '.btn-print', function () {
+    var url = HOST_URL + '/exportPdf/' + tableId;
 
+    window.open(url, '_blank');
+})
