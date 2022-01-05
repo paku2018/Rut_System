@@ -73,18 +73,18 @@
                                     <span class="sub-item">@lang('sales')</span>
                                 </a>
                             </li>
-                            <li class="{{$link=="statistics"&&$sublink=="home_sales"?'active':''}}">
-                                <a href="#">
-                                    <span class="sub-item">@lang('home_sales')</span>
+                            <li class="{{$link=="statistics"&&$sublink=="orders"?'active':''}}">
+                                <a href="{{ route('restaurant.statistics.orders') }}">
+                                    <span class="sub-item">@lang('orders')</span>
                                 </a>
                             </li>
-                            <li class="{{$link=="statistics"&&$sublink=="best_selling_product"?'active':''}}">
-                                <a href="#">
+                            <li class="{{$link=="statistics"&&$sublink=="bestProducts"?'active':''}}">
+                                <a href="{{ route('restaurant.statistics.best-products') }}">
                                     <span class="sub-item">@lang('best_selling_product')</span>
                                 </a>
                             </li>
                             <li class="{{$link=="statistics"&&$sublink=="breakdown"?'active':''}}">
-                                <a href="#">
+                                <a href="{{ route('restaurant.statistics.breakdown') }}">
                                     <span class="sub-item">@lang('breakdown')</span>
                                 </a>
                             </li>

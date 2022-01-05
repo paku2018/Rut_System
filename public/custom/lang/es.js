@@ -39,6 +39,7 @@ var lang = {
         'verify_code_incorrect': 'Verifique que el código sea incorrecto.',
         'cannot_order_this_table': 'No se puede pedir esta mesa.',
         'field_digits': 'El campo debe ser un dígito',
-        'mark_as_deliver': 'Marcar como entregado'
+        'mark_as_deliver': 'Marcar como entregado',
+        'amount': 'Cantidad'
     }
 }
