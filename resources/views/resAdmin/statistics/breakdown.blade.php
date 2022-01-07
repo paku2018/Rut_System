@@ -13,6 +13,35 @@
                         <h2 class="text-white pb-2 fw-bold">{{$restaurant->name}} @lang('breakdown')</h2>
                         <h5 class="text-white op-7 mb-2">@lang('breakdown_table_sale')</h5>
                     </div>
+                    <div class="ml-md-auto py-2 py-md-0">
+                        <div class="d-flex">
+                            <div class="form-group">
+                                <label class="text-white">@lang('start_date')</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" id="start_date" name="start_date">
+                                    <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-calendar-check"></i>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-white">@lang('end_date')</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" id="end_date" name="end_date">
+                                    <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-calendar-check"></i>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <button class="btn btn-black btn-round" id="search">@lang('search')</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,13 +100,20 @@
 @section('page-js')
     <script src="{{asset('assets/js/plugin/chart.js/chart.min.js')}}"></script>
     <script src="{{asset('assets/js/plugin/chart-circle/circles.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugin/moment/moment.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js')}}"></script>
     <script>
+        var link = '{{ route('restaurant.statistics.breakdown') }}'
+        var start_date = '{{ date('m/d/Y', strtotime($start_date)) }}'
+        var end_date = '{{ date('m/d/Y', strtotime($end_date)) }}'
+
         let waiters = '{{$waiters}}'
         let tables = '{{$tables}}'
         let products = '{{$products}}'
         let sales = parseFloat('{{$sales}}')
         let tips = parseFloat('{{$tips}}')
         let shipping = parseFloat('{{$shipping}}')
+
         Circles.create({
             id:'circles-1',
             radius:45,
@@ -161,5 +197,25 @@
                 },
             }
         });
+
+        $('.datepicker').datetimepicker({
+            format: 'DD/MM/YYYY',
+        });
+
+        $(document).ready(function () {
+            $('[name="end_date"]').val(end_date);
+            $('[name="start_date"]').val(start_date);
+        })
+
+        $('#search').on('click', function () {
+            let from_date = $('#start_date').val();
+            let arr = from_date.split("/")
+            let start = arr[2] + "-" + arr[1] + "-" + arr[0]
+            let to_date = $('#end_date').val();
+            let spl = to_date.split("/")
+            let end = spl[2] + "-" + spl[1] + "-" + spl[0]
+
+            location.href = link + "?start=" + start + "&&end=" + end;
+        })
     </script>
 @endsection

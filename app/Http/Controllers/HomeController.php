@@ -181,7 +181,7 @@ class HomeController extends Controller
                 $table_data = [
                     'restaurant_id' => $resId,
                     't_number' => $client->id,
-                    'name' => 'Virtual-'.$client->id."-".date('His'),
+                    'name' => 'Virtual('.$client->email.")-".date('His'),
                     'current_client_id' => $client->id,
                     'type' => 'delivery',
                     'status' => 'ordered'

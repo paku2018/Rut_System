@@ -39,7 +39,7 @@
     padding: 10px 5px;
     width: 150px;
     height: 150px;
-    display: inline-block;
+    display: inline-table;
     position: relative;
     margin-right: 0.7rem;
     margin-bottom: 20px;
@@ -60,6 +60,9 @@
     bottom: 5px;
     left: 0;
     z-index: 1000;
+}
+.table-box h5{
+    word-break: break-all;
 }
 .table-box .table-action i{
     cursor: pointer;

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\ResAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\Product;
 use App\Models\Restaurant;
 use App\Models\Table;
 use Illuminate\Http\Request;
@@ -104,5 +106,65 @@ class TableController extends Controller
         }
 
         return Redirect::back();
+    }
+
+    public function createDelivery(){
+        $resId = session()->get('resId');
+        if ($resId){
+            $restaurant = Restaurant::find($resId);
+            $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
+
+            return view('resAdmin.table.create-delivery', compact('restaurant', 'products'));
+        }else{
+            abort(404);
+        }
+    }
+
+    public function storeDelivery(Request $request){
+        $resId = session()->get('resId');
+        if ($resId){
+            try{
+                $client_email = $request->email;
+                $client = Client::where('email', $client_email)->first();
+                if(!$client){
+                    $client = Client::create(['email'=>$client_email]);
+                }
+
+                $table_data = [
+                    'restaurant_id' => $resId,
+                    't_number' => $client->id,
+                    'name' => 'Virtual('.$client->email.")-".date('His'),
+                    'current_client_id' => $client->id,
+                    'type' => 'delivery',
+                    'status' => 'ordered'
+                ];
+                $table = Table::create($table_data);
+
+                $items = $request->items;
+                $items = json_decode($items);
+                foreach ($items as $key => $item){
+                    if($item){
+                        $data = [
+                            'restaurant_id' => $table->restaurant_id,
+                            'product_id' => $key,
+                            'order_count' => $item,
+                            'status' => 'open',
+                            'client_id' => $table->current_client_id,
+                            'assigned_table_id' => $table->id
+                        ];
+                        Order::create($data);
+                    }
+                }
+                $update = Table::where('id', $table->id)->update(['status'=>'ordered']);
+                $result = true;
+            }catch (\Exception $e){
+                Log::info('order create error:'.$e->getMessage());
+                $result = false;
+            }
+        }else{
+            $result = false;
+        }
+
+        return response()->json(['status'=>true, 'result'=>$result]);
     }
 }

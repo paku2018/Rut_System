@@ -1,5 +1,5 @@
 $('.datepicker').datetimepicker({
-    format: 'MM/DD/YYYY',
+    format: 'DD/MM/YYYY',
 });
 
 $(document).ready(function () {
@@ -11,10 +11,10 @@ $(document).ready(function () {
 $('#search').on('click', function () {
     let from_date = $('#start_date').val();
     let arr = from_date.split("/")
-    let start = arr[2] + "-" + arr[0] + "-" + arr[1]
+    let start = arr[2] + "-" + arr[1] + "-" + arr[0]
     let to_date = $('#end_date').val();
     let spl = to_date.split("/")
-    let end = spl[2] + "-" + spl[0] + "-" + spl[1]
+    let end = spl[2] + "-" + spl[1] + "-" + spl[0]
 
     location.href = link + "?start=" + start + "&&end=" + end;
 })

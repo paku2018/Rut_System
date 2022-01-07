@@ -26,3 +26,8 @@ function sendOrderVerifyEmail($code, $email){
     );
     Mail::to($email)->send(new \App\Mail\OrderVerifyEmail($details));
 }
+
+function cmp($a, $b)
+{
+    return strcmp($b["ordered_count"], $a["ordered_count"]);
+}

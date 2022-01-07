@@ -36,7 +36,10 @@
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h4 class="card-title">@lang('tables')</h4>
-                            <a href="{{ route('restaurant.tables.create') }}" class="btn btn-black btn-round">@lang('create')</a>
+                            <div>
+                                <a href="{{ route('restaurant.tables.create') }}" class="btn btn-black btn-round">@lang('create')</a>
+                                <a href="{{ route('restaurant.tables.create-delivery') }}" class="btn btn-black btn-round">@lang('create_delivery')</a>
+                            </div>
                         </div>
                         <div class="card-body">
                             @if(session()->has('payment_error'))
@@ -76,7 +79,7 @@
                                                 <div class="table-box" data-index="{{$table->id}}">
                                                     <div class="table-status {{$class}}" title="{{$title}}"></div>
                                                     <h6 class="text-center mb-0">@lang('table')-{{$table->t_number}}</h6>
-                                                    <h5 class="text-center">{{$table->name}}</h5>
+                                                    <h5 class="text-center" style="height: 80px">{{$table->name}}</h5>
                                                     <div class="table-action d-flex align-items-center justify-content-center">
                                                         <a href="{{route('restaurant.tables.edit', $table->id)}}" class="text-black"><i class="fas fa-edit"></i></a>
                                                         <div class="ml-2 text-red delete" data-index="{{$table->id}}"><i class="fas fa-trash"></i></div>

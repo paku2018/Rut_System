@@ -38,31 +38,36 @@
                             <h4 class="card-title">@lang('sales')</h4>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex mb-3">
-                                <div class="form-group">
-                                    <label>@lang('start_date')</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control datepicker" id="start_date" name="start_date">
-                                        <div class="input-group-append">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex">
+                                    <div class="form-group">
+                                        <label>@lang('start_date')</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control datepicker" id="start_date" name="start_date">
+                                            <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-calendar-check"></i>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>@lang('end_date')</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control datepicker" id="end_date" name="end_date">
-                                        <div class="input-group-append">
+                                    <div class="form-group">
+                                        <label>@lang('end_date')</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control datepicker" id="end_date" name="end_date">
+                                            <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-calendar-check"></i>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="form-group d-flex align-items-center">
+                                        <button class="btn btn-black btn-round" id="search">@lang('search')</button>
+                                    </div>
                                 </div>
-                                <div class="form-group d-flex align-items-center">
-                                    <button class="btn btn-black btn-round" id="search">@lang('search')</button>
+                                <div>
+                                    <button class="btn btn-black btn-round" id="export">Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -94,6 +99,7 @@
     <script>
         var _token = '{{csrf_token()}}'
         var path_data = '{{ route('restaurant.statistics.sales.get-data') }}'
+        var path_export = '{{ route('restaurant.statistics.sales.export') }}'
     </script>
-    <script src="{{asset('custom/js/resAdmin/statistics/sales.js')}}?v=202201061555"></script>
+    <script src="{{asset('custom/js/resAdmin/statistics/sales.js')}}?v=202201071555"></script>
 @endsection

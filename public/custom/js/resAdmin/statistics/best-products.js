@@ -1,10 +1,10 @@
 $('.datepicker').datetimepicker({
-    format: 'MM/DD/YYYY',
+    format: 'DD/MM/YYYY',
 });
 
 $(document).ready(function () {
-    $('[name="end_date"]').val(window.moment().format('MM/DD/YYYY'));
-    $('[name="start_date"]').val(window.moment().subtract(1, 'months').add(1, 'days').format('MM/DD/YYYY'));
+    $('[name="end_date"]').val(window.moment().format('DD/MM/YYYY'));
+    $('[name="start_date"]').val(window.moment().subtract(1, 'months').add(1, 'days').format('DD/MM/YYYY'));
 
     refreshTable()
 })
@@ -12,10 +12,10 @@ $(document).ready(function () {
 function refreshTable() {
     let from_date = $('#start_date').val();
     let arr = from_date.split("/")
-    let start_date = arr[2] + "-" + arr[0] + "-" + arr[1]
+    let start_date = arr[2] + "-" + arr[1] + "-" + arr[0]
     let to_date = $('#end_date').val();
     let spl = to_date.split("/")
-    let end = spl[2] + "-" + spl[0] + "-" + spl[1]
+    let end = spl[2] + "-" + spl[1] + "-" + spl[0]
     let end_date = moment(end).add(1,'days').format("YYYY-MM-DD");
     let category = $('#category').val();
 
@@ -47,4 +47,47 @@ function refreshTable() {
 
 $('#search').on('click', function () {
     refreshTable()
+})
+
+$('#export').on('click', function () {
+    let from_date = $('#start_date').val();
+    let arr = from_date.split("/")
+    let start_date = arr[2] + "-" + arr[0] + "-" + arr[1]
+    let to_date = $('#end_date').val();
+    let spl = to_date.split("/")
+    let end = spl[2] + "-" + spl[0] + "-" + spl[1]
+    let end_date = moment(end).add(1,'days').format("YYYY-MM-DD");
+    let category = $('#category').val();
+
+    showLoading()
+    let formData = new FormData();
+    formData.append('start_date',start_date);
+    formData.append('end_date',end_date);
+    formData.append('category',category);
+    formData.append('_token',_token);
+    $.ajax({
+        url: path_export,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            hideLoading()
+            if(response.status){
+                var url = response.url;
+                window.open(url,'_blank');
+            }else{
+                swal(langs('messages.server_error'), {
+                    icon: "error",
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((confirmed) => {
+                    location.reload();
+                });
+            }
+        },
+    });
 })

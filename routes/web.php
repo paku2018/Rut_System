@@ -63,6 +63,8 @@ Route::group(['middleware'=>'checkResAdmin'],function () {
         Route::get('/detail/{id}', [App\Http\Controllers\ResAdmin\RestaurantController::class, 'detail'])->name('detail');
         Route::get('/tables', [App\Http\Controllers\ResAdmin\TableController::class, 'index'])->name('tables.list');
         Route::get('/tables/create', [App\Http\Controllers\ResAdmin\TableController::class, 'create'])->name('tables.create');
+        Route::get('/tables/create-delivery', [App\Http\Controllers\ResAdmin\TableController::class, 'createDelivery'])->name('tables.create-delivery');
+        Route::post('/tables/store-delivery', [App\Http\Controllers\ResAdmin\TableController::class, 'storeDelivery'])->name('tables.store-delivery');
         Route::get('/tables/edit/{id}', [App\Http\Controllers\ResAdmin\TableController::class, 'edit'])->name('tables.edit');
         Route::post('/tables/store', [App\Http\Controllers\ResAdmin\TableController::class, 'store'])->name('tables.store');
         Route::post('/tables/delete', [App\Http\Controllers\ResAdmin\TableController::class, 'delete'])->name('tables.delete');
@@ -93,11 +95,13 @@ Route::group(['middleware'=>'checkResAdmin'],function () {
         Route::group(['prefix' => 'statistics', 'as' => 'statistics.'], function () {
             Route::get('/sales', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'salesIndex'])->name('sales');
             Route::post('/sales/getData', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'getSalesData'])->name('sales.get-data');
+            Route::post('/sales/export', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'salesExport'])->name('sales.export');
 
             Route::get('/orders', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'ordersIndex'])->name('orders');
 
             Route::get('/bestProducts', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductIndex'])->name('best-products');
             Route::post('/bestProducts/getData', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductData'])->name('best-products.get-data');
+            Route::post('/bestProducts/export', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductExport'])->name('best-products.export');
 
             Route::get('/breakdown', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'breakdownIndex'])->name('breakdown');
         });

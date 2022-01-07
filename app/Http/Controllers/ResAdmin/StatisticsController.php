@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\ResAdmin;
 
+use App\Export\BestProductsExportExcel;
+use App\Export\SalesExportExcel;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Order;
@@ -10,10 +12,17 @@ use App\Models\Product;
 use App\Models\Restaurant;
 use App\Models\Table;
 use App\Models\User;
+use App\Services\StatisticsService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StatisticsController extends Controller
 {
+    public function __construct(StatisticsService $statisticsService)
+    {
+        $this->statisticsService = $statisticsService;
+    }
+
     public function salesIndex(){
         $resId = session()->get('resId');
         if ($resId){
@@ -31,11 +40,29 @@ class StatisticsController extends Controller
             $start_date = $request->start_date;
             $end_date = $request->end_date;
 
-            $result = Payment::with('restaurant', 'table')->where('restaurant_id', $resId)->where('created_at', '>=', $start_date)->where('created_at', '<=', $end_date)->get();
+            $result = $this->statisticsService->getSales($resId, $start_date, $end_date);
 
             return response()->json($result);
         }else{
             return response()->json(array());
+        }
+    }
+
+    public function salesExport(Request $request){
+        $resId = session()->get('resId');
+        if ($resId){
+            $data = array(
+                'resId' => $resId,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date
+            );
+
+            $filename = __('sales').'_'.date('ymshis').'.xlsx';
+            Excel::store(new SalesExportExcel($data),$filename,'public');
+
+            return response()->json(['status'=>true, 'url'=>asset('storage')."/".$filename]);
+        }else{
+            return response()->json(['status'=>false]);
         }
     }
 
@@ -93,23 +120,7 @@ class StatisticsController extends Controller
             $start_date = $request->start_date;
             $end_date = $request->end_date;
             $categoryId = $request->category;
-            $products = Product::where('restaurant_id', $resId)->where('status', 1);
-            if ($categoryId)
-                $products = $products->where('category_id', $categoryId);
-            $products = $products->get();
-            $result = array();
-            foreach ($products as $product){
-                $pId = $product->id;
-                $count = Order::where('product_id', $pId)->where('created_at', '>=', $start_date)->where('created_at', '<=', $end_date)->sum('order_count');
-
-                $data = array(
-                    'product_id' => $pId,
-                    'product_name' => $product->name,
-                    'product_price' => $product->sale_price,
-                    'ordered_count' => $count
-                );
-                $result[] = $data;
-            }
+            $result = $this->statisticsService->getBestProducts($resId, $start_date, $end_date, $categoryId);
 
             return response()->json($result);
         }else{
@@ -117,19 +128,46 @@ class StatisticsController extends Controller
         }
     }
 
+    public function bestProductExport(Request $request){
+        $resId = session()->get('resId');
+        if ($resId){
+            $data = array(
+                'resId' => $resId,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'categoryId' => $request->category
+            );
+
+            $filename = __('best_selling_product').'_'.date('ymshis').'.xlsx';
+            Excel::store(new BestProductsExportExcel($data), $filename,'public');
+
+            return response()->json(['status'=>true, 'url'=>asset('storage')."/".$filename]);
+        }else{
+            return response()->json(['status'=>false]);
+        }
+    }
+
     public function breakdownIndex(){
         $resId = session()->get('resId');
         if ($resId){
             $restaurant = Restaurant::find($resId);
+            $start_date = isset($_GET['start'])?$_GET['start']:'';
+            if($start_date){
+                $end_date = $_GET['end'];
+            }else{
+                $start = date('Y-m-d', strtotime('-1 months'));
+                $start_date = date('Y-m-d', strtotime($start . ' +1 day'));
+                $end_date = date('Y-m-d 23:59:59');
+            }
             $waiters = User::where('role', 'waiter')->where('restaurant_id', $resId)->count();
             $tables = Table::where('restaurant_id', $resId)->where('type','real')->count();
             $products = Product::where('restaurant_id', $resId)->where('status', 1)->count();
 
-            $sales = Payment::where('restaurant_id', $resId)->sum('consumption');
-            $tips = Payment::where('restaurant_id', $resId)->sum('tip');
-            $shipping = Payment::where('restaurant_id', $resId)->sum('shipping');
+            $sales = Payment::where('restaurant_id', $resId)->where('created_at', '>=', $start_date)->where('created_at', '<=', $end_date)->sum('consumption');
+            $tips = Payment::where('restaurant_id', $resId)->where('created_at', '>=', $start_date)->where('created_at', '<=', $end_date)->sum('tip');
+            $shipping = Payment::where('restaurant_id', $resId)->where('created_at', '>=', $start_date)->where('created_at', '<=', $end_date)->sum('shipping');
 
-            return view('resAdmin.statistics.breakdown', compact('restaurant', 'waiters', 'tables', 'products', 'sales', 'tips','shipping'));
+            return view('resAdmin.statistics.breakdown', compact('restaurant', 'waiters', 'tables', 'products', 'sales', 'tips','shipping', 'start_date', 'end_date'));
         }else{
             abort(404);
         }

@@ -245,5 +245,7 @@
     "total_shipping": "Transporte total",
     "home_orders": "Pedidos a domicilio",
     "order_counts": "Pedido Contar",
-    "order_totals": "Pedido precio"
+    "order_totals": "Pedido precio",
+    "create_delivery": "Crear Entrega",
+    "client_email": "Cliente Email"
 }
