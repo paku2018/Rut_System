@@ -40,6 +40,7 @@
                                         <th>@lang('name')</th>
                                         <th>@lang('email')</th>
                                         <th>@lang('taco_id')</th>
+                                        <th>@lang('status')</th>
                                         <th class="text-center">@lang('action')</th>
                                     </tr>
                                     </thead>
@@ -50,6 +51,7 @@
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->taco_user_id}}</td>
+                                            <td>{{$user->status == "active" ? __('active') : __('inactive')}}</td>
                                             <td class="text-center">
                                                 <div class="form-button-action">
                                                     <a href="{{ route('admin.user.edit', $user->id) }}" type="button" class="btn btn-link btn-primary btn-lg">

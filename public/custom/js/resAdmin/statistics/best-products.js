@@ -35,6 +35,12 @@ function refreshTable() {
         columns: [
             {"data": "product_name"},
             {"data": "ordered_count"},
+            {"data": "product_purchase_price","render":function (data, type, row) {
+                    if (data)
+                        return "$" + data * row.ordered_count;
+                    else
+                        return ''
+                }},
             {"data": "product_price","render":function (data, type, row) {
                 if (data)
                     return "$" + data * row.ordered_count;

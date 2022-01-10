@@ -76,8 +76,8 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group form-show-validation">
-                                            <label for="desc">@lang('description')<span class="required-label">*</span></label>
-                                            <textarea class="form-control" id="desc" name="desc" required>{{isset($data)?$data->desc:''}}</textarea>
+                                            <label for="desc">@lang('description')</label>
+                                            <textarea class="form-control" id="desc" name="desc">{{isset($data)?$data->desc:''}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
@@ -119,5 +119,5 @@
 @endsection
 @section('page-js')
     <script src="{{asset('assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
-    <script src="{{asset('custom/js/resAdmin/product.js')}}?v=202112221555"></script>
+    <script src="{{asset('custom/js/resAdmin/product.js')}}?v=202101101555"></script>
 @endsection

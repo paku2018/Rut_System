@@ -1,3 +1,8 @@
+$('#dt_table').DataTable({
+    "pageLength": 10,
+    "order": [[ 1, 'asc' ]]
+});
+
 $('.minus-btn').on('click', function(e) {
     e.preventDefault();
     var $this = $(this);

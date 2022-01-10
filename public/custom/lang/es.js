@@ -40,6 +40,8 @@ var lang = {
         'cannot_order_this_table': 'No se puede pedir esta mesa.',
         'field_digits': 'El campo debe ser un dígito',
         'mark_as_deliver': 'Marcar como entregado',
-        'amount': 'Cantidad'
+        'amount': 'Cantidad',
+        'order_will_delete': 'Estos pedidos se eliminarán de forma permanente.',
+        'delete': 'Eliminar'
     }
 }

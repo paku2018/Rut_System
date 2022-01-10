@@ -56,6 +56,7 @@
                                             <thead>
                                             <tr>
                                                 <th>@lang('image')</th>
+                                                <th>@lang('sort')</th>
                                                 <th>@lang('name')</th>
                                                 <th>@lang('sale_price')</th>
                                                 <th>@lang('count')</th>
@@ -69,6 +70,7 @@
                                                             <img src="{{$product->image}}" alt="no_img" class="preview-image">
                                                         @endif
                                                     </td>
+                                                    <td>{{$product->category->order}}</td>
                                                     <td>{{$product->name}}</td>
                                                     <td>{{number_format($product->sale_price,2)}}</td>
                                                     <td>
@@ -103,10 +105,11 @@
 @endsection
 @section('page-js')
     <script src="{{asset('assets/js/plugin/selectpicker/js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
     <script>
         let path_create_delivery = '{{route('restaurant.tables.store-delivery')}}'
         let path_table = '{{ route('restaurant.tables.list') }}'
         let _token = '{{csrf_token()}}'
     </script>
-    <script src="{{asset('custom/js/resAdmin/table.js')}}?v=202112061555"></script>
+    <script src="{{asset('custom/js/resAdmin/table.js')}}?v=202101101555"></script>
 @endsection

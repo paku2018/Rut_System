@@ -85,6 +85,7 @@
                                     <tr>
                                         <th>@lang('product')</th>
                                         <th>@lang('amount')</th>
+                                        <th>@lang('purchase_price') @lang('total')</th>
                                         <th>@lang('total')</th>
                                     </tr>
                                     </thead>

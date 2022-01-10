@@ -112,7 +112,7 @@ class TableController extends Controller
         $resId = session()->get('resId');
         if ($resId){
             $restaurant = Restaurant::find($resId);
-            $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
+            $products = Product::with('category')->where('restaurant_id', $resId)->where('status',1)->get();
 
             return view('resAdmin.table.create-delivery', compact('restaurant', 'products'));
         }else{

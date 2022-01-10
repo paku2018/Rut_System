@@ -245,6 +245,7 @@
         let path_create_orders = '{{route('waiter.create-order')}}'
         let path_pend_table = '{{route('waiter.pend-table')}}'
         let path_mark_deliver = '{{route('waiter.deliver-table-orders')}}'
+        let path_delete_order = '{{route('delete-order')}}'
         let _token = '{{csrf_token()}}'
         let HOST_URL = "{{ url('/') }}"
     </script>

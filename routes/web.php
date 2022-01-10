@@ -33,6 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/profile/update', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('profile.update');
     Route::post('/getTableInfo', [App\Http\Controllers\Member\TableController::class, 'getTableInfo'])->name('get-table-info');
     Route::get('/exportPdf/{id}', [App\Http\Controllers\HomeController::class, 'exportPdf'])->name('export-pdf');
+    Route::post('/deleteOrder', [App\Http\Controllers\Member\TableController::class, 'deleteOrder'])->name('delete-order');
 });
 
 Route::group(['as' =>'admin.','prefix'=>'admin','middleware'=>'checkAdmin'],function () {

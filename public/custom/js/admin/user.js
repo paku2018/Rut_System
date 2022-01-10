@@ -24,6 +24,9 @@ $(document).ready(function () {
                 },
                 taco_user_id:{
                     required: true
+                },
+                status:{
+                    required: true
                 }
             },
             messages: {
@@ -38,6 +41,9 @@ $(document).ready(function () {
                     required: langs('messages.field_required'),
                 },
                 taco_user_id:{
+                    required: langs('messages.field_required'),
+                },
+                status:{
                     required: langs('messages.field_required'),
                 },
             },

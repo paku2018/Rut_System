@@ -125,6 +125,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-round btn-delete">@lang('delete')</button>
                     <button type="button" class="btn btn-black btn-round btn-print">@lang('print')</button>
                     <button type="button" class="btn btn-black btn-round btn-confirm">@lang('confirm_payment')</button>
                     <button type="button" class="btn btn-round" data-dismiss="modal">@lang('cancel')</button>
@@ -253,6 +254,7 @@
         let path_delete = '{{route('restaurant.tables.delete')}}'
         let path_table_info = '{{route('get-table-info')}}'
         let path_close_table = '{{route('restaurant.close-table')}}'
+        let path_delete_order = '{{route('delete-order')}}'
         let _token = '{{csrf_token()}}'
         let HOST_URL = "{{ url('/') }}"
     </script>

@@ -247,5 +247,7 @@
     "order_counts": "Pedido Contar",
     "order_totals": "Pedido precio",
     "create_delivery": "Crear Entrega",
-    "client_email": "Cliente Email"
+    "client_email": "Cliente Email",
+    "order_will_delete": "Estos pedidos se eliminarán de forma permanente.",
+    "inactive": "Inactivo"
 }

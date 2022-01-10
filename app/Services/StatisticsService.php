@@ -29,6 +29,7 @@ class StatisticsService
             $data = array(
                 'product_id' => $pId,
                 'product_name' => $product->name,
+                'product_purchase_price' => $product->purchase_price,
                 'product_price' => $product->sale_price,
                 'ordered_count' => $count
             );

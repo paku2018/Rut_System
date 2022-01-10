@@ -18,9 +18,6 @@ $(document).ready(function () {
                 number: true,
                 min: 0.1,
             },
-            desc:{
-                required: true
-            },
         },
         messages: {
             name:{
@@ -38,9 +35,6 @@ $(document).ready(function () {
                 required: langs('messages.field_required'),
                 number: langs('messages.input_valid_number'),
                 min: langs('messages.input_greater_0')
-            },
-            desc:{
-                required: langs('messages.field_required'),
             },
         },
         highlight: function(element) {

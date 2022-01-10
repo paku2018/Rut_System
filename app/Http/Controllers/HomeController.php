@@ -243,7 +243,14 @@ class HomeController extends Controller
         if(!$rManagers && $user->restaurant_id != $table->restaurant_id){
             abort(404);
         }
-        $orders = Order::with('client','product')->where('status','open')->where('assigned_table_id', $id)->get();
+
+        $items = isset($_GET['items'])?$_GET['items']:'';
+        if ($items){
+            $items = explode(",", $items);
+            $orders = Order::with('client','product')->whereIn('id', $items)->get();
+        }else{
+            $orders = Order::with('client','product')->where('status','open')->where('assigned_table_id', $id)->get();
+        }
 
         $html = '
             <style>
