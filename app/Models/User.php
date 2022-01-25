@@ -27,7 +27,8 @@ class User extends Authenticatable
         'taco_user_id',
         'restaurant_id',
         'avatar',
-        'verification_code'
+        'verification_code',
+        'status'
     ];
 
     /**

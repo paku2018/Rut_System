@@ -50,7 +50,29 @@ class TableController extends Controller
 
     public function deliver(Request $request){
         $tableId = $request->tableId;
-        $update = Table::where('id', $tableId)->update(['status'=>'open']);
+        $orders = $request->orders;
+        $orders = explode(",", $orders);
+        $update = Order::whereIn('id', $orders)->update(['deliver_status'=>1]);
+
+        //check if pending order and if not, change the table status
+        $pend_order = Order::where('assigned_table_id', $tableId)->where('status', '!=', 'done')->where('deliver_status', 0)->first();
+        if (!$pend_order)
+            $update = Table::where('id', $tableId)->update(['status'=>'open']);
+
+        return response()->json(['status'=>true, 'result'=>true]);
+    }
+
+    public function deleteOrder(Request $request){
+        $tableId = $request->tableId;
+        $orders = $request->orders;
+        $orders = explode(",", $orders);
+
+        $delete = Order::whereIn('id', $orders)->delete();
+
+        //check if pending order and if not, change the table status
+        $pend_order = Order::where('assigned_table_id', $tableId)->where('status', '!=', 'done')->where('deliver_status', 0)->first();
+        if (!$pend_order)
+            $update = Table::where('id', $tableId)->update(['status'=>'open']);
 
         return response()->json(['status'=>true, 'result'=>true]);
     }

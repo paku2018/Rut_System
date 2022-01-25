@@ -20,13 +20,17 @@ $(document).on('click','.table-box', function () {
                     let code = '';
                     let total = 0;
                     if (orders.length > 0){
+                        code += '<div class="w-100 d-flex justify-content-end mb-2">'
                         if(data.status == "ordered")
-                            code += '<div class="w-100 text-right mb-2"><button class="btn btn-black btn-round btn-deliver btn-sm"><i class="fa fa-check mr-2"></i>' + langs('messages.mark_as_deliver') + '</button></div>'
+                            code += '<button class="btn btn-black btn-round btn-deliver btn-sm mr-2"><i class="fa fa-check mr-2"></i>' + langs('messages.mark_as_deliver') + '</button>'
+                        code += '<button class="btn btn-danger btn-round btn-order-delete btn-sm">' + langs('messages.delete') + '</button></div>'
                         for (let i=0; i<orders.length; i++){
                             let val = orders[i].product.sale_price * orders[i].order_count;
-                            code += ' <div class="d-flex justify-content-between">\n' +
-                                '                                    <h4 class="text-danger mb-1">' + orders[i].product.name + '</h4>\n' +
-                                '                                    <h4 class="mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
+                            let delivered = orders[i].deliver_status == 1 ? '(Entregado)' : ''
+                            code += ' <div><div class="d-flex align-items-center mb-1">\n' +
+                                '                                    <input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-2" data-value="'+ orders[i].id +'">' +
+                                '                                    <h4 class="text-danger mb-0">' + orders[i].product.name + delivered + '</h4></div>\n' +
+                                '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
                                 '                                </div>'
 
                             total += val;
@@ -35,6 +39,7 @@ $(document).on('click','.table-box', function () {
                     $('#assigned-orders').html(code);
                     $('#detail-total').html(total);
                     checkCount()
+                    checkDisable()
                     $('.btn-pend').prop('disabled', false)
                     $('#detailModal').modal('show')
                 }else{
@@ -171,10 +176,18 @@ $(document).on('click','.items', function () {
 })
 
 $(document).on('click','.btn-deliver', function () {
+    let selected = [];
+    $('.orders').each(function () {
+        let index = $(this).data('value');
+        let checked = $('input[name=orders_'+index+']:checked').val();
+        if (checked)
+            selected.push(index)
+    })
     showLoading()
     let formData = new FormData();
     formData.append('_token',_token);
     formData.append('tableId',tableId);
+    formData.append('orders',selected.toString());
     $.ajax({
         url: path_mark_deliver,
         type: 'post',
@@ -408,5 +421,112 @@ $(document).ready(function () {
         "aoColumnDefs": [
             { 'bSortable': false, 'aTargets': [ 0, 3 ] }
         ]
+    });
+})
+
+$(document).on('click', '.btn-print', function () {
+    let selected = [];
+    $('.orders').each(function () {
+        let index = $(this).data('value');
+        let checked = $('input[name=orders_'+index+']:checked').val();
+        if (checked)
+            selected.push(index)
+    })
+    var items = selected.toString();
+    var appened = selected.length > 0 ? "?items=" + items : ''
+    var url = HOST_URL + '/exportPdf/' + tableId + appened;
+
+    window.open(url, '_blank');
+})
+
+
+function checkDisable(){
+    let checked_count = 0;
+    $('.orders').each(function () {
+        let index = $(this).data('value');
+        let checked = $('input[name=orders_'+index+']:checked').val();
+        if (checked){
+            checked_count++;
+        }
+    })
+    if (checked_count == 0){
+        $('.btn-order-delete').prop('disabled', true)
+        $('.btn-deliver').prop('disabled', true)
+    }else{
+        $('.btn-order-delete').prop('disabled', false)
+        $('.btn-deliver').prop('disabled', false)
+    }
+}
+
+$(document).on('click','.orders', function () {
+    checkDisable()
+})
+
+$(document).on('click', '.btn-order-delete', function () {
+    swal({
+        title: langs('messages.sure_delete'),
+        text: langs('messages.order_will_delete'),
+        type: 'question',
+        icon: 'warning',
+        buttons:{
+            confirm: {
+                text : langs('messages.yes'),
+                className : 'btn btn-black'
+            },
+            cancel: {
+                visible: true,
+                text : langs('messages.cancel'),
+                className: 'btn'
+            }
+        }
+    }).then((confirmed) => {
+        if (confirmed){
+            showLoading()
+            let selected = [];
+            $('.orders').each(function () {
+                let index = $(this).data('value');
+                let checked = $('input[name=orders_'+index+']:checked').val();
+                if (checked)
+                    selected.push(index)
+            })
+            let formData = new FormData();
+            formData.append('_token',_token);
+            formData.append('tableId',tableId);
+            formData.append('orders',selected.toString());
+            $.ajax({
+                url: path_delete_order,
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    hideLoading()
+                    if(response.result){
+                        $('#detailModal').modal('hide');
+                        swal(langs('messages.success'), {
+                            icon: "success",
+                            buttons : {
+                                confirm : {
+                                    className: 'btn btn-success'
+                                }
+                            }
+                        }).then((confirmed) => {
+                            location.reload();
+                        });
+                    }else{
+                        swal(langs('messages.server_error'), {
+                            icon: "error",
+                            buttons : {
+                                confirm : {
+                                    className: 'btn btn-danger'
+                                }
+                            }
+                        }).then((confirmed) => {
+                            location.reload();
+                        });
+                    }
+                },
+            });
+        }
     });
 })

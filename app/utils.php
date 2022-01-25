@@ -26,3 +26,44 @@ function sendOrderVerifyEmail($code, $email){
     );
     Mail::to($email)->send(new \App\Mail\OrderVerifyEmail($details));
 }
+
+function cmp($a, $b)
+{
+    return strcmp($b["ordered_count"], $a["ordered_count"]);
+}
+
+function checkStatus($user){
+    $status = false;
+    if($user -> status == "active"){
+        switch ($user->role){
+            case 'admin':
+                $status = true;
+                break;
+            case 'restaurant':
+                //check if this user is a owner
+                $result = \App\Models\Restaurant::where('owner_id', $user->id)->first();
+                if ($result)
+                    $status = true;
+                else{
+                    $manage = \App\Models\RestaurantManger::where('user_id', $user->id)->first();
+                    if($manage){
+                        $restaurant = \App\Models\Restaurant::find($manage->restaurant_id);
+                        $owner = \App\Models\User::find($restaurant->owner_id);
+                        if ($owner->status == "active")
+                            $status = true;
+                    }
+                }
+                break;
+            case 'waiter':
+                $restaurant = \App\Models\Restaurant::find($user->restaurant_id);
+                $owner = \App\Models\User::find($restaurant->owner_id);
+                if ($owner->status == "active")
+                    $status = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    return $status;
+}

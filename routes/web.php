@@ -32,6 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('profile.update');
     Route::post('/getTableInfo', [App\Http\Controllers\Member\TableController::class, 'getTableInfo'])->name('get-table-info');
+    Route::get('/exportPdf/{id}', [App\Http\Controllers\HomeController::class, 'exportPdf'])->name('export-pdf');
+    Route::post('/deleteOrder', [App\Http\Controllers\Member\TableController::class, 'deleteOrder'])->name('delete-order');
 });
 
 Route::group(['as' =>'admin.','prefix'=>'admin','middleware'=>'checkAdmin'],function () {
@@ -62,6 +64,8 @@ Route::group(['middleware'=>'checkResAdmin'],function () {
         Route::get('/detail/{id}', [App\Http\Controllers\ResAdmin\RestaurantController::class, 'detail'])->name('detail');
         Route::get('/tables', [App\Http\Controllers\ResAdmin\TableController::class, 'index'])->name('tables.list');
         Route::get('/tables/create', [App\Http\Controllers\ResAdmin\TableController::class, 'create'])->name('tables.create');
+        Route::get('/tables/create-delivery', [App\Http\Controllers\ResAdmin\TableController::class, 'createDelivery'])->name('tables.create-delivery');
+        Route::post('/tables/store-delivery', [App\Http\Controllers\ResAdmin\TableController::class, 'storeDelivery'])->name('tables.store-delivery');
         Route::get('/tables/edit/{id}', [App\Http\Controllers\ResAdmin\TableController::class, 'edit'])->name('tables.edit');
         Route::post('/tables/store', [App\Http\Controllers\ResAdmin\TableController::class, 'store'])->name('tables.store');
         Route::post('/tables/delete', [App\Http\Controllers\ResAdmin\TableController::class, 'delete'])->name('tables.delete');
@@ -88,6 +92,20 @@ Route::group(['middleware'=>'checkResAdmin'],function () {
         Route::get('/qrcode', [App\Http\Controllers\ResAdmin\HomeController::class, 'qrcode'])->name('qrcode');
 
         Route::post('/closeTable', [App\Http\Controllers\ResAdmin\TableController::class, 'close'])->name('close-table');
+
+        Route::group(['prefix' => 'statistics', 'as' => 'statistics.'], function () {
+            Route::get('/sales', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'salesIndex'])->name('sales');
+            Route::post('/sales/getData', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'getSalesData'])->name('sales.get-data');
+            Route::post('/sales/export', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'salesExport'])->name('sales.export');
+
+            Route::get('/orders', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'ordersIndex'])->name('orders');
+
+            Route::get('/bestProducts', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductIndex'])->name('best-products');
+            Route::post('/bestProducts/getData', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductData'])->name('best-products.get-data');
+            Route::post('/bestProducts/export', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductExport'])->name('best-products.export');
+
+            Route::get('/breakdown', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'breakdownIndex'])->name('breakdown');
+        });
     });
 });
 

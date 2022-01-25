@@ -21,6 +21,9 @@ class CheckMember
             return redirect('/login');
         }elseif (Auth::user()->role != 'waiter'){
             return redirect('/home');
+        }elseif(checkStatus(Auth::user()) == false){
+            auth()->logout();
+            return redirect('/login');
         }
         return $next($request);
     }

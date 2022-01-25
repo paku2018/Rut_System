@@ -20,6 +20,10 @@ class CheckResAdmin
         if(Auth::guard()->check() === false || Auth::user()->role == 'waiter' || Auth::user()->role == 'cashier'){
             return redirect('/home');
         }
+        if(checkStatus(Auth::user()) == false){
+            auth()->logout();
+            return redirect('/login');
+        }
         return $next($request);
     }
 }

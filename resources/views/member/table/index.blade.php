@@ -226,6 +226,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-black btn-round btn-print">@lang('print')</button>
                     <button type="button" class="btn btn-danger btn-round btn-pend">@lang('close_table')</button>
                     <button type="button" class="btn btn-round" data-dismiss="modal">@lang('cancel')</button>
                 </div>
@@ -244,7 +245,9 @@
         let path_create_orders = '{{route('waiter.create-order')}}'
         let path_pend_table = '{{route('waiter.pend-table')}}'
         let path_mark_deliver = '{{route('waiter.deliver-table-orders')}}'
+        let path_delete_order = '{{route('delete-order')}}'
         let _token = '{{csrf_token()}}'
+        let HOST_URL = "{{ url('/') }}"
     </script>
     <script src="{{asset('custom/js/waiter/table-list.js')}}?v=202112181555"></script>
 @endsection

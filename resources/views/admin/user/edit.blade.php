@@ -68,6 +68,15 @@
                                         <input type="email" class="form-control" id="email" name="email" value="{{isset($data)?$data->email:''}}" {{isset($data)?'disabled':''}}>
                                     </div>
                                 </div>
+                                <div class="form-group form-show-validation row">
+                                    <label for="status" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('status')<span class="required-label">*</span></label>
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                        <select class="form-control" id="status" name="status" required>
+                                            <option value="active" {{isset($data)&&$data->status == "active"?'selected':''}}>@lang('active')</option>
+                                            <option value="inactive" {{isset($data)&&$data->status == "inactive"?'selected':''}}>@lang('inactive')</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 @if(isset($data))
                                     <div class="form-group form-show-validation row">
                                         <div class="col-12 offset-sm-3">
@@ -110,5 +119,5 @@
     </div>
 @endsection
 @section('page-js')
-    <script src="{{asset('custom/js/admin/user.js')}}?v=202112061555"></script>
+    <script src="{{asset('custom/js/admin/user.js')}}?v=202201101555"></script>
 @endsection

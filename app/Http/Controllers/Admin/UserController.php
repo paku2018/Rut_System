@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function store(Request $request){
         try{
-            $data = $request->only('id','name','email','taco_user_id');
+            $data = $request->only('id','name','email','taco_user_id','status');
             if($data['id']==0){
                 $data['role'] = "restaurant";
                 $data['email_verified_at'] = date('Y-m-d H:i:s');

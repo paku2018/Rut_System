@@ -47,8 +47,8 @@
 
     <main>
         <header class="row tm-welcome-section">
-            <h2 class="col-12 text-center tm-section-title">Welcome to {{$restaurant->name}}</h2>
-            <p class="col-12 text-center">Dear guests, you are welcomed at our restaurant. We greatly appreciate your choice of dining with us and we promise to serve you with our excellence. Welcome you and have a fine dining experience.</p>
+            <h2 class="col-12 text-center tm-section-title">Bienvenidos a {{$restaurant->name}}</h2>
+            <p class="col-12 text-center">Le damos la bienvenida y disfrute de una excelente experiencia gastronómica.</p>
         </header>
 
         <div class="menu-list">

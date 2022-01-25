@@ -36,7 +36,10 @@
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h4 class="card-title">@lang('tables')</h4>
-                            <a href="{{ route('restaurant.tables.create') }}" class="btn btn-black btn-round">@lang('create')</a>
+                            <div>
+                                <a href="{{ route('restaurant.tables.create') }}" class="btn btn-black btn-round">@lang('create')</a>
+                                <a href="{{ route('restaurant.tables.create-delivery') }}" class="btn btn-black btn-round">@lang('create_delivery')</a>
+                            </div>
                         </div>
                         <div class="card-body">
                             @if(session()->has('payment_error'))
@@ -76,7 +79,7 @@
                                                 <div class="table-box" data-index="{{$table->id}}">
                                                     <div class="table-status {{$class}}" title="{{$title}}"></div>
                                                     <h6 class="text-center mb-0">@lang('table')-{{$table->t_number}}</h6>
-                                                    <h5 class="text-center">{{$table->name}}</h5>
+                                                    <h5 class="text-center" style="height: 80px">{{$table->name}}</h5>
                                                     <div class="table-action d-flex align-items-center justify-content-center">
                                                         <a href="{{route('restaurant.tables.edit', $table->id)}}" class="text-black"><i class="fas fa-edit"></i></a>
                                                         <div class="ml-2 text-red delete" data-index="{{$table->id}}"><i class="fas fa-trash"></i></div>
@@ -122,6 +125,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-round btn-delete">@lang('delete')</button>
+                    <button type="button" class="btn btn-black btn-round btn-print">@lang('print')</button>
                     <button type="button" class="btn btn-black btn-round btn-confirm">@lang('confirm_payment')</button>
                     <button type="button" class="btn btn-round" data-dismiss="modal">@lang('cancel')</button>
                 </div>
@@ -145,19 +150,19 @@
                             <div class="col-12">
                                 <div class="form-group form-show-validation">
                                     <label for="consumption">@lang('consumption')<span class="required-label">*</span></label>
-                                    <input type="text" class="form-control" id="consumption" name="consumption" required>
+                                    <input type="number" class="form-control" id="consumption" name="consumption" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group form-show-validation">
                                     <label for="tip">@lang('tip')</label>
-                                    <input type="text" class="form-control" id="tip" name="tip">
+                                    <input type="number" class="form-control" id="tip" name="tip">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group form-show-validation">
                                     <label for="shipping">@lang('shipping')</label>
-                                    <input type="text" class="form-control" id="shipping" name="shipping">
+                                    <input type="number" class="form-control" id="shipping" name="shipping">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -249,7 +254,9 @@
         let path_delete = '{{route('restaurant.tables.delete')}}'
         let path_table_info = '{{route('get-table-info')}}'
         let path_close_table = '{{route('restaurant.close-table')}}'
+        let path_delete_order = '{{route('delete-order')}}'
         let _token = '{{csrf_token()}}'
+        let HOST_URL = "{{ url('/') }}"
     </script>
-    <script src="{{asset('custom/js/resAdmin/table-list.js')}}?v=202112221555"></script>
+    <script src="{{asset('custom/js/resAdmin/table-list.js')}}?v=202201041555"></script>
 @endsection
