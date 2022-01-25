@@ -56,12 +56,26 @@
                                         <input type="text" class="form-control" id="name" name="name" value="{{isset($data)?$data->name:''}}" required>
                                     </div>
                                 </div>
-                                <div class="form-group form-show-validation row">
-                                    <label for="taco_user_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('taco_id')<span class="required-label">*</span></label>
+                                {{-- <div class="form-group form-show-validation row">
+                                    <label for="taco_user_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right"></label>
                                     <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="taco_user_id" name="taco_user_id" value="{{isset($data)?$data->taco_user_id:''}}" required>
                                     </div>
-                                </div>
+                                </div> --}}
+                                <div class="form-group form-show-validation row">
+                                    <label for="selectTacoUser" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('taco_id')<span class="required-label">*</span></label>
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                    <select name="taco_user_id" class="form-control select2" id="selectTacoUser" required>
+                                        @foreach($usuarios_taco as $key=>$usuario)
+                                            @if(isset($data) && $data->taco_user_id==$key)
+                                            <option value="{{$key}}" selected>{{$usuario}}</option>
+                                            @else
+                                            <option value="{{$key}}">{{$usuario}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    </div>
+                                  </div>
                                 <div class="form-group form-show-validation row">
                                     <label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('email')<span class="required-label">*</span></label>
                                     <div class="col-lg-6 col-md-9 col-sm-8">
@@ -120,4 +134,10 @@
 @endsection
 @section('page-js')
     <script src="{{asset('custom/js/admin/user.js')}}?v=202201101555"></script>
+    <script src="{{asset('assets/js/plugin/select2/select2.full.min.js')}}?v=202201101555"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#selectTacoUser').select2();
+        });
+    </script>
 @endsection

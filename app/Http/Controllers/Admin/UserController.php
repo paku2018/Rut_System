@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use App\CustomClass\ApiTaco;
 
 class UserController extends Controller
 {
@@ -18,13 +19,17 @@ class UserController extends Controller
     }
 
     public function create(){
-        return view('admin.user.edit');
+        $ApiTaco = new ApiTaco();
+        $usuarios_taco = $ApiTaco->getUsuariosTaco();
+        //dd($usuarios_taco);
+        return view('admin.user.edit', compact('usuarios_taco'));
     }
 
     public function edit($id){
         $data = User::find($id);
-
-        return view('admin.user.edit',compact('data'));
+        $ApiTaco = new ApiTaco();
+        $usuarios_taco = $ApiTaco->getUsuariosTaco();
+        return view('admin.user.edit',compact('data','usuarios_taco'));
     }
 
     public function store(Request $request){
