@@ -17,6 +17,8 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+Route::get('/jspm', [App\Http\Controllers\JSPMController::class, 'index'])->name('lincencia_jspm');
+
 Auth::routes();
 Route::get('/verify', [App\Http\Controllers\HomeController::class, 'verify'])->name('verify');
 Route::post('/verify/check_code', [App\Http\Controllers\HomeController::class, 'checkCode'])->name('check-verify-code');
