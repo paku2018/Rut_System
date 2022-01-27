@@ -124,7 +124,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer justify-content-end">
+                    <span id="sprint_active" class="mr-auto text-success px-4 py-2  d-none" data-toggle="tooltip" data-placement="right" title="Impresora activa"><i class="fas fa-print fa-2x"></i> </span>
+                    <span id="sprint_inactive" class="mr-auto text-warning px-4 py-2" data-toggle="tooltip" data-placement="right" title="Impresora no disponible"><i class="fas fa-print fa-2x"></i> </span>
                     <button type="button" class="btn btn-danger btn-round btn-delete">@lang('delete')</button>
                     <button type="button" class="btn btn-black btn-round btn-print">@lang('print')</button>
                     <button type="button" class="btn btn-black btn-round btn-confirm">@lang('confirm_payment')</button>
@@ -248,8 +250,15 @@
     </div>
 @endsection
 @section('page-js')
+    <!-- JSP Print manager JS -->
+    <script src="{{ asset('assets/js/print_tool_v2/zip.js/zip-full.min.js') }}"></script>
+    <script src="{{ asset('assets/js/print_tool_v2/JSPrintManager.js') }}"></script>
+    <script src="{{ asset('assets/js/print_tool_v2/bluebird.min.js') }}"></script>
+    <script src="{{ asset('assets/js/utils_print.js') }}"></script>
+
     <!-- Datatable JS -->
     <script src="{{asset('assets/js/plugin/moment/moment.min.js')}}"></script>
+
     <script>
         let path_delete = '{{route('restaurant.tables.delete')}}'
         let path_table_info = '{{route('get-table-info')}}'

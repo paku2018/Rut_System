@@ -402,7 +402,12 @@ class HomeController extends Controller
         $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);
 
         $postfix = $items = isset($_GET['items'])?str_replace(",","_",$_GET['items']):'a';
-        $filename = storage_path('app/public/receipt_'.$id.'_'.$postfix.'.pdf');
-        $export = $pdf->Output($filename,'F');
+        $user_id = auth()->user()->id;
+        $filename = 'receipt_'.$user_id.'_'.$id.'_'.$postfix.'.pdf';
+        $path_filename = storage_path('app/public/'.$filename);
+        $export = $pdf->Output($path_filename,'F');
+
+        return response()->json(['url_pdf'=>'storage/'.$filename,'success'=>true]);
+
     }
 }

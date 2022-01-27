@@ -241,7 +241,23 @@ $(document).on('click', '.btn-print', function () {
     var appened = selected.length > 0 ? "?items=" + items : ''
     var url = HOST_URL + '/exportPdf/' + tableId + appened;
 
-    window.open(url, '_blank');
+    $.ajax({
+        url: url,
+        type: 'get',
+        //data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            console.log(response);
+            var url_pdf = HOST_URL+'/'+response.url_pdf;
+            if(window.jspmWSStatus()){
+                doPrintingPDF(url_pdf);
+            }
+            window.open(url_pdf, '_blank');
+        },
+    });
+
+
 })
 
 

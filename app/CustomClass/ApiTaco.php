@@ -283,6 +283,7 @@ class ApiTaco {
         $URL_API = $HOST.'/migrate_data/'.$APIKEY.'/'.$ACTION;
         $data_usuario = [];
         $data_usuario[''] = '-- Seleccione Usuario TACO --';
+        $data_usuario['0|0'] = 'SOLO IMPRIME RECIBO, NO REALIZA EMISIÓN DE DTE';
 
         if($APIKEY!='_EMPTY_'){
             $api = new ClientApi();
