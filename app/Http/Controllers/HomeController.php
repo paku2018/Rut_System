@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomClass\ReceiptPDF;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Order;
@@ -244,7 +245,7 @@ class HomeController extends Controller
             abort(404);
         }
 
-        $items = isset($_GET['items'])?$_GET['items']:'';
+        $items = isset($_GET['items'])? $_GET['items'] : '';
         if ($items){
             $items = explode(",", $items);
             $orders = Order::with('client','product')->whereIn('id', $items)->get();
@@ -252,160 +253,30 @@ class HomeController extends Controller
             $orders = Order::with('client','product')->where('status','open')->where('assigned_table_id', $id)->get();
         }
 
-        $html = '
-            <style>
-                .common-table{
-                    padding: 10px !important;
-                }
-                .text-right{
-                    text-align: right;
-                }
-                .v-bottom{
-                    vertical-align: bottom;
-                }
-                .mb-0{
-                    margin-bottom: 0 !important;
-                }
-                .mt-0{
-                    margin-top: 0 !important;
-                    margin-bottom: 0 !important;
-                }
-                .text-grey{
-                    color: #939393;
-                }
-                .text-center{
-                    text-align: center;
-                }
-                .text-right{
-                    text-align: right;
-                }
-                .text-left{
-                    text-align: left;
-                }
-                .py-0{
-                    padding-bottom: 0 !important;
-                    padding-top: 0 !important;
-                }
-                .px-0{
-                    padding-left: 0 !important;
-                    padding-right: 0 !important;
-                }
-                .mt-1{
-                    margin-top: 10px !important;
-                }
-                .ml-3{
-                    margin-left: 20px !important;
-                }
-                .bb-1{
-                    border-bottom: 1px solid #eaeaea;
-                }
-                .font-12{
-                    font-size: 12px !important;
-                }
-                .font-16{
-                    font-size: 16px !important;
-                }
-                .h-4{
-                    font-size: 4px;
-                    color: white;
-                }
-                .h-8{
-                    font-size: 8px;
-                    color: white;
-                }
-                table{
-                    font-family: Noto Sans TC;
-                }
-                p{
-                    font-size: 16px;
-                }
-            </style>
-        ';
-        $html .= '
-            <table style="padding: 20px 60px">
-                <tbody>
-                    <tr class="text-center">
-                    <td>
-                        <table class="common-table" width="610">
-                        <tbody>
-                        <tr>
-                            <td colspan="2" class="text-center">
-                                <h1 class="mb-0">'.__('receipt').'</h1>
-                                <h1 class="mb-0">N*: 18895</h1>
-                                <p>Fecha: <span id="current_time">'.date('d/m/Y H:i').'</span></p>
-                                <p>Rut: '.$restaurant->name.'</p>
-                            </td>
-                        </tr>
-                        </tbody>
-                        </table>';
-
-        $html .= '<table class="common-table">
-                <tbody>
-                    <tr>
-                        <td class="text-center" style="border-bottom: 1px dashed grey">D E T A L L E</td>
-                    </tr>
-                </tbody>
-            </table>';
-
-        $html .= '<table class="common-table">
-                <tbody>';
-
-        $total = 0;
-        foreach ($orders as $order){
-            $price = $order->product->sale_price * $order->order_count;
-            $total += $price;
-            $html .= '<tr>';
-            $html .= '<td class="text-left">'. $order->product->name .'<br>'.$order->order_count.' &times; $'.$order->product->sale_price.'</td>';
-            $html .= '<td class="text-right"><br><br>$'. number_format($price, 0) .'</td>';
-            $html .= '</tr>';
-        }
-        $html .= '</tbody></table>';
-
-        $html .= '<table class="common-table">
-                    <thead>
-                        <tr>
-                            <th class="text-left bb-1 text-right"><h3>TOTAL : $'.number_format($total, 0) .'</h3></th>
-                        </tr>
-                    </thead>';
-        $html .= '<tbody>
-                        <tr>
-                            <th class="text-left bb-1">
-                                <p class="font-weight-bold">Tipo de page : <span id="tipo">EFECTIVO</span></p>
-                                <p class="font-weight-bold">Pago : <span>0</span></p>
-                                <p class="font-weight-bold">Vuelto : <span>0</span></p>
-                            </th>
-                        </tr>
-                    </tbody>';
-        $html .= '</table>';
-
-        $html .= '<table class="common-table"><tbody>
-                        <tr>
-                            <th class="text-center">
-                                <p class="font-weight-bold">www.controlcash.cl</p>
-                                <p class="font-weight-bold">Gracias por su compra</p>
-                            </th>
-                        </tr>
-                    </tbody>';
-        $html .= '</table>';
-
-        $html .= '</td></tr></tbody></table>';
-
-        $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetMargins(-1, 0, -1);
-        $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-        $pdf->setFontSubsetting(true);
-
-        $pdf->AddPage();
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);
-
         $postfix = $items = isset($_GET['items'])?str_replace(",","_",$_GET['items']):'a';
-        $user_id = auth()->user()->id;
-        $filename = 'receipt_'.$user_id.'_'.$id.'_'.$postfix.'.pdf';
-        $path_filename = storage_path('app/public/'.$filename);
-        $export = $pdf->Output($path_filename,'F');
+        $filename = 'receipt_'.auth()->user()->id.'_'.$id.'_'.$postfix.'.pdf';
+
+
+        $myPdf = new ReceiptPDF();
+        $html = $myPdf->renderHeader([
+            'order_code'=> 111,
+            'name'=> $restaurant->name,
+            'rut'=> '11.222.333-4',
+        ]);
+        $html .= $myPdf->renderDetail();
+        $html .= $myPdf->setItems($orders);
+        $html .= $myPdf->setTotal($myPdf->total);
+        //$html .= $myPdf->setPaymentDetails('EFECTIVO', 0 ,0);
+        $html .= $myPdf->footer();
+        $html = $myPdf->getStyles($html);
+
+        $myPdf->pdf->AddPage();
+        $myPdf->pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);
+
+
+
+        $export = $myPdf->pdf->Output(storage_path('app/public/'.$filename),'F');
+
 
         return response()->json(['url_pdf'=>'storage/'.$filename,'success'=>true]);
 
