@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\Passport;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -49,4 +50,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tokens()
+    {
+        return $this->hasMany(Passport::tokenModel(), 'user_id')->where('name', config('app.name'))->orderBy('created_at', 'desc');
+    }
 }
