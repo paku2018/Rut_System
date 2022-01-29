@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CustomClass\ReceiptPDF;
+use App\CustomClass\TestReceipt;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Order;
@@ -277,8 +278,14 @@ class HomeController extends Controller
 
         $export = $myPdf->pdf->Output(storage_path('app/public/'.$filename),'F');
 
+        //$ticket = new TestReceipt(11);
+        $ticket_png = 'storage/receipts/print_pre_test.png';
 
-        return response()->json(['url_pdf'=>'storage/'.$filename,'success'=>true]);
+        return response()->json([
+            'ticket_png'=> $ticket_png,
+            'url_pdf'=>'storage/'.$filename,
+            'success'=>true
+        ]);
 
     }
 }

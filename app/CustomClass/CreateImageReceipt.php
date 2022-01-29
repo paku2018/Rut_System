@@ -41,7 +41,7 @@ class CreateImageReceipt {
 			$this->alto = $alto;
 		}
 
-		$this->filename_qr = storage_path('app/public/invoices/pagocash_qr.png');
+		$this->filename_qr = storage_path('app/public/receipts/pagocash_qr.png');
 		$this->qr_code_image = imagecreatefrompng($this->filename_qr);
 
 		$this->img = imagecreate( $this->ancho, $this->alto);
@@ -314,7 +314,7 @@ class CreateImageReceipt {
 
 	public function setQrCodeCustom($url = '', $venta_id){
         if(!empty($url)){
-        	$this->filename_qr = storage_path('app/public/invoices/qr'.$venta_id.'.png');
+        	$this->filename_qr = storage_path('app/public/receipts/qr'.$venta_id.'.png');
         	QRCode::url($url)
 		        ->setSize(18)
 		        ->setMargin(2)
@@ -378,7 +378,7 @@ class CreateImageReceipt {
 		if($show){
 			imagepng( $this->img );
 		}else{
-			$filename = storage_path('app/public/invoices/'.$filename);
+			$filename = storage_path('app/public/receipts/'.$filename);
 			@imagepng( $this->img, $filename );
 		}
 
@@ -395,7 +395,7 @@ class CreateImageReceipt {
 		if($show){
 			imagepng( $this->img );
 		}else{
-			$filename = storage_path('app/public/invoices/'.$filename);
+			$filename = storage_path('app/public/receipts/'.$filename);
 			@imagepng( $this->img, $filename );
 		}
 
@@ -411,7 +411,7 @@ class CreateImageReceipt {
 		if($show){
 			imagepng( $this->img );
 		}else{
-			$filename = storage_path('app/public/invoices/'.$filename);
+			$filename = storage_path('app/public/receipts/'.$filename);
 			@imagepng( $this->img, $filename );
 		}
 

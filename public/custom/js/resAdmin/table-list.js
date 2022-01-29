@@ -250,9 +250,12 @@ $(document).on('click', '.btn-print', function () {
         success: function(response){
             console.log(response);
             var url_pdf = HOST_URL+'/'+response.url_pdf;
+            var url_png = HOST_URL+'/'+response.ticket_png;
             if(window.jspmWSStatus()){
                 doPrintingPDF(url_pdf);
+                //doPrinting(url_png);
             }
+            //window.open(url_png, '_blank');
             window.open(url_pdf, '_blank');
         },
     });
