@@ -244,20 +244,40 @@ $(document).on('click', '.btn-print', function () {
     $.ajax({
         url: url,
         type: 'get',
-        //data: formData,
         contentType: false,
         processData: false,
         success: function(response){
             console.log(response);
             var url_pdf = HOST_URL+'/'+response.url_pdf;
             var url_png = HOST_URL+'/'+response.ticket_png;
-            if(window.jspmWSStatus()){
-                doPrintingPDF(url_pdf);
-                //doPrinting(url_png);
+            if(url_png.length>1){
+                if(window.jspmWSStatus()){
+                    //doPrintingPDF(url_pdf);
+                    doPrinting(url_png);
+                }
+                swal({
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-danger'
+                        }
+                    },
+                    icon: url_png,
+                });
+                //window.open(url_png, '_blank');
+                //window.open(url_pdf, '_blank');
             }
-            //window.open(url_png, '_blank');
-            window.open(url_pdf, '_blank');
+
         },
+        error: function(a){
+            swal(langs('messages.server_error'), {
+                icon: "error",
+                buttons : {
+                    confirm : {
+                        className: 'btn btn-danger'
+                    }
+                }
+            });
+        }
     });
 
 
@@ -350,5 +370,32 @@ $(document).on('click', '.btn-delete', function () {
                 },
             });
         }
+    });
+})
+
+$(document).on('click', '.btn-confirm-close', function (e) {
+    e.preventDefault();
+    var formValues = $('#confirmForm').serialize();
+    $.post(path_close_table, formValues, function(result){
+        if(result.success){
+            var url_png = HOST_URL+'/'+result.url_png;
+            if(result.url_png.length > 1){
+                if(window.jspmWSStatus()){
+                    doPrinting(url_png);
+                }
+                swal({
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-danger'
+                        }
+                    },
+                    icon: url_png,
+                });
+            }
+        }else{
+        }
+        setTimeout(function(){
+            location.reload();
+        },2000);
     });
 })

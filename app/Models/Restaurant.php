@@ -13,6 +13,10 @@ class Restaurant extends Model
     protected $fillable = [
         'name',
         'tax_id',
+        'rut',
+        'slogan',
+        'address',
+        'bank_transfer_details',
         'owner_id'
     ];
 

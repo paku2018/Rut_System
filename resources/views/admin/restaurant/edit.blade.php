@@ -51,9 +51,34 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-show-validation row">
+                                    <label for="slogan" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('slogan')</label>
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                        <input type="text" class="form-control" id="slogan" name="slogan" value="{{isset($data)?$data->slogan:''}}">
+                                    </div>
+                                </div>
+                                {{-- <div class="form-group form-show-validation row">
                                     <label for="tax_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('tax_id')<span class="required-label">*</span></label>
                                     <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="tax_id" name="tax_id" value="{{isset($data)?$data->tax_id:''}}" required>
+                                    </div>
+                                </div> --}}
+                                <div class="form-group form-show-validation row">
+                                    <label for="rut" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('rut')<span class="required-label">*</span></label>
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                        <input type="text" class="form-control" id="rut" name="rut" value="{{isset($data)?$data->rut:''}}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-show-validation row">
+                                    <label for="address" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('address')</label>
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                        <input type="text" class="form-control" id="address" name="address" value="{{isset($data)?$data->address:''}}">
+                                    </div>
+                                </div>
+                                <div class="form-group form-show-validation row">
+                                    <label for="bank_transfer_details" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('bank_transfer_details')</label>
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                        <textarea class="form-control" id="bank_transfer_details" name="bank_transfer_details" rows="3">{{isset($data)?$data->bank_transfer_details:''}}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group form-show-validation row">

@@ -183,17 +183,17 @@
                                 <div class="form-group form-show-validation">
                                     <label for="document_type">@lang('document_type')<span class="required-label">*</span></label>
                                     <select class="form-control" id="document_type" name="document_type">
-                                        <option value="1" selected>@lang('final_close')</option>
+                                        {{-- <option value="1" selected>@lang('final_close')</option> --}}
+                                        {{-- <option value="3">@lang('invoice')</option> --}}
                                         <option value="2">@lang('electronic_ballot')</option>
-                                        <option value="3">@lang('invoice')</option>
-                                        <option value="4">@lang('receipt')</option>
+                                        <option value="4" selected>@lang('receipt')</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-black btn-round">@lang('confirm_and_close_table')</button>
+                        <button type="submit" class="btn btn-black btn-round btn-confirm-close">@lang('confirm_and_close_table')</button>
                         <button type="button" class="btn btn-round" data-dismiss="modal">@lang('cancel')</button>
                     </div>
                 </form>

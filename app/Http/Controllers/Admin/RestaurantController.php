@@ -27,9 +27,14 @@ class RestaurantController extends Controller
         try{
             $res_id = $request->id;
             $data = array(
-                'name' => $request->restaurant_name,
-                'tax_id' => $request->tax_id,
+                'tax_id' => 0,
+                //'tax_id' => $request->tax_id,
                 'owner_id' => $request->owner_id,
+                'name' => $request->restaurant_name,
+                'rut' => $request->rut,
+                'slogan' => $request->slogan,
+                'address' => $request->address,
+                'bank_transfer_details' => $request->bank_transfer_details,
             );
             $restaurant = Restaurant::updateOrCreate(['id'=>$res_id], $data);
 

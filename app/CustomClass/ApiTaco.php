@@ -3,8 +3,7 @@ namespace App\CustomClass;
 
 use GuzzleHttp\Client as ClientApi;
 use GuzzleHttp\Exception\ConnectException;
-use App\User;
-use App\Models\Document;
+
 
 /**
  * Clase para emision de boletas y facturas desde la api de Taco pagocash
@@ -13,6 +12,9 @@ use App\Models\Document;
 class ApiTaco {
     var $taco_data_user = [];
     var $host_api = '';
+
+    private $venta;
+    private $venta_items;
 
     public function __construct($user_id = null){
         $this->taco_data_user = session('taco_data_user', function() { return []; });
@@ -27,19 +29,21 @@ class ApiTaco {
 
     public function tokenTacoVendedor($user_id)
     {
-        $user = User::find($user_id);
+        $user = explode('|', $user_id);
+        $taco_user_id = $user[0];
+        $taco_empresa_id = $user[1];
 
         $APIKEY = env('TACO_API_KEY','_EMPTY_');
         $HOST = env('TACO_API_URL_PROD','_EMPTY_');
         $URL_API = $HOST.'/token_inventario';
 
 
-        if($APIKEY!='_EMPTY_' && !empty($user->taco_user_id)){
+        if($APIKEY!='_EMPTY_' && !empty($taco_user_id)){
             $api = new ClientApi();
             $options = [
                 'form_params'=> [
-                    'usuario_id'=> $user->taco_user_id,
-                    'comercio_id'=> 0,//$user->empresa->comercio_id,
+                    'usuario_id'=> $taco_user_id,
+                    'comercio_id'=> $taco_empresa_id,
                     'token'=> $APIKEY
                 ]
             ];
@@ -90,10 +94,45 @@ class ApiTaco {
         return $item;
     }
 
-
-    public function EmitirBoleta($venta, $venta_items){
+    public function prepareData($payment, $user){
+        $venta_aux = [
+            'venta_id'=> $payment->id,
+            'vendedor'=> $user['name'],
+            'cliente'=> (object)[
+                'rut'=> '66666666-6',
+                'nombre'=> 'Predeterminado',
+                'glosa'=> '',
+                'direccion'=> '',
+                'comuna'=> '',
+                'email'=> '',
+            ],
+            'total'=> $payment->consumption,
+            'observacion'=> '',
+        ];
+        $venta_items_aux = [];
+        \Log::debug('$payment->items');
+        \Log::debug($payment);
+        \Log::debug($payment->items);
+        foreach ($payment->items as $item) {
+            $venta_items_aux[] = [
+                'producto_id'=> $item->product_id,
+                'descripcion'=> $item->product->name,
+                'cantidad'=> $item->order_count,
+                'precio_venta'=> $item->product->sale_price,
+                'es_exento'=> false,
+            ];
+        }
+        $this->venta = $venta_aux;
+        $this->venta_items = $venta_items_aux;
+    }
+    public function EmitirBoleta(){
+        $venta = $this->venta;
+        $venta_items = $this->venta_items;
         $items_productos = [];
+        \Log::debug($venta);
+        \Log::debug($venta_items);
         foreach ($venta_items as $item) {
+            \Log::debug($item);
             if($item['es_exento']){
                 $items_productos[] = $this->setItemProducto($item['descripcion'],''.$item['cantidad'], ''.explode('.',$item['precio_venta'])[0], $es_exento='1');
             }else{
@@ -124,8 +163,6 @@ class ApiTaco {
             $direccion_receptor = $venta['cliente']->direccion;
             $comuna_receptor = $venta['cliente']->comuna;
             $correo_receptor = $venta['cliente']->email;
-
-            //\Log::debug('RUT RECEPTOR:'.$rut_receptor);
 
             $observacion      = $venta['observacion'];
 

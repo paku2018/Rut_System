@@ -29,7 +29,7 @@ class ReceiptPDF
 		$colors = ['blue','green','red'];
 		$style = '
             <style>
-                .bold{ font-weight:bold; }
+                .bold{ font-weight: 600; }
                 .common-table{
                     padding: 0px !important;
                     width:48mm;
@@ -50,6 +50,8 @@ class ReceiptPDF
                 .ml-3{  margin-left: 20px !important; }
                 .bb-1{ border-bottom: 1px solid #eaeaea; }
                 table{ font-family: Noto Sans TC; }
+                .bb { border: 1px #000000 solid; padding: 0px;}
+                p { font-family: Arial;  }
 
                 ';
 
@@ -78,7 +80,19 @@ class ReceiptPDF
                 </table>';
 		return $html;
 	}
-
+	public function setComment($comment){
+		if(empty($comment)){
+			return '';
+		}
+		$html = '<table class="common-table">
+                    <tbody>
+                        <tr>
+                            <td class="font-10"><br><br>Comentario:<br>'.$comment.'</td>
+                        </tr>
+                    </tbody>
+            </table>';
+        return $html;
+	}
 	public function setTotal($total=0){
 		$html = '<table class="common-table">
                     <tbody>
@@ -141,11 +155,12 @@ class ReceiptPDF
 		        <tbody>
 		        <tr>
 		            <td colspan="2" class="text-center">
-		                <p class="font-16">'.__('receipt').'</p>
-		                <p class="font-18">N°: '.$data['order_code'].'</p>
+		                <h5>'.__('receipt').'</h5>
+		                <h4>N°: '.$data['order_code'].'</h4>
 		                <p class="font-12">Fecha: <span id="current_time">'.date('d/m/Y H:i').'</span></p>
-		                <p class="font-12 bold">'.$data['name'].'</p>
-		                <p class="font-12">Rut: '.$data['rut'].'</p>
+		                <p class="font-12 bold">'.$data['table']->restaurant->name.'</p>
+		                <p class="font-12">Rut: '.$data['table']->restaurant->rut.'</p>
+		                <p class="font-12">M: '.$data['table']->name.'</p>
 		            </td>
 		        </tr>
 		        </tbody>

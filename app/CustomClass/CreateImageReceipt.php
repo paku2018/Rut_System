@@ -155,31 +155,15 @@ class CreateImageReceipt {
 	 * */
 	public function addItem($cantidad, $producto_nombre, $producto_precio, $barcode=''){
 		$this->lineaY += 65;
-
-		//imagettftext($this->img, 40, 0, 30, $this->lineaY+10, $this->text_color, $this->fuente, $cantidad);
-
 		imagettftext($this->img, 42, 0, 30, $this->lineaY+10, $this->text_color, $this->fuente, substr($producto_nombre,0, 33));
-
-		//$producto_precio = (($producto_precio < 0) ? "-" : "") . "$" . number_format(abs($producto_precio), 0, "", ".");
-
-		//$producto_precio_text =  str_pad($producto_precio, 10, " ", STR_PAD_LEFT);
-		//imagettftext($this->img, 42, 0, ($this->ancho/1.34)-50, $this->lineaY+10, $this->text_color, $this->fuente, $producto_precio_text);
-
 		$this->lineaY += 70;
-
-		//imagettftext($this->img, 40, 0, 30, $this->lineaY+10, $this->text_color, $this->fuente, $cantidad);
-		//$barcode_text = str_pad($barcode, 12, " ", STR_PAD_LEFT);
-
 		$precio_individual = "$" . number_format(abs($producto_precio), 0, "", ".");
 		$print_fila = $producto_precio < 0 ? 'Descuento': $cantidad.' x '.$precio_individual;
 		imagettftext($this->img, 42, 0, 30, $this->lineaY+10, $this->text_color, $this->fuente,  $print_fila);
 
 		$producto_precio = (($producto_precio < 0) ? "-" : "") . "$" . number_format(abs($producto_precio*$cantidad), 0, "", ".");
-
 		$producto_precio_text =  str_pad($producto_precio, 10, " ", STR_PAD_LEFT);
 		imagettftext($this->img, 42, 0, ($this->ancho/1.34)-85, $this->lineaY+10, $this->text_color, $this->fuente, $producto_precio_text);
-
-
 
 	}
 
@@ -291,7 +275,6 @@ class CreateImageReceipt {
 		if(!empty($resolucion)){
 			$this->lineaY += 100;
 			$resolucion = str_pad('Resolución SII '.$resolucion, 25, " ", STR_PAD_BOTH);
-			//imagestring( $this->img, 2, 15, $this->lineaY, $resolucion, $this->text_color );
 			imagettftext($this->img, 50, 0, 140, $this->lineaY, $this->text_color, $this->fuente_opensans, $resolucion);
 		}
 

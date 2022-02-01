@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
+use App\CustomClass\ApiTaco;
+use App\CustomClass\CreateReceipt;
+use App\CustomClass\FinalReceipt;
+
 class TableController extends Controller
 {
     public function index(){
@@ -85,13 +89,17 @@ class TableController extends Controller
 
     public function close(Request $request){
         $tableId = $request->tableId;
-        $table = Table::find($tableId);
+        $table = Table::with('restaurant')->find($tableId);
         if (!$table){
-            abort(404);
+            return response()->json([
+                'data'=> 'error',
+                'success'=> false
+            ]);
         }
         try{
             //record payment
             $data = $request->only('consumption', 'tip', 'shipping', 'payment_method', 'document_type');
+
             $data['table_id'] = $tableId;
             $data['client_id'] = $table->current_client_id;
             $data['restaurant_id'] = $table->restaurant_id;
@@ -101,8 +109,35 @@ class TableController extends Controller
             //update order and table
             $order_update = Order::where('assigned_table_id', $tableId)->where('status','open')->update(['status'=>'done', 'final_payment_id'=>$payment->id]);
             $update = Table::where('id', $tableId)->update(['status'=>'closed', 'current_client_id'=>null]);
+
+            $payment = Payment::with(['restaurant','table','items.client','items.product',])->find($payment->id);
+            $payment->update(['history_data'=> json_encode($payment)]);
+            if ((int) $data['document_type']==Payment::ELECTRONIC_BALLOT) {
+                //enviar a taco si es boleta
+                $user_taco_id = auth()->user()->taco_user_id;
+                if(!empty($user_taco_id) && $user_taco_id!='0|0'){
+                    $ApiTaco = new ApiTaco($user_taco_id);
+                    $ApiTaco->prepareData($payment, auth()->user());
+                    $dataTaco = $ApiTaco->EmitirBoleta();
+                    $payment->update(['taco_data'=> json_encode($dataTaco)]);
+                }
+            }
+
+            //crear ticket para imprimir
+            $payment = Payment::with(['restaurant','table','items.client','items.product',])->find($payment->id);
+            $result_ticket = new FinalReceipt($payment, auth()->user());
+            $ticket_png = 'storage/receipts/'.$result_ticket->filename;
+            return response()->json([
+                'url_png'=> !empty($result_ticket->filename) ? $ticket_png : '',
+                'success'=> true
+            ]);
+
         }catch (\Exception $e){
-            session()->flash('payment_error',true);
+            ///session()->flash('payment_error',true);
+            return response()->json([
+                //'data'=> $e,
+                'success'=> false
+            ]);
         }
 
         return Redirect::back();

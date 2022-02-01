@@ -38,7 +38,7 @@
                                     <tr>
                                         <th>@lang('ID')</th>
                                         <th>@lang('name')</th>
-                                        <th>@lang('tax_id')</th>
+                                        <th>@lang('rut')</th>
                                         <th>@lang('owner')</th>
                                         <th>@lang('creation_date')</th>
                                         <th class="text-center">@lang('action')</th>
@@ -49,7 +49,7 @@
                                         <tr>
                                             <td>{{$item->id}}</td>
                                             <td>{{$item->name}}</td>
-                                            <td>{{$item->tax_id}}</td>
+                                            <td>{{$item->rut}}</td>
                                             <td>{{$item->owner->name}}</td>
                                             <td>{{$item->created_at}}</td>
                                             <td class="text-center">

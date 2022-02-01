@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CustomClass\ReceiptPDF;
 use App\CustomClass\TestReceipt;
+use App\CustomClass\CreateReceipt;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Order;
@@ -239,7 +240,7 @@ class HomeController extends Controller
 
     public function exportPdf($id){
         $table = Table::with('restaurant')->find($id);
-        $restaurant = Restaurant::find($table->restaurant_id);
+        //$restaurant = Restaurant::find($table->restaurant_id);
         $user = Auth::user();
         $rManagers = RestaurantManger::where('restaurant_id', $table->restaurant_id)->where('user_id', $user->id)->first();
         if(!$rManagers && $user->restaurant_id != $table->restaurant_id){
@@ -254,36 +255,44 @@ class HomeController extends Controller
             $orders = Order::with('client','product')->where('status','open')->where('assigned_table_id', $id)->get();
         }
 
-        $postfix = $items = isset($_GET['items'])?str_replace(",","_",$_GET['items']):'a';
-        $filename = 'receipt_'.auth()->user()->id.'_'.$id.'_'.$postfix.'.pdf';
+        $order_code = [$table->id];
+        $comment = '';
+        foreach($orders as $order){
+            $order_code[] = $order->id;
+            $comment = $order->comment;
+        }
+        $order_code_text = implode('/',$order_code);
+        $postfix = str_replace("/","_",$order_code_text);
+        $filename = 'receipt_'.auth()->user()->id.'_'.$postfix.'.pdf';
 
-
+        /**
         $myPdf = new ReceiptPDF();
         $html = $myPdf->renderHeader([
-            'order_code'=> 111,
-            'name'=> $restaurant->name,
-            'rut'=> '11.222.333-4',
+            'order_code'=> $order_code_text,
+            'name'=> $table->restaurant->name,
+            'rut'=> $table->restaurant->rut,
+            'table'=> $table
         ]);
         $html .= $myPdf->renderDetail();
         $html .= $myPdf->setItems($orders);
         $html .= $myPdf->setTotal($myPdf->total);
+        $html .= $myPdf->setComment($comment);
         //$html .= $myPdf->setPaymentDetails('EFECTIVO', 0 ,0);
         $html .= $myPdf->footer();
         $html = $myPdf->getStyles($html);
 
         $myPdf->pdf->AddPage();
         $myPdf->pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);
-
-
-
         $export = $myPdf->pdf->Output(storage_path('app/public/'.$filename),'F');
+        */
 
-        //$ticket = new TestReceipt(11);
-        $ticket_png = 'storage/receipts/print_pre_test.png';
+        $ticket = new CreateReceipt($table, $orders, auth()->user());
+        $ticket_png = 'storage/receipts/'.$ticket->filename;
 
         return response()->json([
-            'ticket_png'=> $ticket_png,
+            'ticket_png'=> !empty($ticket->filename) ? $ticket_png : '',
             'url_pdf'=>'storage/'.$filename,
+            //'all_data'=> compact('table','restaurant','user','rManagers','orders'),
             'success'=>true
         ]);
 
