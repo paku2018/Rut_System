@@ -271,5 +271,5 @@
         let _token = '{{csrf_token()}}'
         let HOST_URL = "{{ url('/') }}"
     </script>
-    <script src="{{asset('custom/js/resAdmin/table-list.js')}}?v=202201041555"></script>
+    <script src="{{asset('custom/js/resAdmin/table-list.js')}}?v=202202070010"></script>
 @endsection

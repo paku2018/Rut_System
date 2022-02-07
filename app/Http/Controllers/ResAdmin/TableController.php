@@ -127,6 +127,7 @@ class TableController extends Controller
             $payment = Payment::with(['restaurant','table','items.client','items.product',])->find($payment->id);
             $result_ticket = new FinalReceipt($payment, auth()->user());
             $ticket_png = 'storage/receipts/'.$result_ticket->filename;
+            sleep(2);
             return response()->json([
                 ///'TACO'=> env('TACO_API_URL_PROD','_EMPTY_'),
                 'url_png'=> !empty($result_ticket->filename) ? $ticket_png : '',

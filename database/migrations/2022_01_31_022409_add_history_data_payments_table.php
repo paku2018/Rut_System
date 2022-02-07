@@ -14,7 +14,7 @@ class AddHistoryDataPaymentsTable extends Migration
     public function up()
     {
         Schema::table('payments', function (Blueprint $table) {
-           // $table->text('taco_data')->nullable();
+           $table->text('taco_data')->nullable();
             $table->longText('history_data')->nullable();
         });
     }
@@ -27,7 +27,7 @@ class AddHistoryDataPaymentsTable extends Migration
     public function down()
     {
         Schema::table('payments', function (Blueprint $table) {
-            ///$table->dropColumn('taco_data');
+            $table->dropColumn('taco_data');
             $table->dropColumn('history_data');
         });
     }

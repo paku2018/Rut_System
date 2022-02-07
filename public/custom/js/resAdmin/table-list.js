@@ -386,6 +386,7 @@ $(document).on('click', '.btn-confirm-close', function (e) {
     var formValues = $('#confirmForm').serialize();
     $.post(path_close_table, formValues, function(result){
         if(result.success){
+            console.log(result);
             var url_png = HOST_URL+'/'+result.url_png;
             if(result.url_png.length > 1){
                 if(window.jspmWSStatus()){
@@ -400,10 +401,11 @@ $(document).on('click', '.btn-confirm-close', function (e) {
                     icon: url_png,
                 });
             }
+            setTimeout(function(){
+                location.reload();
+            },7000);
         }else{
         }
-        setTimeout(function(){
-            location.reload();
-        },4000);
+
     });
 })
