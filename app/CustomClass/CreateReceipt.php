@@ -75,6 +75,9 @@ class CreateReceipt {
             //SET datos del vendedor
             $image->setVendedor($user->name);
 
+            //SET datos de la mesa
+            $image->setMesa($table->name);
+
             //print DETALLES
             $image->setDetalle();
 
@@ -91,14 +94,14 @@ class CreateReceipt {
             $image->setTotal('TOTAL:', $total);
 
             //SET tipo de pago
-            $image->setTipoPago('efectivo', [
+            /*$image->setTipoPago('efectivo', [
                 'observacion'=> $comment,
                 'pago'=> 0,
                 'vuelto'=> 0,
-            ], true);
+            ], true);*/
 
             //SET datos footer
-            $image->setFooter($resolucion);
+            //$image->setFooter($resolucion);
 
             if(empty($resolucion)){
                 $image->renderSinQR($mostrar = false, $this->filename, false);

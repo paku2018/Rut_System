@@ -119,8 +119,16 @@ $(document).on('click','.btn-confirm', function (e) {
     $('#tableId').val(tableId);
     let total = $('#detail-total').html();
     $('#consumption').val(total)
+    $('#tip').val(parseInt(total*(tip_percentage/100)))
     $('#confirmModal').modal('show')
 })
+
+$(document).on('change','#consumption', function (e) {
+    let total = $('#consumption').val();
+    $('#tip').val(parseInt(total*(tip_percentage/100)))
+})
+
+
 
 $("#confirmForm").validate({
     validClass: "success",
@@ -396,6 +404,6 @@ $(document).on('click', '.btn-confirm-close', function (e) {
         }
         setTimeout(function(){
             location.reload();
-        },2000);
+        },4000);
     });
 })

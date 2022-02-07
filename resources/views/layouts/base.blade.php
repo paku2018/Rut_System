@@ -35,6 +35,9 @@
 
     <script src="{{ asset('custom/lang/converter.js') }}?v=202112061555"></script>
     <script src="{{ asset('custom/lang/es.js') }}?v=202112061555"></script>
+    <script type="text/javascript">
+        var path_lang_datatable = '{{asset('assets/js/plugin/datatables/es-cl.json')}}';
+    </script>
 </head>
 <body>
 <div class="preloader" style="display: none">

@@ -290,6 +290,7 @@ class HomeController extends Controller
         $ticket_png = 'storage/receipts/'.$ticket->filename;
 
         return response()->json([
+            //'TACO'=> env('TACO_API_URL_PROD'),
             'ticket_png'=> !empty($ticket->filename) ? $ticket_png : '',
             'url_pdf'=>'storage/'.$filename,
             //'all_data'=> compact('table','restaurant','user','rManagers','orders'),

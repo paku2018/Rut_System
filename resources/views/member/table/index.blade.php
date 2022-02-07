@@ -155,10 +155,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="detail">
+                <div class="modal-body p-0" id="detail">
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <div class="bg-light px-2 py-3">
+                            <div class="bg-light px-2 py-0">
                                 <div class="bg-black text-white px-3 py-1 mb-3">
                                     <h3 class="mb-0 text-center">@lang('order_list')</h3>
                                 </div>
@@ -171,7 +171,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-8">
-                            <div class="bg-grey2 px-2 py-3">
+                            <div class="bg-grey2 px-2 py-0">
                                 <div class="bg-black text-white px-3 py-1 mb-3">
                                     <h3 class="mb-0 text-center">@lang('add_order')</h3>
                                 </div>
@@ -216,8 +216,8 @@
                                             <textarea class="form-control" id="comment" name="comment"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-12 d-flex align-items-center justify-content-between mt-2">
-                                        <h2 class="mb-0 ml-3">@lang('total') : <span id="new-total">0</span></h2>
+                                    <div class="col-12 d-flex align-items-center justify-content-between mt-2 pr-4 pb-4">
+                                        <h2 class="mb-0 ml-3">@lang('total'): <span id="new-total">0</span></h2>
                                         <button type="button" class="btn btn-black btn-round btn-order">@lang('add')</button>
                                     </div>
                                 </div>
@@ -225,7 +225,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer  justify-content-end">
+                    <span id="sprint_active" class="mr-auto text-success px-4 py-2  d-none" data-toggle="tooltip" data-placement="right" title="Impresora activa"><i class="fas fa-print fa-2x"></i> </span>
+                    <span id="sprint_inactive" class="mr-auto text-warning px-4 py-2" data-toggle="tooltip" data-placement="right" title="Impresora no disponible"><i class="fas fa-print fa-2x"></i> </span>
+
                     <button type="button" class="btn btn-black btn-round btn-print">@lang('print')</button>
                     <button type="button" class="btn btn-danger btn-round btn-pend">@lang('close_table')</button>
                     <button type="button" class="btn btn-round" data-dismiss="modal">@lang('cancel')</button>
@@ -235,10 +238,17 @@
     </div>
 @endsection
 @section('page-js')
+    <!-- JSP Print manager JS -->
+    <script src="{{ asset('assets/js/print_tool_v2/zip.js/zip-full.min.js') }}"></script>
+    <script src="{{ asset('assets/js/print_tool_v2/JSPrintManager.js') }}"></script>
+    <script src="{{ asset('assets/js/print_tool_v2/bluebird.min.js') }}"></script>
+    <script src="{{ asset('assets/js/utils_print.js') }}"></script>
+
     <!-- Datatable JS -->
     <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
 
     <script>
+
         let path_get_orders = '{{route('get-order-data')}}'
         let path_assign_orders = '{{route('assign-orders')}}'
         let path_table_info = '{{route('get-table-info')}}'
@@ -249,5 +259,5 @@
         let _token = '{{csrf_token()}}'
         let HOST_URL = "{{ url('/') }}"
     </script>
-    <script src="{{asset('custom/js/waiter/table-list.js')}}?v=202112181555"></script>
+    <script src="{{asset('custom/js/waiter/table-list.js')}}?v=202202061932"></script>
 @endsection

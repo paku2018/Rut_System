@@ -107,10 +107,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="detail">
+                <div class="modal-body pt-0" id="detail">
                     <div class="row">
                         <div class="col-12 col-md-12">
-                            <div class="view-order-list bg-light px-2 py-3">
+                            <div class="view-order-list bg-light px-0 pt-0 pb-3">
                                 <div class="bg-black text-white px-3 py-1 mb-3">
                                     <h3 class="mb-0 text-center">@lang('order_list')</h3>
                                 </div>
@@ -141,33 +141,33 @@
                 <form id="confirmForm" action="{{ route('restaurant.close-table') }}" method="POST">
                     @csrf
                     <input type="hidden" name="tableId" id="tableId" value="0">
-                    <div class="modal-header">
+                    <div class="modal-header bg-black">
                         <h1 class="modal-title" id="detailModalLabel">@lang('confirm_payment')</h1>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body py-0">
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-group form-show-validation">
+                                <div class="form-group form-show-validation pb-0">
                                     <label for="consumption">@lang('consumption')<span class="required-label">*</span></label>
-                                    <input type="number" class="form-control" id="consumption" name="consumption" required>
+                                    <input type="number" class="form-control font-weight-bold" id="consumption" name="consumption" required>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group form-show-validation">
+                            <div class="col-6">
+                                <div class="form-group form-show-validation pb-0">
                                     <label for="tip">@lang('tip')</label>
-                                    <input type="number" class="form-control" id="tip" name="tip">
+                                    <input type="number" class="form-control font-weight-bold" id="tip" name="tip">
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group form-show-validation">
+                            <div class="col-6 px-0">
+                                <div class="form-group form-show-validation pb-0 pl-0">
                                     <label for="shipping">@lang('shipping')</label>
                                     <input type="number" class="form-control" id="shipping" name="shipping">
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="form-group form-show-validation">
                                     <label for="payment_method">@lang('payment_method')<span class="required-label">*</span></label>
                                     <select class="form-control" id="payment_method" name="payment_method">
@@ -179,15 +179,18 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group form-show-validation">
-                                    <label for="document_type">@lang('document_type')<span class="required-label">*</span></label>
-                                    <select class="form-control" id="document_type" name="document_type">
-                                        {{-- <option value="1" selected>@lang('final_close')</option> --}}
-                                        {{-- <option value="3">@lang('invoice')</option> --}}
-                                        <option value="2">@lang('electronic_ballot')</option>
-                                        <option value="4" selected>@lang('receipt')</option>
-                                    </select>
+
+                            <div class="col-6 px-0 pt-2">
+                                <div class="form-dgroup form-show-validation">
+                                    <label class="d-block font-weight-bold" for="document_type">@lang('document_type')<span class="required-label">*</span></label>
+                                    <div class="form-check form-check-inline pt-0">
+                                      <input class="form-check-input" type="radio" name="document_type" id="document_type2" value="2">
+                                      <label class="form-check-label pt-2" for="document_type2">@lang('electronic_ballot')</label>
+                                    </div>
+                                    <div class="form-check form-check-inline pt-0">
+                                      <input class="form-check-input" type="radio" name="document_type" id="document_type4" value="4" checked>
+                                      <label class="form-check-label pt-2" for="document_type4">@lang('receipt')</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -260,6 +263,7 @@
     <script src="{{asset('assets/js/plugin/moment/moment.min.js')}}"></script>
 
     <script>
+        let tip_percentage = '10'
         let path_delete = '{{route('restaurant.tables.delete')}}'
         let path_table_info = '{{route('get-table-info')}}'
         let path_close_table = '{{route('restaurant.close-table')}}'

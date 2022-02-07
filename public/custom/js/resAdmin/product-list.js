@@ -1,6 +1,9 @@
 $('#dt_table').DataTable({
     "pageLength": 10,
-    "order": [[ 3, 'asc' ]]
+    "order": [[ 3, 'asc' ]],
+    language: {
+        url: path_lang_datatable
+    }
 });
 function delProduct(id) {
     swal({

@@ -106,12 +106,14 @@ class FinalReceipt {
             //SET total
             $image->setTotal('TOTAL:', $total);
 
+            $image->setPropina($payment->tip);
+
             //SET tipo de pago
-            $image->setTipoPago($this->getPaymentMethod($payment->payment_method), [
+            /*$image->setTipoPago($this->getPaymentMethod($payment->payment_method), [
                 'observacion'=> $comment,
                 'pago'=> 0,
                 'vuelto'=> 0,
-            ], true);
+            ], true);*/
 
             //SET datos footer
             $image->setFooter($resolucion);

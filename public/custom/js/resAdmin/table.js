@@ -1,6 +1,9 @@
 $('#dt_table').DataTable({
     "pageLength": 10,
-    "order": [[ 1, 'asc' ]]
+    "order": [[ 1, 'asc' ]],
+    language: {
+        url: path_lang_datatable
+    }
 });
 
 $('.minus-btn').on('click', function(e) {

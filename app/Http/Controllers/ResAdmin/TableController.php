@@ -128,6 +128,7 @@ class TableController extends Controller
             $result_ticket = new FinalReceipt($payment, auth()->user());
             $ticket_png = 'storage/receipts/'.$result_ticket->filename;
             return response()->json([
+                ///'TACO'=> env('TACO_API_URL_PROD','_EMPTY_'),
                 'url_png'=> !empty($result_ticket->filename) ? $ticket_png : '',
                 'success'=> true
             ]);

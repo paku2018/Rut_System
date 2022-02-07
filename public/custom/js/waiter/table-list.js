@@ -420,7 +420,10 @@ $(document).ready(function () {
         "order": [[ 1, 'asc' ]],
         "aoColumnDefs": [
             { 'bSortable': false, 'aTargets': [ 0, 3 ] }
-        ]
+        ],
+        language: {
+            url: path_lang_datatable
+        }
     });
 })
 
@@ -436,7 +439,46 @@ $(document).on('click', '.btn-print', function () {
     var appened = selected.length > 0 ? "?items=" + items : ''
     var url = HOST_URL + '/exportPdf/' + tableId + appened;
 
-    window.open(url, '_blank');
+    $.ajax({
+        url: url,
+        type: 'get',
+        contentType: false,
+        processData: false,
+        success: function(response){
+            console.log(response);
+            var url_pdf = HOST_URL+'/'+response.url_pdf;
+            var url_png = HOST_URL+'/'+response.ticket_png;
+            if(url_png.length>1){
+                if(window.jspmWSStatus()){
+                    //doPrintingPDF(url_pdf);
+                    doPrinting(url_png);
+                }
+                swal({
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-danger'
+                        }
+                    },
+                    icon: url_png,
+                });
+                //window.open(url_png, '_blank');
+                //window.open(url_pdf, '_blank');
+            }
+
+        },
+        error: function(a){
+            swal(langs('messages.server_error'), {
+                icon: "error",
+                buttons : {
+                    confirm : {
+                        className: 'btn btn-danger'
+                    }
+                }
+            });
+        }
+    });
+
+    //window.open(url, '_blank');
 })
 
 

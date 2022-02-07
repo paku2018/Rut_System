@@ -147,6 +147,16 @@ class CreateImageReceipt {
 	}
 
 	/**
+	 * funcion para setear datos del vendedor e imprimir
+	 * @param string $nombre nombre del vendedor
+	 *
+	 * */
+	public function setMesa($nombre_mesa){
+		$this->lineaY += 70;
+		imagettftext($this->img, 40, 0, 35, $this->lineaY, $this->text_color, $this->fuente, "Mesa: ".$nombre_mesa);
+	}
+
+	/**
 	 * funcion para setear el valor de iva
 	 * @param number $cantidad cantidad de productos
 	 * @param string $producto_nombre
@@ -255,6 +265,18 @@ class CreateImageReceipt {
 				imagettftext($this->img, 45, 0, 30, $this->lineaY, $this->text_color, $this->fuente, trim($text));
 			}
 		}
+	}
+
+	public function setPropina($propina, $showLine = true){
+		if($showLine){
+			$this->lineaY += 50;
+			imagesetthickness ( $this->img, 3 );
+			imageline( $this->img, 0, $this->lineaY, $this->ancho, $this->lineaY, $this->line_color );
+		}
+
+
+			$this->lineaY += 120;
+			imagettftext($this->img, 50, 0, 30, $this->lineaY, $this->text_color, $this->fuente, 'Propina: $ '.number_format(abs($propina), 0, "", "."));
 	}
 
 	/**

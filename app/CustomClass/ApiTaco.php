@@ -19,7 +19,11 @@ class ApiTaco {
     public function __construct($user_id = null){
         $this->taco_data_user = session('taco_data_user', function() { return []; });
         $this->host_api = env('TACO_API_URL_PROD','_EMPTY_');
-
+        // \Log::debug([
+        //     'user_id'=> $user_id ,
+        //     'this->taco_data_user '=> $this->taco_data_user ,
+        //     'this->host_api'=> $this->host_api,
+        // ]);
         if(!empty($user_id)){
             if(empty($this->taco_data_user)){
                 $this->tokenTacoVendedor($user_id);
@@ -29,7 +33,9 @@ class ApiTaco {
 
     public function tokenTacoVendedor($user_id)
     {
+        //\Log::debug('Obtener token user taco');
         $user = explode('|', $user_id);
+        //\Log::debug($user);
         $taco_user_id = $user[0];
         $taco_empresa_id = $user[1];
 
@@ -56,7 +62,7 @@ class ApiTaco {
                 if(!empty($data_user)){
                     session(['taco_data_user' => $data_user]);
                     $this->taco_data_user = $data_user;
-                    //\Log::debug($data_user);
+                    \Log::debug($data_user);
                     return true;
                 }
             }
@@ -110,9 +116,9 @@ class ApiTaco {
             'observacion'=> '',
         ];
         $venta_items_aux = [];
-        \Log::debug('$payment->items');
-        \Log::debug($payment);
-        \Log::debug($payment->items);
+        //\Log::debug('$payment->items');
+        //\Log::debug($payment);
+        //\Log::debug($payment->items);
         foreach ($payment->items as $item) {
             $venta_items_aux[] = [
                 'producto_id'=> $item->product_id,
@@ -126,13 +132,14 @@ class ApiTaco {
         $this->venta_items = $venta_items_aux;
     }
     public function EmitirBoleta(){
+        \Log::debug('aqui se hace la boleta');
         $venta = $this->venta;
         $venta_items = $this->venta_items;
         $items_productos = [];
-        \Log::debug($venta);
-        \Log::debug($venta_items);
+        //\Log::debug($venta);
+        //\Log::debug($venta_items);
         foreach ($venta_items as $item) {
-            \Log::debug($item);
+            //\Log::debug($item);
             if($item['es_exento']){
                 $items_productos[] = $this->setItemProducto($item['descripcion'],''.$item['cantidad'], ''.explode('.',$item['precio_venta'])[0], $es_exento='1');
             }else{
@@ -141,6 +148,8 @@ class ApiTaco {
         }
 
         $taco_data_user = $this->taco_data_user;
+        //\Log::debug('taco_data_user');
+        //\Log::debug($taco_data_user);
         $data_documento = ['sin_iniciar'=>$taco_data_user];
         if(!empty($taco_data_user)){
 
