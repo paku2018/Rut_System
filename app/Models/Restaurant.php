@@ -17,7 +17,8 @@ class Restaurant extends Model
         'slogan',
         'address',
         'bank_transfer_details',
-        'owner_id'
+        'owner_id',
+        'is_receipt_sii',
     ];
 
     public function owner()

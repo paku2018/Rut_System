@@ -35,6 +35,7 @@ class RestaurantController extends Controller
                 'slogan' => $request->slogan,
                 'address' => $request->address,
                 'bank_transfer_details' => $request->bank_transfer_details,
+                'is_receipt_sii' => $request->is_receipt_sii,
             );
             $restaurant = Restaurant::updateOrCreate(['id'=>$res_id], $data);
 

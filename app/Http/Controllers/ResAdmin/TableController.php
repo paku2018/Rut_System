@@ -21,6 +21,7 @@ class TableController extends Controller
 {
     public function index(){
         $resId = session()->get('resId');
+        //dd(env('TACO_API_URL_PROD'));
         if ($resId){
             $tables = Table::where('restaurant_id', $resId)->where(function ($q){
                 $q->where('type', 'real')
@@ -112,6 +113,7 @@ class TableController extends Controller
 
             $payment = Payment::with(['restaurant','table','items.client','items.product',])->find($payment->id);
             $payment->update(['history_data'=> json_encode($payment)]);
+            $output_pdf_to_png = '';
             if ((int) $data['document_type']==Payment::ELECTRONIC_BALLOT) {
                 //enviar a taco si es boleta
                 $user_taco_id = auth()->user()->taco_user_id;
@@ -120,6 +122,32 @@ class TableController extends Controller
                     $ApiTaco->prepareData($payment, auth()->user());
                     $dataTaco = $ApiTaco->EmitirBoleta();
                     $payment->update(['taco_data'=> json_encode($dataTaco)]);
+
+                    //start
+                    //download pdf "libredte" and convert to image
+                    if($table->restaurant->is_receipt_sii){
+                        if(isset($dataTaco['response'])){
+                            if(isset($dataTaco['response']['folio'])){
+                                if(!empty($dataTaco['response']['folio'])){
+                                    $params = [
+                                        $dataTaco['response']['dte'],
+                                        $dataTaco['response']['folio'],
+                                        1,
+                                        $dataTaco['response']['emisor'],
+                                        $dataTaco['response']['fecha'],
+                                        $dataTaco['response']['total'],
+                                    ];
+                                    $dataTaco['response']['url_pdf'] = $url_pdf = 'https://sii.pagocash.cl/dte/dte_emitidos/pdf/'.implode('/',$params).'?filename=boleta.pdf';
+
+                                    $output_pdf = storage_path('app/public/receipts/print_'.$payment->id.'.pdf');
+                                    $output_pdf_to_png = storage_path('app/public/receipts/print_'.$payment->id.'');
+                                    shell_exec("curl $url_pdf --output $output_pdf");
+                                    shell_exec("pdftoppm -png $output_pdf $output_pdf_to_png");
+                                }
+                            }
+                        }
+                    }
+                    //end downlaoad pdf
                 }
             }
 
@@ -127,15 +155,25 @@ class TableController extends Controller
             $payment = Payment::with(['restaurant','table','items.client','items.product',])->find($payment->id);
             $result_ticket = new FinalReceipt($payment, auth()->user());
             $ticket_png = 'storage/receipts/'.$result_ticket->filename;
+            if(!empty($output_pdf_to_png)){
+                $url_png = 'storage/receipts/print_'.$payment->id.'-1.png';
+                if(!file_exists($output_pdf_to_png.'-1.png')){
+                    $url_png = !empty($result_ticket->filename) ? $ticket_png : '';
+                }
+            }else{
+                $url_png = !empty($result_ticket->filename) ? $ticket_png : '';
+            }
             sleep(2);
+
             return response()->json([
                 ///'TACO'=> env('TACO_API_URL_PROD','_EMPTY_'),
-                'url_png'=> !empty($result_ticket->filename) ? $ticket_png : '',
+                'url_png'=> $url_png,
                 'success'=> true
             ]);
 
         }catch (\Exception $e){
             ///session()->flash('payment_error',true);
+            \Log::debug($e);
             return response()->json([
                 //'data'=> $e,
                 'success'=> false

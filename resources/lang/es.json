@@ -253,5 +253,8 @@
     "rut": "RUT",
     "slogan": "Nombre restaurante 2da línea",
     "address": "Dirección",
-    "bank_transfer_details": "Datos bancarios para transferencia"
+    "bank_transfer_details": "Datos bancarios <br>para transferencia",
+    "is_format_sii": "Formato SII",
+    "is_format_generic": "Formato Generico",
+    "is_receipt_sii": "Imprimir Recibo"
 }
