@@ -86,11 +86,11 @@
                                     <label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right font-weight-bold">@lang('is_receipt_sii')<span class="required-label">*</span></label>
                                     <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="form-check form-check-inline pt-0">
-                                          <input class="form-check-input" type="radio" name="is_receipt_sii" id="is_receipt_sii1" value="1" {{ $data->is_receipt_sii==true ? 'checked':''}}>
+                                          <input class="form-check-input" type="radio" name="is_receipt_sii" id="is_receipt_sii1" value="1" {{ isset($data) && $data->is_receipt_sii==true ? 'checked':''}}>
                                           <label class="form-check-label pt-2" for="is_receipt_sii1">@lang('is_format_sii')</label>
                                         </div>
                                         <div class="form-check form-check-inline pt-0">
-                                          <input class="form-check-input" type="radio" name="is_receipt_sii" id="is_receipt_sii0" value="0" {{ $data->is_receipt_sii==false ? 'checked':''}}>
+                                          <input class="form-check-input" type="radio" name="is_receipt_sii" id="is_receipt_sii0" value="0" {{ isset($data) && $data->is_receipt_sii==false ? 'checked':''}}>
                                           <label class="form-check-label pt-2" for="is_receipt_sii0">@lang('is_format_generic')</label>
                                         </div>
                                     </div>
