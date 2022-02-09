@@ -298,4 +298,10 @@ class HomeController extends Controller
         ]);
 
     }
+
+    public function orderDetail($tableId){
+        $table = Table::with('restaurant')->find($tableId);
+        $orders = Order::with('client','product')->where('status','open')->where('assigned_table_id', $tableId)->get();
+        return view('order-detail', compact('table','orders'));
+    }
 }
