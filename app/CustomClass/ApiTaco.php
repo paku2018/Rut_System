@@ -95,7 +95,7 @@ class ApiTaco {
             'PrcItem'=> $PrcItem
         ];
         if(!empty($IndExe)){
-            $item['IndExe'] = '1';
+            $item['IndExe'] = ''.$IndExe;
         }
         return $item;
     }
@@ -113,6 +113,7 @@ class ApiTaco {
                 'email'=> '',
             ],
             'total'=> $payment->consumption,
+            'propina'=> $payment->tip,
             'observacion'=> '',
         ];
         $venta_items_aux = [];
@@ -145,6 +146,9 @@ class ApiTaco {
             }else{
                 $items_productos[] = $this->setItemProducto($item['descripcion'],''.$item['cantidad'], ''.explode('.',$item['precio_venta'])[0]);
             }
+        }
+        if(!empty($venta['propina'])){
+            $items_productos[] = $this->setItemProducto('Propina','1', ''.explode('.',$venta['propina'])[0], $es_exento='2');
         }
 
         $taco_data_user = $this->taco_data_user;
