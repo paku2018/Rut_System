@@ -28,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/restaurant-menu/{code}', [App\Http\Controllers\HomeController::class, 'menu'])->name('restaurant-menu');
 Route::post('/send-mail', [App\Http\Controllers\HomeController::class, 'sendVerificationMail'])->name('send-verification-mail');
 Route::post('/order', [App\Http\Controllers\HomeController::class, 'order'])->name('order');
+Route::get('/order-detail/{tableId}', [App\Http\Controllers\HomeController::class, 'orderDetail'])->name('order-detail');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
