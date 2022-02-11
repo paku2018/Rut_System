@@ -119,7 +119,7 @@
     width: 80px;
 }
 .view-order-list{
-    max-height: 500px;
+    max-height: 700px;
     overflow-y: auto;
 }
 .detail{

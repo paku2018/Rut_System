@@ -74,23 +74,9 @@ $(document).on('click','.table-box', function () {
                     })
                 }else if(data.status == "open" || data.status == "pend" || data.status == "ordered"){
                     let orders = response.orders;
-                    let code = '';
-                    let total = 0;
-                    for (let i=0; i<orders.length; i++){
-                        let val = orders[i].product.sale_price * orders[i].order_count;
-                        code += ' <div class="d-flex justify-content-between align-items-center mb-3"><div class="d-flex align-items-center">';
-                        code += '<input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-3" data-value="'+ orders[i].id +'">'
-                        if (orders[i].product.image){
-                            code += '<img class="order-image mr-2" src="' + orders[i].product.image + '">';
-                        }
-                        code += '<h4 class="text-danger mb-1">' + orders[i].product.name + '</h4></div>\n' +
-                            '                                    <h4 class="mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
-                            '                                </div>'
 
-                        total += val;
-                    }
-                    $('#assigned-orders').html(code);
-                    $('#detail-total').html(total);
+                    generateOrderedList(data, orders)
+                    checkCount()
                     checkDisable();
                     $('#detailModal').modal('show')
                 }
@@ -109,6 +95,175 @@ $(document).on('click','.table-box', function () {
         },
     });
 })
+
+function generateOrderedList(tableData, orders){
+    let code = '';
+    let total = 0;
+    if (orders.length > 0){
+        code += '<div class="w-100 d-flex justify-content-end mb-2">'
+        if(tableData.status == "ordered")
+            code += '<button class="btn btn-black btn-round btn-deliver btn-sm mr-2"><i class="fa fa-check mr-2"></i>' + langs('messages.mark_as_deliver') + '</button>'
+        code += '<button class="btn btn-danger btn-round btn-order-delete btn-sm">' + langs('messages.delete') + '</button></div>'
+        for (let i=0; i<orders.length; i++){
+            let val = orders[i].product.sale_price * orders[i].order_count;
+            let delivered = orders[i].deliver_status == 1 ? '(Entregado)' : ''
+            code += ' <div><div class="d-flex align-items-center mb-1">\n' +
+                '                                    <input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-2" data-value="'+ orders[i].id +'">' +
+                '                                    <h4 class="text-danger mb-0">' + orders[i].product.name + delivered + '</h4></div>\n' +
+                '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
+                '                                </div>'
+
+            total += val;
+        }
+    }
+    $('#assigned-orders').html(code);
+    $('#detail-total').html(total);
+}
+
+function getOrderList(){
+    let formData = new FormData();
+    formData.append('_token',_token);
+    formData.append('tableId',tableId);
+    $.ajax({
+        url: path_table_info,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            if(response.result){
+                let data = response.data;
+                let orders = response.orders;
+                generateOrderedList(data, orders)
+                $('.order_count').each(function () {
+                    $(this).val(0);
+                })
+                $('#comment').val('')
+                checkCount()
+                checkDisable()
+            }else{
+                $('#assigned-orders').html(langs('messages.server_error'));
+            }
+        },
+    });
+}
+
+$('.minus-btn').on('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var $input = $this.closest('div').find('input');
+    var value = parseInt($input.val());
+
+    if (value > 1) {
+        value = value - 1;
+    } else {
+        value = 0;
+    }
+
+    $input.val(value);
+    checkCount()
+});
+
+$('.plus-btn').on('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var $input = $this.closest('div').find('input');
+    var value = parseInt($input.val());
+
+    value = value + 1;
+
+    $input.val(value);
+    checkCount()
+});
+
+function checkCount(){
+    let new_total = 0;
+    let count = 0;
+    $('.order_count').each(function () {
+        let val = $(this).val();
+        if(val > 0){
+            count ++;
+            let price = $(this).data('price')
+            new_total += val * price
+        }
+    })
+    if (count > 0){
+        $('.btn-order').prop('disabled', false)
+    }else{
+        $('.btn-order').prop('disabled', true)
+    }
+    $('#new-total').html(new_total)
+}
+
+$(document).on('click','.btn-order', function () {
+    showLoading()
+    let items = [];
+    $('.order_count').each(function () {
+        let id = $(this).data('value');
+        let val = $(this).val();
+        if(val > 0){
+            items[id] = val;
+        }
+    })
+    let comment = $('#comment').val();
+    let formData = new FormData();
+    formData.append('items',JSON.stringify(items));
+    formData.append('tableId',tableId);
+    formData.append('comment',comment);
+    formData.append('_token',_token);
+    $.ajax({
+        url: path_create_orders,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            hideLoading()
+            if(response.result){
+                $('#newModal').modal('hide');
+                swal(langs('messages.success'), {
+                    icon: "success",
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-success'
+                        }
+                    }
+                }).then((confirmed) => {
+                    getOrderList();
+                });
+            }else{
+                swal(langs('messages.server_error'), {
+                    icon: "error",
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((confirmed) => {
+                    location.reload();
+                });
+            }
+        },
+    });
+})
+
+function checkDisable(){
+    let checked_count = 0;
+    $('.orders').each(function () {
+        let index = $(this).data('value');
+        let checked = $('input[name=orders_'+index+']:checked').val();
+        if (checked){
+            checked_count++;
+        }
+    })
+    if (checked_count == 0){
+        $('.btn-order-delete').prop('disabled', true)
+        $('.btn-deliver').prop('disabled', true)
+    }else{
+        $('.btn-order-delete').prop('disabled', false)
+        $('.btn-deliver').prop('disabled', false)
+    }
+}
 
 $(document).on('click','.table-box .table-action', function (e) {
     e.stopPropagation();
@@ -302,9 +457,11 @@ function checkDisable(){
         }
     })
     if (checked_count == 0){
-        $('.btn-delete').prop('disabled', true)
+        $('.btn-order-delete').prop('disabled', true)
+        $('.btn-deliver').prop('disabled', true)
     }else{
-        $('.btn-delete').prop('disabled', false)
+        $('.btn-order-delete').prop('disabled', false)
+        $('.btn-deliver').prop('disabled', false)
     }
 }
 
@@ -312,7 +469,7 @@ $(document).on('click','.orders', function () {
     checkDisable()
 })
 
-$(document).on('click', '.btn-delete', function () {
+$(document).on('click', '.btn-order-delete', function () {
     swal({
         title: langs('messages.sure_delete'),
         text: langs('messages.order_will_delete'),
@@ -352,7 +509,6 @@ $(document).on('click', '.btn-delete', function () {
                 success: function(response){
                     hideLoading()
                     if(response.result){
-                        $('#detailModal').modal('hide');
                         swal(langs('messages.success'), {
                             icon: "success",
                             buttons : {
@@ -361,9 +517,10 @@ $(document).on('click', '.btn-delete', function () {
                                 }
                             }
                         }).then((confirmed) => {
-                            location.reload();
+                            getOrderList();
                         });
                     }else{
+                        $('#detailModal').modal('hide');
                         swal(langs('messages.server_error'), {
                             icon: "error",
                             buttons : {
@@ -378,6 +535,55 @@ $(document).on('click', '.btn-delete', function () {
                 },
             });
         }
+    });
+})
+
+$(document).on('click','.btn-deliver', function () {
+    let selected = [];
+    $('.orders').each(function () {
+        let index = $(this).data('value');
+        let checked = $('input[name=orders_'+index+']:checked').val();
+        if (checked)
+            selected.push(index)
+    })
+    showLoading()
+    let formData = new FormData();
+    formData.append('_token',_token);
+    formData.append('tableId',tableId);
+    formData.append('orders',selected.toString());
+    $.ajax({
+        url: path_mark_deliver,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            hideLoading()
+            if(response.result){
+                swal(langs('messages.success'), {
+                    icon: "success",
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-success'
+                        }
+                    }
+                }).then((confirmed) => {
+                    getOrderList();
+                });
+            }else{
+                $('#detailModal').modal('hide');
+                swal(langs('messages.server_error'), {
+                    icon: "error",
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((confirmed) => {
+                    location.reload();
+                });
+            }
+        },
     });
 })
 

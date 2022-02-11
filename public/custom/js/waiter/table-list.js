@@ -17,27 +17,9 @@ $(document).on('click','.table-box', function () {
                 let data = response.data;
                 if(data.status == "open" || data.status == "closed" || data.status == "ordered"){
                     let orders = response.orders;
-                    let code = '';
-                    let total = 0;
-                    if (orders.length > 0){
-                        code += '<div class="w-100 d-flex justify-content-end mb-2">'
-                        if(data.status == "ordered")
-                            code += '<button class="btn btn-black btn-round btn-deliver btn-sm mr-2"><i class="fa fa-check mr-2"></i>' + langs('messages.mark_as_deliver') + '</button>'
-                        code += '<button class="btn btn-danger btn-round btn-order-delete btn-sm">' + langs('messages.delete') + '</button></div>'
-                        for (let i=0; i<orders.length; i++){
-                            let val = orders[i].product.sale_price * orders[i].order_count;
-                            let delivered = orders[i].deliver_status == 1 ? '(Entregado)' : ''
-                            code += ' <div><div class="d-flex align-items-center mb-1">\n' +
-                                '                                    <input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-2" data-value="'+ orders[i].id +'">' +
-                                '                                    <h4 class="text-danger mb-0">' + orders[i].product.name + delivered + '</h4></div>\n' +
-                                '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
-                                '                                </div>'
 
-                            total += val;
-                        }
-                    }
-                    $('#assigned-orders').html(code);
-                    $('#detail-total').html(total);
+                    generateOrderedList(data, orders)
+
                     checkCount()
                     checkDisable()
                     $('.btn-pend').prop('disabled', false)
@@ -67,6 +49,59 @@ $(document).on('click','.table-box', function () {
         },
     });
 })
+
+function generateOrderedList(tableData, orders){
+    let code = '';
+    let total = 0;
+    if (orders.length > 0){
+        code += '<div class="w-100 d-flex justify-content-end mb-2">'
+        if(tableData.status == "ordered")
+            code += '<button class="btn btn-black btn-round btn-deliver btn-sm mr-2"><i class="fa fa-check mr-2"></i>' + langs('messages.mark_as_deliver') + '</button>'
+        code += '<button class="btn btn-danger btn-round btn-order-delete btn-sm">' + langs('messages.delete') + '</button></div>'
+        for (let i=0; i<orders.length; i++){
+            let val = orders[i].product.sale_price * orders[i].order_count;
+            let delivered = orders[i].deliver_status == 1 ? '(Entregado)' : ''
+            code += ' <div><div class="d-flex align-items-center mb-1">\n' +
+                '                                    <input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-2" data-value="'+ orders[i].id +'">' +
+                '                                    <h4 class="text-danger mb-0">' + orders[i].product.name + delivered + '</h4></div>\n' +
+                '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
+                '                                </div>'
+
+            total += val;
+        }
+    }
+    $('#assigned-orders').html(code);
+    $('#detail-total').html(total);
+}
+
+function getOrderList(){
+    let formData = new FormData();
+    formData.append('_token',_token);
+    formData.append('tableId',tableId);
+    $.ajax({
+        url: path_table_info,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            if(response.result){
+                let data = response.data;
+                let orders = response.orders;
+                generateOrderedList(data, orders)
+                $('.order_count').each(function () {
+                    $(this).val(0);
+                })
+                $('#comment').val('')
+                checkCount()
+                checkDisable()
+            }else{
+                $('#assigned-orders').html(langs('messages.server_error'));
+            }
+        },
+    });
+}
+
 $(document).on('click','.btn-next', function () {
     $('#optionModal').modal('hide');
     var checked = $('input[name=orderType]:checked').val();
@@ -197,7 +232,6 @@ $(document).on('click','.btn-deliver', function () {
         success: function(response){
             hideLoading()
             if(response.result){
-                $('#detailModal').modal('hide');
                 swal(langs('messages.success'), {
                     icon: "success",
                     buttons : {
@@ -206,9 +240,10 @@ $(document).on('click','.btn-deliver', function () {
                         }
                     }
                 }).then((confirmed) => {
-                    location.reload();
+                    getOrderList();
                 });
             }else{
+                $('#detailModal').modal('hide');
                 swal(langs('messages.server_error'), {
                     icon: "error",
                     buttons : {
@@ -354,7 +389,7 @@ $(document).on('click','.btn-order', function () {
                         }
                     }
                 }).then((confirmed) => {
-                    location.reload();
+                    getOrderList();
                 });
             }else{
                 swal(langs('messages.server_error'), {
@@ -544,7 +579,6 @@ $(document).on('click', '.btn-order-delete', function () {
                 success: function(response){
                     hideLoading()
                     if(response.result){
-                        $('#detailModal').modal('hide');
                         swal(langs('messages.success'), {
                             icon: "success",
                             buttons : {
@@ -553,9 +587,10 @@ $(document).on('click', '.btn-order-delete', function () {
                                 }
                             }
                         }).then((confirmed) => {
-                            location.reload();
+                            getOrderList();
                         });
                     }else{
+                        $('#detailModal').modal('hide');
                         swal(langs('messages.server_error'), {
                             icon: "error",
                             buttons : {

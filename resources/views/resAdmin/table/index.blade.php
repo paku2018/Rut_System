@@ -4,6 +4,24 @@
         .table-box{
             cursor: pointer;
         }
+        #order-list td{
+            height: 55px;
+        }
+        @media (min-width: 768px){
+            .modal-lg {
+                max-width: 650px;
+            }
+        }
+        @media (min-width: 992px){
+            .modal-lg {
+                max-width: 900px;
+            }
+        }
+        @media (min-width: 1200px){
+            .modal-lg {
+                max-width: 1000px;
+            }
+        }
     </style>
 @endsection
 @section('content')
@@ -98,6 +116,7 @@
             </div>
         </div>
     </div>
+    <!-- Detail modal -->
     <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -109,7 +128,7 @@
                 </div>
                 <div class="modal-body pt-0" id="detail">
                     <div class="row">
-                        <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-4">
                             <div class="view-order-list bg-light px-0 pt-0 pb-3">
                                 <div class="bg-black text-white px-3 py-1 mb-3">
                                     <h3 class="mb-0 text-center">@lang('order_list')</h3>
@@ -122,12 +141,64 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-12 col-md-8">
+                            <div class="bg-grey2 px-2 py-0">
+                                <div class="bg-black text-white px-3 py-1 mb-3">
+                                    <h3 class="mb-0 text-center">@lang('add_order')</h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped" id="dt_table">
+                                                <thead>
+                                                <tr>
+                                                    <th>@lang('image')</th>
+                                                    <th>@lang('name')</th>
+                                                    <th>@lang('sale_price')</th>
+                                                    <th>@lang('count')</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($products as $product)
+                                                    <tr>
+                                                        <td>
+                                                            @if($product->image)
+                                                                <img src="{{$product->image}}" alt="no_img" class="preview-image">
+                                                            @endif
+                                                        </td>
+                                                        <td>{{$product->name}}</td>
+                                                        <td>{{number_format($product->sale_price,2)}}</td>
+                                                        <td>
+                                                            <div class="quantity d-flex">
+                                                                <button class="minus-btn" type="button" name="button">-</button>
+                                                                <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" data-price="{{$product->sale_price}}" value="0" min="0">
+                                                                <button class="plus-btn" type="button" name="button">+</button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="comment">@lang('comment')</label>
+                                            <textarea class="form-control" id="comment" name="comment"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex align-items-center justify-content-between mt-2 pr-4 pb-4">
+                                        <h2 class="mb-0 ml-3">@lang('total'): <span id="new-total">0</span></h2>
+                                        <button type="button" class="btn btn-black btn-round btn-order">@lang('add')</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-end">
                     <span id="sprint_active" class="mr-auto text-success px-4 py-2  d-none" data-toggle="tooltip" data-placement="right" title="Impresora activa"><i class="fas fa-print fa-2x"></i> </span>
                     <span id="sprint_inactive" class="mr-auto text-warning px-4 py-2" data-toggle="tooltip" data-placement="right" title="Impresora no disponible"><i class="fas fa-print fa-2x"></i> </span>
-                    <button type="button" class="btn btn-danger btn-round btn-delete">@lang('delete')</button>
                     <button type="button" class="btn btn-black btn-round btn-print">@lang('print')</button>
                     <button type="button" class="btn btn-black btn-round btn-confirm">@lang('confirm_payment')</button>
                     <button type="button" class="btn btn-round" data-dismiss="modal">@lang('cancel')</button>
@@ -135,6 +206,8 @@
             </div>
         </div>
     </div>
+    <!-- End Detail modal -->
+
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -268,6 +341,8 @@
         let path_table_info = '{{route('get-table-info')}}'
         let path_close_table = '{{route('restaurant.close-table')}}'
         let path_delete_order = '{{route('delete-order')}}'
+        let path_mark_deliver = '{{route('deliver-table-orders')}}'
+        let path_create_orders = '{{route('create-order')}}'
         let _token = '{{csrf_token()}}'
         let HOST_URL = "{{ url('/') }}"
     </script>

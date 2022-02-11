@@ -36,7 +36,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/profile/update', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('profile.update');
     Route::post('/getTableInfo', [App\Http\Controllers\Member\TableController::class, 'getTableInfo'])->name('get-table-info');
     Route::get('/exportPdf/{id}', [App\Http\Controllers\HomeController::class, 'exportPdf'])->name('export-pdf');
+    Route::post('/createOrder', [App\Http\Controllers\Member\OrderController::class, 'createAndAssign'])->name('create-order');
     Route::post('/deleteOrder', [App\Http\Controllers\Member\TableController::class, 'deleteOrder'])->name('delete-order');
+    Route::post('/deliverOrders', [App\Http\Controllers\Member\TableController::class, 'deliver'])->name('deliver-table-orders');
 });
 
 Route::group(['as' =>'admin.','prefix'=>'admin','middleware'=>'checkAdmin'],function () {
@@ -118,9 +120,7 @@ Route::group(['middleware'=>'checkMember'],function () {
 
     Route::group(['prefix' => 'waiter', 'as' => 'waiter.'], function () {
         Route::get('/tables', [App\Http\Controllers\Member\TableController::class, 'index'])->name('tables');
-        Route::post('/createOrder', [App\Http\Controllers\Member\OrderController::class, 'createAndAssign'])->name('create-order');
         Route::post('/pendTable', [App\Http\Controllers\Member\TableController::class, 'pend'])->name('pend-table');
-        Route::post('/deliverOrders', [App\Http\Controllers\Member\TableController::class, 'deliver'])->name('deliver-table-orders');
     });
 
 //    Route::group(['prefix' => 'cashier', 'as' => 'cashier.'], function () {

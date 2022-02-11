@@ -7,9 +7,6 @@
         #order-list td{
             height: 55px;
         }
-        .quantity{
-            display: flex;
-        }
         @media (min-width: 768px){
             .modal-lg {
                 max-width: 650px;
@@ -198,7 +195,7 @@
                                                         <td>{{$product->name}}</td>
                                                         <td>{{number_format($product->sale_price,2)}}</td>
                                                         <td>
-                                                            <div class="quantity">
+                                                            <div class="quantity d-flex">
                                                                 <button class="minus-btn" type="button" name="button">-</button>
                                                                 <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" data-price="{{$product->sale_price}}" value="0" min="0">
                                                                 <button class="plus-btn" type="button" name="button">+</button>
@@ -252,12 +249,12 @@
         let path_get_orders = '{{route('get-order-data')}}'
         let path_assign_orders = '{{route('assign-orders')}}'
         let path_table_info = '{{route('get-table-info')}}'
-        let path_create_orders = '{{route('waiter.create-order')}}'
+        let path_create_orders = '{{route('create-order')}}'
         let path_pend_table = '{{route('waiter.pend-table')}}'
-        let path_mark_deliver = '{{route('waiter.deliver-table-orders')}}'
+        let path_mark_deliver = '{{route('deliver-table-orders')}}'
         let path_delete_order = '{{route('delete-order')}}'
         let _token = '{{csrf_token()}}'
         let HOST_URL = "{{ url('/') }}"
     </script>
-    <script src="{{asset('custom/js/waiter/table-list.js')}}?v=202202070010"></script>
+    <script src="{{asset('custom/js/waiter/table-list.js')}}?v=202202110010"></script>
 @endsection

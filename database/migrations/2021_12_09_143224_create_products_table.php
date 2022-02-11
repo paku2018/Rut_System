@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->integer('restaurant_id');
             $table->integer('category_id');
             $table->string('name');
-            $table->string('desc');
+            $table->string('desc')->nullable();
             $table->float('purchase_price',10,2)->default(0);
             $table->float('sale_price',10,2)->default(0);
             $table->string('image')->nullable();

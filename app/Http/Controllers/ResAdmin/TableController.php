@@ -31,8 +31,9 @@ class TableController extends Controller
                     });
             })->orderBy('type', 'asc')->get();
             $restaurant = Restaurant::find($resId);
+            $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
 
-            return view('resAdmin.table.index', compact('tables','restaurant'));
+            return view('resAdmin.table.index', compact('tables','restaurant', 'products'));
         }else{
             abort(404);
         }
