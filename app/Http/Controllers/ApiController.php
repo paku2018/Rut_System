@@ -80,7 +80,7 @@ class ApiController extends Controller
                     $query->where('type', '!=', 'real')
                         ->where('status', '!=', 'closed');
                 });
-        })->orderBy('type', 'asc')->get();
+        })->orderBy('name', 'asc')->get();
         $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
         $success = array(
             'tables' =>  $tables,
