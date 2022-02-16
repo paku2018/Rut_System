@@ -29,7 +29,7 @@ class TableController extends Controller
                         $query->where('type', '!=', 'real')
                             ->where('status', '!=', 'closed');
                     });
-            })->orderBy('type', 'asc')->orderBy('t_number', 'ASC')->get();
+            })->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
             $restaurant = Restaurant::find($resId);
             $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
 
