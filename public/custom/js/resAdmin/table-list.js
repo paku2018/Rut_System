@@ -63,23 +63,12 @@ $(document).on('click','.table-box', function () {
             hideLoading()
             if(response.result){
                 let data = response.data;
-                if(data.status == "closed"){
-                    swal(langs('messages.no_orders_yet'), {
-                        icon: "info",
-                        buttons : {
-                            confirm : {
-                                className: 'btn btn-black'
-                            }
-                        }
-                    })
-                }else if(data.status == "open" || data.status == "pend" || data.status == "ordered"){
-                    let orders = response.orders;
+                let orders = response.orders;
 
-                    generateOrderedList(data, orders)
-                    checkCount()
-                    checkDisable();
-                    $('#detailModal').modal('show')
-                }
+                generateOrderedList(data, orders)
+                checkCount()
+                checkDisable();
+                $('#detailModal').modal('show')
             }else{
                 swal(langs('messages.server_error'), {
                     icon: "error",
@@ -333,7 +322,7 @@ $("#confirmForm").validate({
 
 $(document).on('click','.btn-close', function () {
     swal({
-        title: langs('messages.sure_delete'),
+        title: langs('messages.are_you_sure'),
         text: langs('messages.table_will_close'),
         type: 'question',
         icon: 'warning',

@@ -408,43 +408,63 @@ $(document).on('click','.btn-order', function () {
 })
 
 $(document).on('click','.btn-pend', function () {
-    showLoading()
-    let formData = new FormData();
-    formData.append('tableId',tableId);
-    formData.append('_token',_token);
-    $.ajax({
-        url: path_pend_table,
-        type: 'post',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response){
-            hideLoading()
-            if(response.result){
-                $('#detailModal').modal('hide');
-                swal(langs('messages.success'), {
-                    icon: "success",
-                    buttons : {
-                        confirm : {
-                            className: 'btn btn-success'
-                        }
-                    }
-                }).then((confirmed) => {
-                    location.reload();
-                });
-            }else{
-                swal(langs('messages.server_error'), {
-                    icon: "error",
-                    buttons : {
-                        confirm : {
-                            className: 'btn btn-danger'
-                        }
-                    }
-                }).then((confirmed) => {
-                    location.reload();
-                });
+    swal({
+        title: langs('messages.are_you_sure'),
+        text: langs('messages.table_will_close'),
+        type: 'question',
+        icon: 'warning',
+        buttons:{
+            confirm: {
+                text : langs('messages.yes'),
+                className : 'btn btn-black'
+            },
+            cancel: {
+                visible: true,
+                text : langs('messages.cancel'),
+                className: 'btn'
             }
-        },
+        }
+    }).then((confirmed) => {
+        if (confirmed){
+            showLoading()
+            let formData = new FormData();
+            formData.append('tableId',tableId);
+            formData.append('_token',_token);
+            $.ajax({
+                url: path_pend_table,
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    hideLoading()
+                    if(response.result){
+                        $('#detailModal').modal('hide');
+                        swal(langs('messages.success'), {
+                            icon: "success",
+                            buttons : {
+                                confirm : {
+                                    className: 'btn btn-success'
+                                }
+                            }
+                        }).then((confirmed) => {
+                            location.reload();
+                        });
+                    }else{
+                        swal(langs('messages.server_error'), {
+                            icon: "error",
+                            buttons : {
+                                confirm : {
+                                    className: 'btn btn-danger'
+                                }
+                            }
+                        }).then((confirmed) => {
+                            location.reload();
+                        });
+                    }
+                },
+            });
+        }
     });
 })
 

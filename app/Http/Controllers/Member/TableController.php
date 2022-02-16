@@ -20,7 +20,7 @@ class TableController extends Controller
                    $query->where('type', '!=', 'real')
                        ->where('status', '!=', 'closed');
                 });
-        })->orderBy('type', 'asc')->get();
+        })->orderBy('type', 'asc')->orderBy('t_number', 'ASC')->get();
         $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
         return view('member.table.index',compact('tables','products'));
     }

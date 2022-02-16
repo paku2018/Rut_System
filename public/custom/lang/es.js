@@ -42,6 +42,7 @@ var lang = {
         'mark_as_deliver': 'Marcar como entregado',
         'amount': 'Cantidad',
         'order_will_delete': 'Estos pedidos se eliminarán de forma permanente.',
-        'delete': 'Eliminar'
+        'delete': 'Eliminar',
+        'are_you_sure': 'Estas seguro?'
     }
 }
