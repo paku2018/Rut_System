@@ -159,6 +159,38 @@ class ApiController extends Controller
         $responseData->status = self::SUCCESS;
         return response()->json($responseData);
     }
+    public function saveComment(Request $request){
+        $responseData = new ApiResponseData($request);
+        $tableId = $request->tableId;
+        $table = Table::with('restaurant')->find($tableId);
+        $order = Order::where('restaurant_id', $table->restaurant_id)->where('client_id', $table->current_client_id)->where('assigned_table_id', $tableId)
+            ->where('status', 'open')->whereNull('comment')->first();
+        if(isset($order)){
+            Order::where('id', $order->id)->update(['comment' => $request->comment]);
+        }
+        else{
+            $order = Order::where('restaurant_id', $table->restaurant_id)->where('client_id', $table->current_client_id)->where('assigned_table_id', $tableId)
+                ->where('status', 'open')->orderBy('updated_at', 'asc')->first();
+            if(isset($order)){
+                Order::where('id', $order->id)->update(['comment' => $request->comment]);
+            }
+            else{
+                $responseData->message = self::ERROR;
+                $responseData->status = self::ERR_INVALID_UNKNOWN;
+                return response()->json($responseData);
+            }
+        }
+        $orders = Order::with('client', 'product')->where('status', 'open')->where('assigned_table_id', $tableId)->get();
+        $success = array(
+            'table' => $table,
+            'orders' => $orders
+        );
+
+        $responseData->result = $success;
+        $responseData->message = "success";
+        $responseData->status = self::SUCCESS;
+        return response()->json($responseData);
+    }
     public function pend(Request $request){
         $tableId = $request->tableId;
         $update = Table::where('id', $tableId)->update(['status'=>'pend']);
