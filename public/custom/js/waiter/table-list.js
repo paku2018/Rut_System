@@ -53,6 +53,7 @@ $(document).on('click','.table-box', function () {
 function generateOrderedList(tableData, orders){
     let code = '';
     let total = 0;
+    let comment = '';
     if (orders.length > 0){
         code += '<div class="w-100 d-flex justify-content-end mb-2">'
         if(tableData.status == "ordered")
@@ -61,16 +62,22 @@ function generateOrderedList(tableData, orders){
         for (let i=0; i<orders.length; i++){
             let val = orders[i].product.sale_price * orders[i].order_count;
             let delivered = orders[i].deliver_status == 1 ? '(Entregado)' : ''
+            let direct_order_class = orders[i].direct == null? 'text-danger':'text-purple'
             code += ' <div><div class="d-flex align-items-center mb-1">\n' +
                 '                                    <input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-2" data-value="'+ orders[i].id +'">' +
-                '                                    <h4 class="text-danger mb-0">' + orders[i].product.name + delivered + '</h4></div>\n' +
+                '                                    <h4 class="mb-0 ' + direct_order_class + '">' + orders[i].product.name + delivered + '</h4></div>\n' +
                 '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
                 '                                </div>'
 
             total += val;
+
+            if (orders[i].comment) {
+                comment += '<p class="mt-1 mb-0">' + orders[i].comment + '</p>'
+            }
         }
     }
     $('#assigned-orders').html(code);
+    $('#assigned-orders').append(comment);
     $('#detail-total').html(total);
 }
 

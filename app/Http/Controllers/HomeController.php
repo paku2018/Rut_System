@@ -103,7 +103,7 @@ class HomeController extends Controller
             if ($restaurant){
                 $categories = Category::where('restaurant_id', $resId)->orderBy('order','ASC')->get();
                 $products = Product::where('restaurant_id', $resId)->where('status', 1)->orderBy('created_at', 'desc')->get();
-                $tables = Table::where('restaurant_id', $resId)->where('status', '!=', 'pend')->get();
+                $tables = Table::where('restaurant_id', $resId)->where('status', '!=', 'pend')->where('type', 'real')->get();
 
                 return view('menu', compact('restaurant','products','tables', 'categories'));
             }else{
@@ -203,7 +203,8 @@ class HomeController extends Controller
                         'client_id' => $client->id,
                         'assigned_table_id' => $table->id,
                         'comment' => $request->comment,
-                        'status' => 'open'
+                        'status' => 'open',
+                        'direct' => 1
                     ];
                     Order::create($data);
                 }

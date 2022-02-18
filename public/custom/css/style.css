@@ -173,3 +173,7 @@
 .view{
     cursor: pointer;
 }
+
+.text-purple {
+    color: purple;
+}
