@@ -91,6 +91,7 @@ function generateOrderedList(tableData, orders){
     let code = '';
     let total = 0;
     let comment = '';
+    let comment_list = [];
     if (orders.length > 0){
         code += '<div class="w-100 d-flex justify-content-end mb-2">'
         if(tableData.status == "ordered")
@@ -109,7 +110,10 @@ function generateOrderedList(tableData, orders){
             total += val;
 
             if (orders[i].comment) {
-                comment += '<p class="mt-1 mb-0">' + orders[i].comment + '</p>'
+                if (!comment_list.includes(orders[i].comment)) {
+                    comment_list.push(orders[i].comment)
+                    comment += '<p class="mt-1 mb-0">' + orders[i].comment + '</p>'
+                }
             }
         }
     }
