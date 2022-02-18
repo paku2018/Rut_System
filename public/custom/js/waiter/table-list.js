@@ -66,7 +66,7 @@ function generateOrderedList(tableData, orders){
             code += ' <div><div class="d-flex align-items-center mb-1">\n' +
                 '                                    <input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-2" data-value="'+ orders[i].id +'">' +
                 '                                    <h4 class="mb-0 ' + direct_order_class + '">' + orders[i].product.name + delivered + '</h4></div>\n' +
-                '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price + '*' + orders[i].order_count + '='+ val +'</h4>\n' +
+                '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price.toLocaleString('de-DE') + '*' + orders[i].order_count + '='+ val.toLocaleString('de-DE') +'</h4>\n' +
                 '                                </div>'
 
             total += val;
@@ -78,7 +78,7 @@ function generateOrderedList(tableData, orders){
     }
     $('#assigned-orders').html(code);
     $('#assigned-orders').append(comment);
-    $('#detail-total').html(total);
+    $('#detail-total').html(total.toLocaleString('de-DE'));
 }
 
 function getOrderList(){

@@ -167,7 +167,7 @@
                                                             @endif
                                                         </td>
                                                         <td>{{$product->name}}</td>
-                                                        <td>{{number_format($product->sale_price,2)}}</td>
+                                                        <td>{{number_format($product->sale_price, 0 , ",", ".")}}</td>
                                                         <td>
                                                             <div class="quantity d-flex">
                                                                 <button class="minus-btn" type="button" name="button">-</button>
