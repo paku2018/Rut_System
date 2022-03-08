@@ -600,6 +600,7 @@ $(document).on('click', '.btn-confirm-close', function (e) {
                 if(window.jspmWSStatus()){
                     doPrinting(url_png);
                 }
+                $('#confirmModal').modal('hide')
                 swal({
                     buttons : {
                         confirm : {
@@ -609,9 +610,9 @@ $(document).on('click', '.btn-confirm-close', function (e) {
                     icon: url_png,
                 });
             }
-            setTimeout(function(){
-                location.reload();
-            },7000);
+            // setTimeout(function(){
+            //     location.reload();
+            // },7000);
         }else{
         }
 

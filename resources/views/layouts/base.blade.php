@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{env('APP_NAME')}}</title>
 
+    <link rel="icon" href="{{ asset('assets/img/icon.ico') }}">
+
     <!-- Global stylesheets -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/atlantis.min.css') }}" rel="stylesheet">

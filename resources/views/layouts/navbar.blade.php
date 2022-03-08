@@ -3,8 +3,9 @@
     <!-- Logo Header -->
     <div class="logo-header" data-background-color="dark">
 
-        <a href="{{url('/')}}" class="logo w-100 text-center">
-            <img src="{{asset('assets/img/logo.svg')}}" alt="navbar brand" class="navbar-brand" style="padding-top: 7px;margin-right: 20px">
+        <a href="{{url('/')}}" class="logo w-100 text-cente d-flex text-white align-items-center">
+            <img src="{{asset('assets/img/logo.png')}}" alt="navbar brand" class="navbar-brand" style="margin-right: 5px; height: 75%">
+            {{env('APP_NAME')}}
         </a>
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">

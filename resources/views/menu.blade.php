@@ -34,7 +34,7 @@
             <div class="tm-header">
                 <div class="row tm-header-inner">
                     <div class="col-md-6 col-12">
-                        <img src="{{asset('assets/img/logo.png')}}" alt="Logo" class="tm-site-logo" />
+                        <img src="{{asset('assets/img/logo.png')}}" alt="Logo" class="tm-site-logo" style="width: 100px"/>
                         <div class="tm-site-text-box">
                             <h1 class="tm-site-title">{{$restaurant->name}}</h1>
                             <h6 class="tm-site-description">@lang('please_order_here')</h6>

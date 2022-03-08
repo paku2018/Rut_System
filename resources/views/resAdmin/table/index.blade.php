@@ -269,7 +269,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-black btn-round btn-confirm-close">@lang('confirm_and_close_table')</button>
+                        <button type="button" class="btn btn-black btn-round btn-confirm-close">@lang('confirm_and_close_table')</button>
                         <button type="button" class="btn btn-round" data-dismiss="modal">@lang('cancel')</button>
                     </div>
                 </form>
