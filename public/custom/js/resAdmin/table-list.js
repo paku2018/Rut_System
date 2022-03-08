@@ -275,8 +275,9 @@ $(document).on('click','.btn-confirm', function (e) {
     $('#detailModal').modal('hide')
     $('#tableId').val(tableId);
     let total = $('#detail-total').html();
-    $('#consumption').val(total)
-    $('#tip').val(parseInt(total*(tip_percentage/100)))
+    let real_total = total.replaceAll(".", "")
+    $('#consumption').val(real_total)
+    $('#tip').val(parseInt(real_total * (tip_percentage/100)))
     $('#confirmModal').modal('show')
 })
 
