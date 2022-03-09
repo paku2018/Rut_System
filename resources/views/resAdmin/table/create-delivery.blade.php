@@ -91,6 +91,11 @@
                             <div class="card-action">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
+                                        <div class="d-none">
+                                            <span id="sprint_active" class="mr-auto text-success px-4 py-2  d-none" data-toggle="tooltip" data-placement="right" title="Impresora activa"><i class="fas fa-print fa-2x"></i> </span>
+                                            <span id="sprint_inactive" class="mr-auto text-warning px-4 py-2" data-toggle="tooltip" data-placement="right" title="Impresora no disponible"><i class="fas fa-print fa-2x"></i> </span>
+                                        </div>
+                                        <button class="btn btn-black btn-round btn-print mr-3" type="button" disabled>@lang('print')</button>
                                         <button class="btn btn-black btn-order" type="button">@lang('save')</button>
                                         <a href="{{route('restaurant.tables.list')}}" class="btn">@lang('cancel')</a>
                                     </div>
@@ -106,10 +111,17 @@
 @section('page-js')
     <script src="{{asset('assets/js/plugin/selectpicker/js/bootstrap-select.min.js')}}"></script>
     <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
+
+    <script src="{{ asset('assets/js/print_tool_v2/zip.js/zip-full.min.js') }}"></script>
+    <script src="{{ asset('assets/js/print_tool_v2/JSPrintManager.js') }}"></script>
+    <script src="{{ asset('assets/js/print_tool_v2/bluebird.min.js') }}"></script>
+    <script src="{{ asset('assets/js/utils_print.js') }}"></script>
+
     <script>
         let path_create_delivery = '{{route('restaurant.tables.store-delivery')}}'
         let path_table = '{{ route('restaurant.tables.list') }}'
         let _token = '{{csrf_token()}}'
+        let HOST_URL = "{{ url('/') }}"
     </script>
-    <script src="{{asset('custom/js/resAdmin/table.js')}}?v=202101101555"></script>
+    <script src="{{asset('custom/js/resAdmin/table.js')}}?v=202203101555"></script>
 @endsection

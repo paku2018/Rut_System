@@ -1,3 +1,5 @@
+var tableId = ""
+
 $('#dt_table').DataTable({
     "pageLength": 10,
     "order": [[ 1, 'asc' ]],
@@ -94,7 +96,8 @@ $(document).on('click','.btn-order', function () {
                         }
                     }
                 }).then((confirmed) => {
-                    location.href = path_table;
+                    $('.btn-print').attr('disabled', false)
+                    tableId = response.data.id;
                 });
             }else{
                 swal(langs('messages.server_error'), {
@@ -110,6 +113,48 @@ $(document).on('click','.btn-order', function () {
             }
         },
     });
+})
+
+$(document).on('click', '.btn-print', function () {
+    var url = HOST_URL + '/exportPdf/' + tableId
+
+    $.ajax({
+        url: url,
+        type: 'get',
+        contentType: false,
+        processData: false,
+        success: function(response){
+            var url_png = HOST_URL+'/'+response.ticket_png;
+            if(url_png.length>1){
+                if(window.jspmWSStatus()){
+                    doPrinting(url_png);
+                }
+                swal({
+                    buttons : {
+                        confirm : {
+                            className: 'btn btn-danger'
+                        }
+                    },
+                    icon: url_png,
+                }).then((confirmed) => {
+                    location.href = path_table
+                });
+            }
+
+        },
+        error: function(a){
+            swal(langs('messages.server_error'), {
+                icon: "error",
+                buttons : {
+                    confirm : {
+                        className: 'btn btn-danger'
+                    }
+                }
+            });
+        }
+    });
+
+
 })
 
 $(function () {

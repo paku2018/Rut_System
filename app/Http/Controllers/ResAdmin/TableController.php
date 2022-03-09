@@ -198,6 +198,7 @@ class TableController extends Controller
 
     public function storeDelivery(Request $request){
         $resId = session()->get('resId');
+        $table = null;
         if ($resId){
             try{
                 $client_email = $request->email;
@@ -241,6 +242,6 @@ class TableController extends Controller
             $result = false;
         }
 
-        return response()->json(['status'=>true, 'result'=>$result]);
+        return response()->json(['status'=>true, 'result'=>$result, 'data'=>$table]);
     }
 }
