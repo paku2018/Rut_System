@@ -108,6 +108,8 @@ class FinalReceipt {
 
             $image->setPropina($payment->tip);
 
+            $image->setDelivery($payment->shipping, false);
+
             //SET tipo de pago
             /*$image->setTipoPago($this->getPaymentMethod($payment->payment_method), [
                 'observacion'=> $comment,

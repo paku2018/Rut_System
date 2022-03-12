@@ -279,6 +279,18 @@ class CreateImageReceipt {
 			imagettftext($this->img, 50, 0, 30, $this->lineaY, $this->text_color, $this->fuente, 'Propina: $ '.number_format(abs($propina), 0, "", "."));
 	}
 
+	public function setDelivery($delivery, $showLine = true){
+		if($showLine){
+			$this->lineaY += 50;
+			imagesetthickness ( $this->img, 3 );
+			imageline( $this->img, 0, $this->lineaY, $this->ancho, $this->lineaY, $this->line_color );
+		}
+
+
+			$this->lineaY += 120;
+			imagettftext($this->img, 50, 0, 30, $this->lineaY, $this->text_color, $this->fuente, 'Delivery: $ '.number_format(abs($delivery), 0, "", "."));
+	}
+
 	/**
 	 * funcion para setear el footer
 	 * @param string $resolucion

@@ -114,6 +114,7 @@ class ApiTaco {
             ],
             'total'=> $payment->consumption,
             'propina'=> $payment->tip,
+            'delivery'=> $payment->shipping,
             'observacion'=> '',
         ];
         $venta_items_aux = [];
@@ -149,6 +150,9 @@ class ApiTaco {
         }
         if(!empty($venta['propina'])){
             $items_productos[] = $this->setItemProducto('Propina','1', ''.explode('.',$venta['propina'])[0], $es_exento='2');
+        }
+        if(!empty($venta['delivery'])){
+            $items_productos[] = $this->setItemProducto('Delivery','1', ''.explode('.',$venta['delivery'])[0], $es_exento='2');
         }
 
         $taco_data_user = $this->taco_data_user;
