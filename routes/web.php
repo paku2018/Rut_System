@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/jspm', [App\Http\Controllers\JSPMController::class, 'index'])->name('lincencia_jspm');
+Route::get('/jspmtest', [App\Http\Controllers\JSPMController::class, 'test'])->name('lincencia_jspm_test');
 
 Auth::routes();
 Route::get('/verify', [App\Http\Controllers\HomeController::class, 'verify'])->name('verify');

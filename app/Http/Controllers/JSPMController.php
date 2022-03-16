@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class JSPMController extends Controller
 {
@@ -19,6 +20,11 @@ class JSPMController extends Controller
 
         return response($resp)->header('Content-Type', 'text/plain');
 
-    }    
+    }
+
+    public function test(Request $request){
+        $categories = Category::all();
+        return response($categories)->header('Content-Type', 'application/json');
+    }
 
 }
