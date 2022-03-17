@@ -55,6 +55,7 @@
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h4 class="card-title">@lang('tables')</h4>
                             <div>
+                                <button class="btn btn-outline-primary btn-round btn-update mr-3">@lang('update_status')</button>
                                 <a href="{{ route('restaurant.tables.create') }}" class="btn btn-black btn-round">@lang('create')</a>
                                 <a href="{{ route('restaurant.tables.create-delivery') }}" class="btn btn-black btn-round">@lang('create_delivery')</a>
                             </div>
@@ -65,51 +66,13 @@
                                     <h5 class="text-center">@lang('payment_error') @lang('try_again')</h5>
                                 </div>
                             @endif
-                            @if(count($tables) > 0)
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="table-group">
-                                            @foreach($tables as $table)
-                                                @php
-                                                    switch ($table->status){
-                                                        case "open":
-                                                            $class = "bg-success-gradient success-shadow";
-                                                            $title = __("open");
-                                                            break;
-                                                        case "ordered":
-                                                            $class = "bg-warning-gradient";
-                                                            $title = __("ordered");
-                                                            break;
-                                                        case "pend":
-                                                            $class = "bg-danger-gradient";
-                                                            $title = __("provisional_close");
-                                                            break;
-                                                        case "closed":
-                                                            $class = "bg-black";
-                                                            $title = __("available");
-                                                            break;
-                                                        default:
-                                                            $class = '';
-                                                            $title = '';
-                                                            break;
-                                                    }
-                                                @endphp
-                                                <div class="table-box" data-index="{{$table->id}}">
-                                                    <div class="table-status {{$class}}" title="{{$title}}"></div>
-                                                    <h6 class="text-center mb-0">@lang('table')-{{$table->t_number}}</h6>
-                                                    <h5 class="text-center" style="height: 80px">{{$table->name}}</h5>
-                                                    <div class="table-action d-flex align-items-center justify-content-center">
-                                                        <a href="{{route('restaurant.tables.edit', $table->id)}}" class="text-black"><i class="fas fa-edit"></i></a>
-                                                        <div class="ml-2 text-red delete" data-index="{{$table->id}}"><i class="fas fa-trash"></i></div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table-group">
+
                                     </div>
                                 </div>
-                            @else
-                                <h3 class="text-danger text-center">@lang('no_table')</h3>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -338,6 +301,7 @@
     <script>
         let tip_percentage = '10'
         let path_delete = '{{route('restaurant.tables.delete')}}'
+        let path_table_list = '{{route('restaurant.tables.get-list')}}'
         let path_table_info = '{{route('get-table-info')}}'
         let path_close_table = '{{route('restaurant.close-table')}}'
         let path_delete_order = '{{route('delete-order')}}'

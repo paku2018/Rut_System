@@ -1,6 +1,13 @@
 var tableId = 0;
 var nf = Intl.NumberFormat();
 
+$(document).ready(function () {
+    getTableList()
+    setInterval(function () {
+        getTableList()
+    }, 10000);
+})
+
 $(document).on('click','.delete', function () {
     let id = $(this).data('index');
     swal({
@@ -149,6 +156,70 @@ function getOrderList(){
         },
     });
 }
+
+function getTableList() {
+    let formData = new FormData();
+    formData.append('_token',_token);
+    $.ajax({
+        url: path_table_list,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            let code = ''
+            if(response.result){
+                let tables = response.data;
+                let len = tables.length
+                if (len > 0) {
+                    for (let i=0; i<len; i++) {
+                        let status = tables[i].status;
+                        let className = ''
+                        let title = ''
+                        let t_url = HOST_URL + "/restaurant/tables/edit/" + tables[i].id
+                        switch (status) {
+                            case "open":
+                                className = 'bg-success-gradient success-shadow'
+                                title = langs('messages.open')
+                                break
+                            case "ordered":
+                                className = 'bg-warning-gradient'
+                                title = langs('messages.ordered')
+                                break
+                            case "pend":
+                                className = 'bg-danger-gradient'
+                                title = langs('messages.provisional_close')
+                                break
+                            case "closed":
+                                className = 'bg-black'
+                                title = langs('messages.available')
+                                break
+                            default:
+                                break
+                        }
+                        code += '<div class="table-box" data-index="' + tables[i].id + '">'
+                        code += '<div class="table-status ' + className + '" title="' + title + '"></div>'
+                        code += '<h6 class="text-center mb-0">' + langs('messages.table') + '-' + tables[i].t_number + '</h6>'
+                        code += '<h5 class="text-center" style="height: 80px">' + tables[i].name + '</h5>'
+                        code += '<div class="table-action d-flex align-items-center justify-content-center">'
+                        code += '<a href="' + t_url + '" class="text-black"><i class="fas fa-edit"></i></a>'
+                        code += '<div class="ml-2 text-red delete" data-index="' + tables[i].id + '"><i class="fas fa-trash"></i></div>'
+                        code += '</div></div>'
+                    }
+                }else {
+                    code = '<h6 class="text-center">No hay mesas disponibles.</h6>'
+                }
+            }else{
+                code = '<h6 class="text-center">No hay mesas disponibles.</h6>'
+            }
+            $('.table-group').html(code)
+        },
+    });
+}
+
+$(document).on('click','.btn-update', function (e) {
+    getTableList()
+})
 
 $('.minus-btn').on('click', function(e) {
     e.preventDefault();

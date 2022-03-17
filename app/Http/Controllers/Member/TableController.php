@@ -25,6 +25,22 @@ class TableController extends Controller
         return view('member.table.index',compact('tables','products'));
     }
 
+    public function getList(Request $request) {
+        $resId = Auth::user()->restaurant_id;
+        if ($resId) {
+            $tables = Table::where('restaurant_id', $resId)->where(function ($q){
+                $q->where('type', 'real')
+                    ->orWhere(function ($query){
+                        $query->where('type', '!=', 'real')
+                            ->where('status', '!=', 'closed');
+                    });
+            })->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
+            return response()->json(['result'=>true, 'data'=>$tables]);
+        }else {
+            return response()->json(['result'=>true, 'data'=>array()]);
+        }
+    }
+
     public function getTableInfo(Request $request){
         $tableId = $request->tableId;
         $table = Table::with('restaurant')->find($tableId);

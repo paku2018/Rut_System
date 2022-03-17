@@ -44,13 +44,21 @@
                                         <h5 class="text-center">@lang('server_error') @lang('try_again')</h5>
                                     </div>
                                 @endif
-                                <div class="form-group form-show-validation row">
-                                    <label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">@lang('client_email')<span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
-                                        <input type="email" class="form-control" id="email" name="email" required>
+                                <div class="form-show-validation row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group d-flex align-items-center">
+                                            <label for="email" class="mt-sm-2 text-sm-right mr-2">@lang('client_email')<span class="required-label">*</span></label>
+                                            <input type="email" class="form-control" id="email" name="email" value="waiter@app.pagocash" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group d-flex align-items-center">
+                                            <label for="email" class="mt-sm-2 text-sm-right mr-2">@lang('client_name')</label>
+                                            <input type="text" class="form-control" id="name" name="name" value="" required>
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="mt-3">
                                     <div class="table-responsive">
                                         <table class="table table-striped" id="dt_table">
                                             <thead>

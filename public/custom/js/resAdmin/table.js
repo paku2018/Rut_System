@@ -75,9 +75,11 @@ $(document).on('click','.btn-order', function () {
         }
     })
     let email = $('#email').val();
+    let name = $('#name').val();
     let formData = new FormData();
     formData.append('items',JSON.stringify(items));
     formData.append('email',email);
+    formData.append('name',name);
     formData.append('_token',_token);
     $.ajax({
         url: path_create_delivery,

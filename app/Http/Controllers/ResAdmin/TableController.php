@@ -23,6 +23,18 @@ class TableController extends Controller
         $resId = session()->get('resId');
         //dd(env('TACO_API_URL_PROD'));
         if ($resId){
+            $restaurant = Restaurant::find($resId);
+            $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
+
+            return view('resAdmin.table.index', compact('restaurant', 'products'));
+        }else{
+            abort(404);
+        }
+    }
+
+    public function getList(Request $request) {
+        $resId = session()->get('resId');
+        if ($resId) {
             $tables = Table::where('restaurant_id', $resId)->where(function ($q){
                 $q->where('type', 'real')
                     ->orWhere(function ($query){
@@ -30,12 +42,9 @@ class TableController extends Controller
                             ->where('status', '!=', 'closed');
                     });
             })->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
-            $restaurant = Restaurant::find($resId);
-            $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
-
-            return view('resAdmin.table.index', compact('tables','restaurant', 'products'));
-        }else{
-            abort(404);
+            return response()->json(['result'=>true, 'data'=>$tables]);
+        }else {
+            return response()->json(['result'=>true, 'data'=>array()]);
         }
     }
 
@@ -202,15 +211,21 @@ class TableController extends Controller
         if ($resId){
             try{
                 $client_email = $request->email;
-                $client = Client::where('email', $client_email)->first();
+                $client_name = $request->name;
+                $client = Client::where('email', $client_email);
+                if($client_name) {
+                    $client = $client->where('name', $client_name);
+                }
+                $client = $client->first();
                 if(!$client){
-                    $client = Client::create(['email'=>$client_email]);
+                    $client = Client::create(['email'=>$client_email, 'name'=>$client_name]);
                 }
 
+                $name = $client_name ? $client_name : $client_email;
                 $table_data = [
                     'restaurant_id' => $resId,
                     't_number' => $client->id,
-                    'name' => 'Virtual('.$client->email.")-".date('His'),
+                    'name' => 'Virtual('.$name.")-".date('His'),
                     'current_client_id' => $client->id,
                     'type' => 'delivery',
                     'status' => 'ordered'

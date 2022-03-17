@@ -75,6 +75,7 @@ Route::group(['middleware'=>'checkResAdmin'],function () {
         Route::get('/tables/edit/{id}', [App\Http\Controllers\ResAdmin\TableController::class, 'edit'])->name('tables.edit');
         Route::post('/tables/store', [App\Http\Controllers\ResAdmin\TableController::class, 'store'])->name('tables.store');
         Route::post('/tables/delete', [App\Http\Controllers\ResAdmin\TableController::class, 'delete'])->name('tables.delete');
+        Route::post('/tables/list', [App\Http\Controllers\ResAdmin\TableController::class, 'getList'])->name('tables.get-list');
 
         Route::get('/members', [App\Http\Controllers\ResAdmin\UserController::class, 'index'])->name('members.list');
         Route::get('/members/create', [App\Http\Controllers\ResAdmin\UserController::class, 'create'])->name('members.create');
@@ -121,10 +122,7 @@ Route::group(['middleware'=>'checkMember'],function () {
 
     Route::group(['prefix' => 'waiter', 'as' => 'waiter.'], function () {
         Route::get('/tables', [App\Http\Controllers\Member\TableController::class, 'index'])->name('tables');
+        Route::post('/get-table-list', [App\Http\Controllers\Member\TableController::class, 'getList'])->name('get-table-list');
         Route::post('/pendTable', [App\Http\Controllers\Member\TableController::class, 'pend'])->name('pend-table');
     });
-
-//    Route::group(['prefix' => 'cashier', 'as' => 'cashier.'], function () {
-//        Route::get('/tables', [App\Http\Controllers\Member\TableController::class, 'cashierIndex'])->name('tables');
-//    });
 });

@@ -50,47 +50,13 @@
                             <h4 class="card-title">@lang('tables')</h4>
                         </div>
                         <div class="card-body">
-                            @if(count($tables) > 0)
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="table-group">
-                                            @foreach($tables as $table)
-                                                @php
-                                                    switch ($table->status){
-                                                        case "open":
-                                                            $class = "bg-success-gradient success-shadow";
-                                                            $title = __("open");
-                                                            break;
-                                                        case "ordered":
-                                                            $class = "bg-warning-gradient";
-                                                            $title = __("ordered");
-                                                            break;
-                                                        case "pend":
-                                                            $class = "bg-danger-gradient";
-                                                            $title = __("provisional_close");
-                                                            break;
-                                                        case "closed":
-                                                            $class = "bg-black";
-                                                            $title = __("available");
-                                                            break;
-                                                        default:
-                                                            $class = '';
-                                                            $title = '';
-                                                            break;
-                                                    }
-                                                @endphp
-                                                <div class="table-box" data-index="{{$table->id}}">
-                                                    <div class="table-status {{$class}}" title="{{$title}}"></div>
-                                                    <h6 class="text-center mb-0">@lang('table')-{{$table->t_number}}</h6>
-                                                    <h5 class="text-center">{{$table->name}}</h5>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table-group">
+
                                     </div>
                                 </div>
-                            @else
-                                <h3 class="text-danger text-center">@lang('no_table')</h3>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -248,6 +214,7 @@
 
         let path_get_orders = '{{route('get-order-data')}}'
         let path_assign_orders = '{{route('assign-orders')}}'
+        let path_table_list = '{{route('waiter.get-table-list')}}'
         let path_table_info = '{{route('get-table-info')}}'
         let path_create_orders = '{{route('create-order')}}'
         let path_pend_table = '{{route('waiter.pend-table')}}'

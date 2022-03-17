@@ -43,6 +43,11 @@ var lang = {
         'amount': 'Cantidad',
         'order_will_delete': 'Estos pedidos se eliminarán de forma permanente.',
         'delete': 'Eliminar',
-        'are_you_sure': 'Estas seguro?'
+        'are_you_sure': 'Estas seguro?',
+        'open': 'Abierto',
+        'closed': 'Cerrado',
+        'ordered': 'Ordenado',
+        'provisional_close': 'Provisional cerrado',
+        'available': 'Disponible',
     }
 }
