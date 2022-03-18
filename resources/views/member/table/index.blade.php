@@ -48,6 +48,9 @@
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h4 class="card-title">@lang('tables')</h4>
+                            <div>
+                                <button class="btn btn-outline-primary btn-round btn-update mr-3">@lang('update_status')</button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
