@@ -64,7 +64,7 @@ class CreateReceipt {
             //$image->setQrCodeCustom($url_pdf, $VentaData->id);
 
             //SET tipo de documento
-            $image->setDocumento(__('receipt'), $order_code_text, date('d/m/Y H:i'));
+            $image->setDocumento('          COMANDA', $order_code_text, date('d/m/Y H:i'));
 
             //SET datos de comercio
             $image->setComercio($comercio);
@@ -94,11 +94,9 @@ class CreateReceipt {
             $image->setTotal('TOTAL:', $total);
 
             //SET tipo de pago
-            /*$image->setTipoPago('efectivo', [
-                'observacion'=> $comment,
-                'pago'=> 0,
-                'vuelto'=> 0,
-            ], true);*/
+            /**/
+            $image->setComentario('Comentario:', $comment, true);
+            /**/
 
             //SET datos footer
             //$image->setFooter($resolucion);

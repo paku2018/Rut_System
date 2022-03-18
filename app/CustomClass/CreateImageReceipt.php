@@ -64,7 +64,7 @@ class CreateImageReceipt {
 	public function setDocumento($nombre_documento = 'Recibo', $codigo = '', $fecha = ''){
 		$nombre_documento = str_pad($nombre_documento, 55, " ", STR_PAD_BOTH);
 		$this->lineaY += 80;
-		imagettftext($this->img, 50, 0, 0, $this->lineaY, $this->text_color, $this->fuente_bold, ucwords($nombre_documento));
+		imagettftext($this->img, 40, 0, 0, $this->lineaY, $this->text_color, $this->fuente_bold, ucwords($nombre_documento));
 
 		$this->lineaY += 80;
 		$codigo = str_pad('N°: '.$codigo, 65, " ", STR_PAD_BOTH);
@@ -267,6 +267,35 @@ class CreateImageReceipt {
 		}
 	}
 
+	/**
+	 * funcion para setear el valor de iva
+	 * @param string $nombre_tipo_pago
+	 *
+	 * */
+	public function setComentario($nombre, $observacion, $showLine = true){
+		if($showLine){
+			$this->lineaY += 50;
+			imagesetthickness ( $this->img, 3 );
+			imageline( $this->img, 0, $this->lineaY, $this->ancho, $this->lineaY, $this->line_color );
+		}
+
+		if(!empty($observacion)){
+			$this->lineaY += 130;
+			imagettftext($this->img, 50, 0, 30, $this->lineaY, $this->text_color, $this->fuente, $nombre);
+
+			$longitud_observacion = strlen($observacion);
+			$split = 30;
+			$len = ceil($longitud_observacion/$split);
+
+			for($i=0; $i<$len;$i++){
+				$this->lineaY += 60;
+				$start = $i*$split;
+				$text = substr($observacion, $start, $split);
+				imagettftext($this->img, 45, 0, 30, $this->lineaY, $this->text_color, $this->fuente, trim($text));
+			}
+		}
+	}
+
 	public function setPropina($propina, $showLine = true){
 		if($showLine){
 			$this->lineaY += 50;
@@ -276,7 +305,7 @@ class CreateImageReceipt {
 
 
 			$this->lineaY += 120;
-			imagettftext($this->img, 50, 0, 30, $this->lineaY, $this->text_color, $this->fuente, 'Propina: $ '.number_format(abs($propina), 0, "", "."));
+			imagettftext($this->img, 50, 0, 30, $this->lineaY, $this->text_color, $this->fuente, 'Propina Sugerida: $ '.number_format(abs($propina), 0, "", "."));
 	}
 
 	public function setDelivery($delivery, $showLine = true){
@@ -315,7 +344,7 @@ class CreateImageReceipt {
 
 		$this->lineaY += 100;
 		$gracias_compra = '123456789-0123456789-123456789-123456789-1234567';
-		$gracias_compra = str_pad('Gracias por su compra', 25, " ", STR_PAD_BOTH);
+		$gracias_compra = str_pad('Gracias por su preferencia', 25, " ", STR_PAD_BOTH);
 		imagettftext($this->img, 50, 0, 50, $this->lineaY, $this->text_color, $this->fuente, $gracias_compra);
 	}
 

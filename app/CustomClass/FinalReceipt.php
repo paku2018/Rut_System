@@ -76,7 +76,7 @@ class FinalReceipt {
 
 
             //SET tipo de documento
-            $image->setDocumento(!empty($folio) ? __('electronic_ballot') : __('receipt') , $order_code_text, $document_date);
+            $image->setDocumento(!empty($folio) ? __('BOLETA ELECTRÓNICA') : '              '.strtoupper(__('receipt')) , $order_code_text, $document_date);
 
             //SET datos de comercio
             $image->setComercio($comercio);
@@ -104,11 +104,13 @@ class FinalReceipt {
              	$image->setIva('IVA('.((int) $this->iva).'%):', $monto_iva);
             }
             //SET total
-            $image->setTotal('TOTAL:', $total);
+            $image->setTotal('SUB-TOTAL:', $total);
 
             $image->setPropina($payment->tip);
 
             $image->setDelivery($payment->shipping, false);
+
+            $image->setTotal('TOTAL:', ($total+$payment->tip+$payment->shipping), true);
 
             //SET tipo de pago
             /*$image->setTipoPago($this->getPaymentMethod($payment->payment_method), [
@@ -118,7 +120,7 @@ class FinalReceipt {
             ], true);*/
 
             //SET datos footer
-            $image->setFooter($resolucion);
+            $image->setFooter(!empty($folio) ? $resolucion : '');
 
             if(empty($folio)){
                 $image->renderSinQR($mostrar = false, $this->filename, false);
