@@ -81,32 +81,32 @@
     </div>
     <!-- Detail modal -->
     <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg-no" role="document" style="min-width:95%;">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header pt-1 pb-0">
                     <h1 class="modal-title" id="detailModalLabel">@lang('detail')</h1>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close mt-1 pt-1" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body pt-0" id="detail">
+                <div class="modal-body pt-0 pb-0" id="detail">
                     <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="view-order-list bg-light px-0 pt-0 pb-3">
+                        <div class="col-12 col-md-4 pr-0">
+                            <div class="view-order-list bg-light px-0 pt-0 pb-0">
                                 <div class="bg-black text-white px-3 py-1 mb-3">
                                     <h3 class="mb-0 text-center">@lang('order_list')</h3>
                                 </div>
-                                <div id="assigned-orders">
+                                <div id="assigned-orders" style="overflow-y: scroll;height: 332px;padding-right: 10px;">
 
                                 </div>
-                                <div class="mt-3">
-                                    <h1 class="text-right">@lang('total') : <span id="detail-total"></span></h1>
+                                <div class="mt-1 pb-0">
+                                    <h1 class="text-right mb-0">@lang('total') : <span id="detail-total"></span></h1>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-8">
-                            <div class="bg-grey2 px-2 py-0">
-                                <div class="bg-black text-white px-3 py-1 mb-3">
+                        <div class="col-12 col-md-8 pr-0">
+                            <div class="bg-grey2 px-2 py-0" style="overflow-y: scroll;height: 430px;overflow-x: hidden;">
+                                <div class="bg-black text-white px-3 py-1 mb-0">
                                     <h3 class="mb-0 text-center">@lang('add_order')</h3>
                                 </div>
                                 <div class="row">
@@ -115,10 +115,10 @@
                                             <table class="table table-striped" id="dt_table">
                                                 <thead>
                                                 <tr>
-                                                    <th>@lang('image')</th>
-                                                    <th>@lang('name')</th>
-                                                    <th>@lang('sale_price')</th>
-                                                    <th>@lang('count')</th>
+                                                    <th style="height: 35px;padding: 0 20px!important">@lang('image')</th>
+                                                    <th style="height: 35px;padding: 0 20px!important">@lang('name')</th>
+                                                    <th style="height: 35px;padding: 0 20px!important">@lang('sale_price')</th>
+                                                    <th style="height: 35px;padding: 0 20px!important">@lang('count')</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -159,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer justify-content-end">
+                <div class="modal-footer justify-content-end pt-1 pb-2">
                     <span id="sprint_active" class="mr-auto text-success px-4 py-2  d-none" data-toggle="tooltip" data-placement="right" title="Impresora activa"><i class="fas fa-print fa-2x"></i> </span>
                     <span id="sprint_inactive" class="mr-auto text-warning px-4 py-2" data-toggle="tooltip" data-placement="right" title="Impresora no disponible"><i class="fas fa-print fa-2x"></i> </span>
                     <button type="button" class="btn btn-black btn-round btn-print">@lang('print')</button>
