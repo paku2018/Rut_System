@@ -98,9 +98,11 @@
             let val = parseInt($(this).val())
             total_val = total_val + val;
         })
-        $('#sub-total').text(total_val);
-        $('#tip').text(parseInt(total_val/10));
-        $('#total').text(total_val + parseInt(total_val/10));
+        $('#sub-total').text(total_val.toLocaleString('de-DE'));
+        let tip = parseInt(total_val/10);
+        let total = total_val + parseInt(total_val/10);
+        $('#tip').text(tip.toLocaleString('de-DE'));
+        $('#total').text(total.toLocaleString('de-DE'));
     })
 </script>
 <script src="{{ asset('custom/front/js/menu.js') }}?v=202112221555"></script>
