@@ -5,7 +5,7 @@
             cursor: pointer;
         }
         #order-list td{
-            height: 55px;
+            height: 50px;
         }
         @media (min-width: 768px){
             .modal-lg {
@@ -21,6 +21,27 @@
             .modal-lg {
                 max-width: 1000px;
             }
+        }
+        .custom-scroll {
+          scrollbar-color: #194af3 #e4e4e4;
+          scrollbar-width: thin;
+        }
+
+        .custom-scroll::-webkit-scrollbar {
+          width: 10px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-track {
+          background-color: #e4e4e4;
+          border-radius: 100px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+          border-radius: 100px;
+          border: 6px solid rgba(0, 0, 0, 0.18);
+          border-left: 0;
+          border-right: 0;
+          background-color: #202f60;
         }
     </style>
 @endsection
@@ -81,8 +102,8 @@
     </div>
     <!-- Detail modal -->
     <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg-no" role="document" style="min-width:95%;">
-            <div class="modal-content">
+        <div class="modal-dialog modal-lg-no" role="document" style="min-width:100%;position: absolute;bottom: 0;top: 0;left: 0;right: 0;margin:0;">
+            <div class="modal-content" style="position: absolute;bottom: 0;top: 0;">
                 <div class="modal-header pt-1 pb-0">
                     <h1 class="modal-title" id="detailModalLabel">@lang('detail')</h1>
                     <button type="button" class="close mt-1 pt-1" data-dismiss="modal" aria-label="Close">
@@ -96,7 +117,7 @@
                                 <div class="bg-black text-white px-3 py-1 mb-3">
                                     <h3 class="mb-0 text-center">@lang('order_list')</h3>
                                 </div>
-                                <div id="assigned-orders" style="overflow-y: scroll;height: 332px;padding-right: 10px;">
+                                <div class="custom-scroll" id="assigned-orders" style="overflow-y: scroll;height: calc(88vh - 130px);padding-right: 10px;">
 
                                 </div>
                                 <div class="mt-1 pb-0">
@@ -105,7 +126,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-8 pr-0">
-                            <div class="bg-grey2 px-2 py-0" style="overflow-y: scroll;height: 430px;overflow-x: hidden;">
+                            <div class="bg-grey2 px-2 py-0 custom-scroll" style="overflow-y: scroll;height: calc(100vh - 130px);overflow-x: hidden;">
                                 <div class="bg-black text-white px-3 py-1 mb-0">
                                     <h3 class="mb-0 text-center">@lang('add_order')</h3>
                                 </div>
