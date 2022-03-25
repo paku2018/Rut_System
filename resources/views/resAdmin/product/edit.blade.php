@@ -76,6 +76,18 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group form-show-validation">
+                                            <label for="stock_count">@lang('stock_count')<span class="required-label">*</span></label>
+                                            <input type="number" class="form-control" id="stock_count" name="stock_count" value="{{isset($data)?$data->stock_count:''}}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="sale_price" class="mr-3">@lang('availability')</label>
+                                            <input type="checkbox" name="status" value="1" data-toggle="toggle" data-onstyle="primary" data-style="btn-round" {{!isset($data)||$data->status==1?'checked':''}}>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group form-show-validation">
                                             <label for="desc">@lang('description')</label>
                                             <textarea class="form-control" id="desc" name="desc">{{isset($data)?$data->desc:''}}</textarea>
                                         </div>
@@ -92,12 +104,6 @@
                                                 @endif
                                                 <input type="hidden" name="delete_image" id="delete_image" value="0">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="sale_price" class="mr-3">@lang('availability')</label>
-                                            <input type="checkbox" name="status" value="1" data-toggle="toggle" data-onstyle="primary" data-style="btn-round" {{!isset($data)||$data->status==1?'checked':''}}>
                                         </div>
                                     </div>
                                 </div>

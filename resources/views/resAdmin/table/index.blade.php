@@ -152,11 +152,30 @@
                                                         </td>
                                                         <td>{{$product->name}}</td>
                                                         <td>{{number_format($product->sale_price, 0 , ",", ".")}}</td>
-                                                        <td>
-                                                            <div class="quantity d-flex">
-                                                                <button class="minus-btn" type="button" name="button">-</button>
-                                                                <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" data-price="{{$product->sale_price}}" value="0" min="0">
-                                                                <button class="plus-btn" type="button" name="button">+</button>
+                                                        <td width="500">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="quantity d-flex">
+                                                                    <button class="minus-btn" type="button" name="button">-</button>
+                                                                    <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" data-price="{{$product->sale_price}}" value="0" min="0">
+                                                                    <button class="plus-btn" type="button" name="button">+</button>
+                                                                </div>
+                                                                @if(count($agg_products) > 0)
+                                                                    <button type="button" class="btn btn-black btn-sm btn-round ml-3" data-toggle="collapse" data-target="#collapse_{{$product->id}}" aria-expanded="false" aria-controls="collapse">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <div class="collapse" id="collapse_{{$product->id}}">
+                                                                        <div class="agg_product">
+                                                                            @foreach($agg_products as $one)
+                                                                                <div class="form-check py-0">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input sub_order" name="sub_order_{{$product->id}}" type="checkbox" value="{{$one->id}}" data-price="{{$one->sale_price}}">
+                                                                                        <span class="form-check-sign">{{$one->name. " : $" .number_format($one->sale_price, 0, ".", ",")}}</span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -192,6 +211,30 @@
     </div>
     <!-- End Detail modal -->
 
+    <!-- Aggregate Modal -->
+    <div class="modal fade" id="aggregateModal" tabindex="-1" role="dialog" aria-labelledby="aggregateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-black">
+                    <h3 class="modal-title" id="detailModalLabel">@lang('aggregate')</h3>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body py-0">
+                    <div class="row">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-black btn-round">@lang('confirm')</button>
+                    <button type="button" class="btn btn-round" data-dismiss="modal">@lang('cancel')</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Aggregate Modal -->
+
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -200,7 +243,7 @@
                     <input type="hidden" name="tableId" id="tableId" value="0">
                     <div class="modal-header bg-black">
                         <h1 class="modal-title" id="detailModalLabel">@lang('confirm_payment')</h1>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>

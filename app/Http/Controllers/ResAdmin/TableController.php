@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Restaurant;
+use App\Models\SubOrder;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -24,9 +25,16 @@ class TableController extends Controller
         //dd(env('TACO_API_URL_PROD'));
         if ($resId){
             $restaurant = Restaurant::find($resId);
-            $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
+            $products = Product::with('category')->where('restaurant_id', $resId)->where('status',1)
+                ->whereHas('category', function ($query) {
+                    $query->where('restaurant_id', '!=', 0);
+                })->get();
+            $agg_products = Product::with('category')->where('restaurant_id', $resId)->where('status',1)
+                ->whereHas('category', function ($query) {
+                    $query->where('restaurant_id', 0);
+                })->get();
 
-            return view('resAdmin.table.index', compact('restaurant', 'products'));
+            return view('resAdmin.table.index', compact('restaurant', 'products', 'agg_products'));
         }else{
             abort(404);
         }
@@ -197,9 +205,16 @@ class TableController extends Controller
         $resId = session()->get('resId');
         if ($resId){
             $restaurant = Restaurant::find($resId);
-            $products = Product::with('category')->where('restaurant_id', $resId)->where('status',1)->get();
+            $products = Product::with('category')->where('restaurant_id', $resId)->where('status',1)
+                ->whereHas('category', function ($query) {
+                    $query->where('restaurant_id', '!=', 0);
+                })->get();
+            $agg_products = Product::with('category')->where('restaurant_id', $resId)->where('status',1)
+                ->whereHas('category', function ($query) {
+                    $query->where('restaurant_id', 0);
+                })->get();
 
-            return view('resAdmin.table.create-delivery', compact('restaurant', 'products'));
+            return view('resAdmin.table.create-delivery', compact('restaurant', 'products', 'agg_products'));
         }else{
             abort(404);
         }
@@ -212,13 +227,14 @@ class TableController extends Controller
             try{
                 $client_email = $request->email;
                 $client_name = $request->name;
+                $client_address = $request->address;
                 $client = Client::where('email', $client_email);
                 if($client_name) {
                     $client = $client->where('name', $client_name);
                 }
                 $client = $client->first();
                 if(!$client){
-                    $client = Client::create(['email'=>$client_email, 'name'=>$client_name]);
+                    $client = Client::create(['email'=>$client_email, 'name'=>$client_name, 'address'=>$client_address]);
                 }
 
                 $name = $client_name ? $client_name : $client_email;
@@ -234,17 +250,28 @@ class TableController extends Controller
 
                 $items = $request->items;
                 $items = json_decode($items);
-                foreach ($items as $key => $item){
+                foreach ($items as $item){
                     if($item){
                         $data = [
                             'restaurant_id' => $table->restaurant_id,
-                            'product_id' => $key,
-                            'order_count' => $item,
+                            'product_id' => $item->id,
+                            'order_count' => $item->quantity,
                             'status' => 'open',
                             'client_id' => $table->current_client_id,
                             'assigned_table_id' => $table->id
                         ];
-                        Order::create($data);
+                        $order = Order::create($data);
+
+                        //adding sub orders
+                        $indexes = $item->sub_orders;
+                        $indexes = explode(",", $indexes);
+                        foreach ($indexes as $index) {
+                            $subData = [
+                                'order_id' => $order->id,
+                                'product_id' => $index
+                            ];
+                            SubOrder::create($subData);
+                        }
                     }
                 }
                 $update = Table::where('id', $table->id)->update(['status'=>'ordered']);

@@ -49,5 +49,7 @@ var lang = {
         'ordered': 'Ordenado',
         'provisional_close': 'Provisional cerrado',
         'available': 'Disponible',
+        'add': 'Agregar',
+        'input_amount': 'Cantidad de entrada'
     }
 }

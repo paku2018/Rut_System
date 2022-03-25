@@ -113,6 +113,11 @@ Route::group(['middleware'=>'checkResAdmin'],function () {
 
             Route::get('/breakdown', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'breakdownIndex'])->name('breakdown');
         });
+
+        Route::group(['prefix' => 'sales', 'as' => 'sales.'], function () {
+            Route::get('/index', [App\Http\Controllers\ResAdmin\SalesController::class, 'index'])->name('index');
+            Route::post('/get-products', [App\Http\Controllers\ResAdmin\SalesController::class, 'getProducts'])->name('get-products');
+        });
     });
 });
 

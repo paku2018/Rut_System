@@ -251,9 +251,9 @@ class HomeController extends Controller
         $items = isset($_GET['items'])? $_GET['items'] : '';
         if ($items){
             $items = explode(",", $items);
-            $orders = Order::with('client','product')->whereIn('id', $items)->get();
+            $orders = Order::with('client','product','children')->whereIn('id', $items)->get();
         }else{
-            $orders = Order::with('client','product')->where('status','open')->where('assigned_table_id', $id)->get();
+            $orders = Order::with('client','product','children')->where('status','open')->where('assigned_table_id', $id)->get();
         }
 
         $order_code = [$table->id];

@@ -31,6 +31,19 @@ class CreateReceipt {
                     'nombre' => $order->product->name,
                     'precio'=> $order->product->sale_price,
                 ];
+
+                //adding sub orders
+                $children = $order->children;
+                foreach ($children as $one) {
+                    $venta_items[] = [
+                        'producto_id' => $one->product_id,
+                        'barcode'     => $one->product_id,
+                        'descripcion' => $one->detail->name,
+                        'cantidad'    => 1,
+                        'nombre' => $one->detail->name,
+                        'precio'=> $one->detail->sale_price,
+                    ];
+                }
             }
 
             $comercio = [

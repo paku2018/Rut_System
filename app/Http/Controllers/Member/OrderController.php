@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\SubOrder;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,18 +41,29 @@ class OrderController extends Controller
             $table = Table::find($tableId);
             $items = $request->items;
             $items = json_decode($items);
-            foreach ($items as $key => $item){
+            foreach ($items as $item){
                 if($item){
                     $data = [
                         'restaurant_id' => $table->restaurant_id,
-                        'product_id' => $key,
-                        'order_count' => $item,
+                        'product_id' => $item->id,
+                        'order_count' => $item->quantity,
                         'status' => 'open',
                         'client_id' => $table->current_client_id,
                         'comment' => $request->comment,
                         'assigned_table_id' => $tableId
                     ];
-                    Order::create($data);
+                    $order = Order::create($data);
+
+                    //adding sub orders
+                    $indexes = $item->sub_orders;
+                    $indexes = explode(",", $indexes);
+                    foreach ($indexes as $index) {
+                        $subData = [
+                            'order_id' => $order->id,
+                            'product_id' => $index
+                        ];
+                        SubOrder::create($subData);
+                    }
                 }
             }
             $update = Table::where('id', $tableId)->update(['status'=>'ordered']);

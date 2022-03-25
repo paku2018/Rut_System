@@ -28,7 +28,7 @@ class ProductController extends Controller
         $resId = session()->get('resId');
         if ($resId){
             $restaurant = Restaurant::find($resId);
-            $categories = Category::where('restaurant_id', $resId)->get();
+            $categories = Category::where('restaurant_id', $resId)->orWhere('restaurant_id', 0)->get();
 
             return view('resAdmin.product.edit', compact('restaurant', 'categories'));
         }else{
@@ -51,7 +51,7 @@ class ProductController extends Controller
 
     public function store(Request $request){
         try{
-            $data = $request->only('id','category_id','name','desc','purchase_price','sale_price', 'status');
+            $data = $request->only('id','category_id','name','desc','purchase_price','sale_price', 'status', 'stock_count');
             $data['restaurant_id'] = session()->get('resId');
             if (!isset($request->status))
                 $data['status'] = 0;

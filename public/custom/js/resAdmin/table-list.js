@@ -108,11 +108,23 @@ function generateOrderedList(tableData, orders){
             let val = orders[i].product.sale_price * orders[i].order_count;
             let delivered = orders[i].deliver_status == 1 ? '(Entregado)' : ''
             let direct_order_class = orders[i].direct == null? 'text-danger':'text-purple'
-            code += ' <div><div class="d-flex align-items-center mb-1">\n' +
+            let sub_orders = orders[i].children
+            let sub_code = ''
+            if (sub_orders.length > 0) {
+                for (let ii=0; ii<sub_orders.length; ii++) {
+                    sub_code += '<div class="d-flex justify-content-between">' +
+                        '<h4 class="mb-0 ml-3 text-danger">' + sub_orders[ii].detail.name +'</h4>' +
+                        '<h4 class="mb-0 text-black">' + sub_orders[ii].detail.sale_price.toLocaleString('de-DE') +'</h4>' +
+                        '</div>'
+                    total += sub_orders[ii].detail.sale_price
+                }
+            }
+            code += ' <div class="pb-1" style="border-bottom: 1px solid #eeeeee"><div class="d-flex align-items-center mb-1">\n' +
                 '                                    <input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-2" data-value="'+ orders[i].id +'">' +
                 '                                    <h4 class="mb-0 ' + direct_order_class + '">' + orders[i].product.name + delivered + '</h4></div>\n' +
-                '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price.toLocaleString('de-DE') + '*' + orders[i].order_count + '='+ val.toLocaleString('de-DE') +'</h4>\n' +
-                '                                </div>'
+                '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price.toLocaleString('de-DE') + '*' + orders[i].order_count + '='+ val.toLocaleString('de-DE') +'</h4>';
+            code += sub_code
+            code += '</div>'
 
             total += val;
 
@@ -265,8 +277,22 @@ function checkCount(){
     }else{
         $('.btn-order').prop('disabled', true)
     }
-    $('#new-total').html(new_total)
+
+    //sub orders
+    $('.sub_order').each(function () {
+        var checked = $(this).is(":checked")
+        if (checked) {
+            var s_price = $(this).data('price')
+            new_total += s_price
+        }
+    })
+
+    $('#new-total').html(new_total.toLocaleString('de-DE'))
 }
+
+$(document).on('change', '.sub_order', function () {
+    checkCount()
+})
 
 $(document).on('click','.btn-order', function () {
     showLoading()
@@ -275,9 +301,16 @@ $(document).on('click','.btn-order', function () {
         let id = $(this).data('value');
         let val = $(this).val();
         if(val > 0){
-            items[id] = val;
+            //get sub orders
+            let sub_orders = []
+            $('input[name=sub_order_' + id + ']:checked').each(function () {
+                sub_orders.push($(this).val())
+            })
+            let item = {id: id, quantity: val, sub_orders: sub_orders.join(",")}
+            items.push(item)
         }
     })
+
     let comment = $('#comment').val();
     let formData = new FormData();
     formData.append('items',JSON.stringify(items));
@@ -520,24 +553,6 @@ $(document).on('click', '.btn-print', function () {
 
 })
 
-
-function checkDisable(){
-    let checked_count = 0;
-    $('.orders').each(function () {
-        let index = $(this).data('value');
-        let checked = $('input[name=orders_'+index+']:checked').val();
-        if (checked){
-            checked_count++;
-        }
-    })
-    if (checked_count == 0){
-        $('.btn-order-delete').prop('disabled', true)
-        $('.btn-deliver').prop('disabled', true)
-    }else{
-        $('.btn-order-delete').prop('disabled', false)
-        $('.btn-deliver').prop('disabled', false)
-    }
-}
 
 $(document).on('click','.orders', function () {
     checkDisable()

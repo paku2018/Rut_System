@@ -184,11 +184,30 @@
                                                         </td>
                                                         <td>{{$product->name}}</td>
                                                         <td>{{number_format($product->sale_price, 0 , ",", ".")}}</td>
-                                                        <td>
-                                                            <div class="quantity d-flex">
-                                                                <button class="minus-btn" type="button" name="button">-</button>
-                                                                <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" data-price="{{$product->sale_price}}" value="0" min="0">
-                                                                <button class="plus-btn" type="button" name="button">+</button>
+                                                        <td width="400">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="quantity d-flex">
+                                                                    <button class="minus-btn" type="button" name="button">-</button>
+                                                                    <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" data-price="{{$product->sale_price}}" value="0" min="0">
+                                                                    <button class="plus-btn" type="button" name="button">+</button>
+                                                                </div>
+                                                                @if(count($agg_products) > 0)
+                                                                    <button type="button" class="btn btn-black btn-sm btn-round ml-3" data-toggle="collapse" data-target="#collapse_{{$product->id}}" aria-expanded="false" aria-controls="collapse">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <div class="collapse" id="collapse_{{$product->id}}">
+                                                                        <div class="agg_product">
+                                                                            @foreach($agg_products as $one)
+                                                                                <div class="form-check py-0">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input sub_order" name="sub_order_{{$product->id}}" type="checkbox" value="{{$one->id}}" data-price="{{$one->sale_price}}">
+                                                                                        <span class="form-check-sign">{{$one->name. " : $" .number_format($one->sale_price, 0, ".", ",")}}</span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>

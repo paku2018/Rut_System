@@ -60,6 +60,12 @@
                         <p>@lang('menu_qr')</p>
                     </a>
                 </li>
+                <li class="nav-item {{$link=="sales"?'active':''}}">
+                    <a href="{{ route('restaurant.sales.index') }}">
+                        <i class="fas fa-credit-card"></i>
+                        <p>@lang('sales_panel')</p>
+                    </a>
+                </li>
                 <li class="nav-item {{$link=="statistics"?'active':''}}">
                     <a data-toggle="collapse" href="#statistics">
                         <i class="fas fa-chart-area"></i>

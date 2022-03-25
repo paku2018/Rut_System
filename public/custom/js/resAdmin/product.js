@@ -11,12 +11,17 @@ $(document).ready(function () {
             purchase_price:{
                 required: true,
                 number: true,
-                min: 0.1,
+                min: 0,
             },
             sale_price:{
                 required: true,
                 number: true,
-                min: 0.1,
+                min: 0,
+            },
+            stock_count:{
+                required: true,
+                digits: true,
+                min: 1,
             },
         },
         messages: {
@@ -34,6 +39,11 @@ $(document).ready(function () {
             sale_price:{
                 required: langs('messages.field_required'),
                 number: langs('messages.input_valid_number'),
+                min: langs('messages.input_greater_0')
+            },
+            stock_count:{
+                required: langs('messages.field_required'),
+                digits: langs('messages.input_valid_number'),
                 min: langs('messages.input_greater_0')
             },
         },

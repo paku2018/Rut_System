@@ -53,47 +53,90 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group d-flex align-items-center">
-                                            <label for="email" class="mt-sm-2 text-sm-right mr-2">@lang('client_name')</label>
+                                            <label for="name" class="mt-sm-2 text-sm-right mr-2">@lang('client_name')</label>
                                             <input type="text" class="form-control" id="name" name="name" value="" required>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="mt-3">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped" id="dt_table">
-                                            <thead>
-                                            <tr>
-                                                <th>@lang('image')</th>
-                                                <th>@lang('sort')</th>
-                                                <th>@lang('name')</th>
-                                                <th>@lang('sale_price')</th>
-                                                <th>@lang('count')</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($products as $product)
-                                                <tr>
-                                                    <td>
-                                                        @if($product->image)
-                                                            <img src="{{$product->image}}" alt="no_img" class="preview-image">
-                                                        @endif
-                                                    </td>
-                                                    <td>{{$product->category->order}}</td>
-                                                    <td>{{$product->name}}</td>
-                                                    <td>{{number_format($product->sale_price,2)}}</td>
-                                                    <td>
-                                                        <div class="quantity">
-                                                            <button class="minus-btn" type="button" name="button">-</button>
-                                                            <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" data-price="{{$product->sale_price}}" value="0" min="0">
-                                                            <button class="plus-btn" type="button" name="button">+</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
+                                    <div class="col-12 col-md-8">
+                                        <div class="form-group d-flex align-items-center">
+                                            <label for="address" class="mt-sm-2 text-sm-right mr-2">@lang('address')</label>
+                                            <input type="text" class="form-control" id="address" name="address" value="" required>
+                                        </div>
                                     </div>
-                                    <h2 class="text-right">@lang('total') : <span id="new-total">0</span></h2>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-md-3">
+                                        <div class="bg-black text-white mb-3">
+                                            <h3 class="mb-0 text-center">@lang('order_list')</h3>
+                                        </div>
+                                        <div class="custom-scroll" id="assigned-orders" style="overflow-y: auto;height: calc( 100% - 100px)">
+
+                                        </div>
+                                        <div class="mt-1 pb-0">
+                                            <h1 class="text-right mb-0">@lang('total') : <span id="detail-total">0</span></h1>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <div>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped" id="dt_table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>@lang('image')</th>
+                                                        <th>@lang('sort')</th>
+                                                        <th>@lang('name')</th>
+                                                        <th>@lang('sale_price')</th>
+                                                        <th>@lang('count')</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($products as $product)
+                                                        <tr>
+                                                            <td>
+                                                                @if($product->image)
+                                                                    <img src="{{$product->image}}" alt="no_img" class="preview-image">
+                                                                @endif
+                                                            </td>
+                                                            <td>{{$product->category->order}}</td>
+                                                            <td>{{$product->name}}</td>
+                                                            <td>{{number_format($product->sale_price,2)}}</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="quantity">
+                                                                        <button class="minus-btn" type="button" name="button">-</button>
+                                                                        <input type="text" class="order_count" name="order_count_{{$product->id}}" data-value="{{$product->id}}" data-price="{{$product->sale_price}}" value="0" min="0">
+                                                                        <button class="plus-btn" type="button" name="button">+</button>
+                                                                    </div>
+                                                                    @if(count($agg_products) > 0)
+                                                                        <button type="button" class="btn btn-black btn-sm btn-round ml-3" data-toggle="collapse" data-target="#collapse_{{$product->id}}" aria-expanded="false" aria-controls="collapse">
+                                                                            <i class="fa fa-plus"></i>
+                                                                        </button>
+                                                                    @endif
+                                                                </div>
+
+                                                                @if(count($agg_products) > 0)
+                                                                    <div class="collapse" id="collapse_{{$product->id}}">
+                                                                        <div class="agg_product">
+                                                                            @foreach($agg_products as $one)
+                                                                                <div class="form-check py-0">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input sub_order" name="sub_order_{{$product->id}}" type="checkbox" value="{{$one->id}}" data-price="{{$one->sale_price}}">
+                                                                                        <span class="form-check-sign">{{$one->name. " : $" .number_format($one->sale_price, 0, ".", ",")}}</span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <h2 class="text-right">@lang('total') : <span id="new-total">0</span></h2>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-action">
@@ -127,6 +170,7 @@
 
     <script>
         let path_create_delivery = '{{route('restaurant.tables.store-delivery')}}'
+        let path_table_info = '{{route('get-table-info')}}'
         let path_table = '{{ route('restaurant.tables.list') }}'
         let _token = '{{csrf_token()}}'
         let HOST_URL = "{{ url('/') }}"

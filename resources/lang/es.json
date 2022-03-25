@@ -257,5 +257,13 @@
     "is_format_sii": "Formato SII",
     "is_format_generic": "Formato Generico",
     "is_receipt_sii": "Imprimir Recibo",
-    "update_status": "Actualizar"
+    "update_status": "Actualizar",
+    "aggregate": "Aggregate",
+    "sales_panel": "Panel de Ventas",
+    "add_with_product_code": "Agregar con código de producto",
+    "input_code_product": "Ingresar código del producto",
+    "stock_count": "Recuento de stock",
+    "close": "Cerrar",
+    "added_product": "Productos añadidos",
+    "quantity": "Cantidad"
 }
