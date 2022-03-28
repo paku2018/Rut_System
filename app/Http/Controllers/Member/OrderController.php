@@ -58,11 +58,13 @@ class OrderController extends Controller
                     $indexes = $item->sub_orders;
                     $indexes = explode(",", $indexes);
                     foreach ($indexes as $index) {
-                        $subData = [
-                            'order_id' => $order->id,
-                            'product_id' => $index
-                        ];
-                        SubOrder::create($subData);
+                        if ($index) {
+                            $subData = [
+                                'order_id' => $order->id,
+                                'product_id' => $index
+                            ];
+                            SubOrder::create($subData);
+                        }
                     }
                 }
             }
