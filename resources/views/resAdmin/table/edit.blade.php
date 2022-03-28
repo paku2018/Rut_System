@@ -75,5 +75,5 @@
 @endsection
 @section('page-js')
     <script src="{{asset('assets/js/plugin/selectpicker/js/bootstrap-select.min.js')}}"></script>
-    <script src="{{asset('custom/js/resAdmin/table.js')}}?v=202112061555"></script>
+    <script src="{{asset('custom/js/resAdmin/table-create.js')}}?v=202112061555"></script>
 @endsection

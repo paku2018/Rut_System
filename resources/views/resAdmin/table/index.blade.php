@@ -361,6 +361,7 @@
 
     <!-- Datatable JS -->
     <script src="{{asset('assets/js/plugin/moment/moment.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
 
     <script>
         let tip_percentage = '10'

@@ -1,11 +1,24 @@
 var tableId = 0;
 var nf = Intl.NumberFormat();
 
+
 $(document).ready(function () {
     getTableList()
     setInterval(function () {
         getTableList()
     }, 10000);
+
+    $('#dt_table').DataTable({
+        "pageLength": 3,
+        "lengthChange": false,
+        "order": [[ 1, 'asc' ]],
+        "aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [ 0, 3 ] }
+        ],
+        language: {
+            url: path_lang_datatable
+        }
+    });
 })
 
 $(document).on('click','.delete', function () {

@@ -584,7 +584,7 @@ $(document).on('click','.btn-pend', function () {
 
 $(document).ready(function () {
     $('#dt_table').DataTable({
-        "pageLength": 10,
+        "pageLength": 3,
         "lengthChange": false,
         "order": [[ 1, 'asc' ]],
         "aoColumnDefs": [
