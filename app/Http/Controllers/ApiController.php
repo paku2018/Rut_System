@@ -6,6 +6,7 @@ use App\Common\ApiResponseData;
 use App\Models\Client;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\SubOrder;
 use App\Models\Table;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -82,9 +83,14 @@ class ApiController extends Controller
                 });
         })->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
         $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
+        $agg_products = Product::with('category')->where('restaurant_id', $resId)->where('status',1)
+            ->whereHas('category', function ($query) {
+                $query->where('restaurant_id', 0);
+            })->get();
         $success = array(
             'tables' =>  $tables,
-            'products' => $products
+            'products' => $products,
+            'agg_products' => $agg_products
         );
         $responseData->result = $success;
         $responseData->message = "success";
@@ -96,7 +102,7 @@ class ApiController extends Controller
         $tableId = $request->tableId;
         $responseData = new ApiResponseData($request);
         $table = Table::with('restaurant')->find($tableId);
-        $orders = Order::with('client','product')->where('status','open')->where('assigned_table_id', $tableId)->get();
+        $orders = Order::with('client','product', 'children')->where('status','open')->where('assigned_table_id', $tableId)->get();
         $success = array(
             'table' =>  $table,
             'orders' => $orders
@@ -134,14 +140,27 @@ class ApiController extends Controller
                 if($item){
                     $data = [
                         'restaurant_id' => $table->restaurant_id,
-                        'product_id' => $key,
-                        'order_count' => $item,
+                        'product_id' => $item->id,
+                        'order_count' => $item->quantity,
                         'status' => 'open',
                         'client_id' => $table->current_client_id,
                         'comment' => $request->comment,
                         'assigned_table_id' => $tableId
                     ];
-                    Order::create($data);
+                    $order = Order::create($data);
+
+                    //adding sub orders
+                    $indexes = $item->sub_orders;
+                    $indexes = explode(",", $indexes);
+                    foreach ($indexes as $index) {
+                        if ($index) {
+                            $subData = [
+                                'order_id' => $order->id,
+                                'product_id' => $index
+                            ];
+                            SubOrder::create($subData);
+                        }
+                    }
                 }
             }
             $update = Table::where('id', $tableId)->update(['status'=>'ordered']);
@@ -205,6 +224,27 @@ class ApiController extends Controller
         $orders = $request->orders;
         $orders = explode(",", $orders);
         $update = Order::whereIn('id', $orders)->update(['deliver_status'=>1]);
+        $delivered_orders = Order::whereIn('id', $orders)->where('deliver_status', 0)->get();
+
+        //send confirmation email to the client
+        if (count($delivered_orders) > 0 && $delivered_orders[0]->client_id) {
+            $client = Client::find($delivered_orders[0]->client_id);
+            $data = array();
+            $total = 0;
+            foreach ($delivered_orders as $one) {
+                $item = array();
+                $product = Product::find($one->product_id);
+                $item['product_name'] = $product->name;
+                $item['product_price'] = $product->sale_price;
+                $item['product_count'] = $one->order_count;
+                $total += $product->sale_price * $one->order_count;
+
+                $data['products'][] = $item;
+            }
+            $data['total'] = $total;
+
+            sendOrderDeliverEmail($data, $client->email);
+        }
 
         //check if pending order and if not, change the table status
         $pend_order = Order::where('assigned_table_id', $tableId)->where('status', '!=', 'done')->where('deliver_status', 0)->first();
