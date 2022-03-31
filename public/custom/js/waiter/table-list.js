@@ -31,6 +31,11 @@ $(document).on('click','.table-box', function () {
                     checkCount()
                     checkDisable()
                     $('.btn-pend').prop('disabled', false)
+                    if (orders.length == 0) {
+                        $('.btn-pend').attr('disabled', true)
+                    }else {
+                        $('.btn-pend').attr('disabled', false)
+                    }
                     $('#detailModal').modal('show')
                 }else{
                     swal(langs('messages.wait_cashier_close_table'), {
@@ -71,21 +76,21 @@ function generateOrderedList(tableData, orders){
         for (let i=0; i<orders.length; i++){
             let val = orders[i].product.sale_price * orders[i].order_count;
             let delivered = orders[i].deliver_status == 1 ? '(Entregado)' : ''
-            let direct_order_class = orders[i].direct == null? 'text-danger':'text-purple'
+            //let direct_order_class = orders[i].direct == null? 'text-danger':'text-purple'
             let sub_orders = orders[i].children
             let sub_code = ''
             if (sub_orders.length > 0) {
                 for (let ii=0; ii<sub_orders.length; ii++) {
                     sub_code += '<div class="d-flex justify-content-between">' +
                         '<h4 class="mb-0 ml-3 text-danger">' + sub_orders[ii].detail.name +'</h4>' +
-                        '<h4 class="mb-0 text-black">' + sub_orders[ii].detail.sale_price.toLocaleString('de-DE') +'</h4>' +
+                        '<h4 class="mb-0 text-danger">' + sub_orders[ii].detail.sale_price.toLocaleString('de-DE') +'</h4>' +
                         '</div>'
                     total += sub_orders[ii].detail.sale_price
                 }
             }
             code += ' <div class="pb-1" style="border-bottom: 1px solid #eeeeee"><div class="d-flex align-items-center mb-1">\n' +
                 '                                    <input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-2" data-value="'+ orders[i].id +'">' +
-                '                                    <h4 class="mb-0 ' + direct_order_class + '">' + orders[i].product.name + delivered + '</h4></div>\n' +
+                '                                    <h4 class="mb-0">' + orders[i].product.name + delivered + '</h4></div>\n' +
                 '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price.toLocaleString('de-DE') + '*' + orders[i].order_count + '='+ val.toLocaleString('de-DE') +'</h4>'
             code += sub_code
             code += '</div>'
@@ -126,6 +131,12 @@ function getOrderList(){
                 $('#comment').val('')
                 checkCount()
                 checkDisable()
+
+                if (orders.length == 0) {
+                    $('.btn-pend').attr('disabled',true)
+                }else {
+                    $('.btn-pend').attr('disabled',false)
+                }
             }else{
                 $('#assigned-orders').html(langs('messages.server_error'));
             }
@@ -177,10 +188,7 @@ function getTableList() {
                         code += '<div class="table-status ' + className + '" title="' + title + '"></div>'
                         code += '<h6 class="text-center mb-0">' + langs('messages.table') + '-' + tables[i].t_number + '</h6>'
                         code += '<h5 class="text-center" style="height: 80px">' + tables[i].name + '</h5>'
-                        code += '<div class="table-action d-flex align-items-center justify-content-center">'
-                        code += '<a href="' + t_url + '" class="text-black"><i class="fas fa-edit"></i></a>'
-                        code += '<div class="ml-2 text-red delete" data-index="' + tables[i].id + '"><i class="fas fa-trash"></i></div>'
-                        code += '</div></div>'
+                        code += '</div>'
                     }
                 }else {
                     code = '<h6 class="text-center">No hay mesas disponibles.</h6>'

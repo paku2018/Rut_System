@@ -120,21 +120,21 @@ function generateOrderedList(tableData, orders){
         for (let i=0; i<orders.length; i++){
             let val = orders[i].product.sale_price * orders[i].order_count;
             let delivered = orders[i].deliver_status == 1 ? '(Entregado)' : ''
-            let direct_order_class = orders[i].direct == null? 'text-danger':'text-purple'
+            //let direct_order_class = orders[i].direct == null? 'text-danger':'text-purple'
             let sub_orders = orders[i].children
             let sub_code = ''
             if (sub_orders.length > 0) {
                 for (let ii=0; ii<sub_orders.length; ii++) {
                     sub_code += '<div class="d-flex justify-content-between">' +
                         '<h4 class="mb-0 ml-3 text-danger">' + sub_orders[ii].detail.name +'</h4>' +
-                        '<h4 class="mb-0 text-black">' + sub_orders[ii].detail.sale_price.toLocaleString('de-DE') +'</h4>' +
+                        '<h4 class="mb-0 text-danger">' + sub_orders[ii].detail.sale_price.toLocaleString('de-DE') +'</h4>' +
                         '</div>'
                     total += sub_orders[ii].detail.sale_price
                 }
             }
             code += ' <div class="pb-1" style="border-bottom: 1px solid #eeeeee"><div class="d-flex align-items-center mb-1">\n' +
                 '                                    <input type="checkbox" name="orders_'+orders[i].id+'" class="orders mr-2" data-value="'+ orders[i].id +'">' +
-                '                                    <h4 class="mb-0 ' + direct_order_class + '">' + orders[i].product.name + delivered + '</h4></div>\n' +
+                '                                    <h4 class="mb-0">' + orders[i].product.name + delivered + '</h4></div>\n' +
                 '                                    <h4 class="text-right mb-1">' + orders[i].product.sale_price.toLocaleString('de-DE') + '*' + orders[i].order_count + '='+ val.toLocaleString('de-DE') +'</h4>';
             code += sub_code
             code += '</div>'
