@@ -267,5 +267,5 @@
         let _token = '{{csrf_token()}}'
         let HOST_URL = "{{ url('/') }}"
     </script>
-    <script src="{{asset('custom/js/waiter/table-list.js')}}?v=202203170010"></script>
+    <script src="{{asset('custom/js/waiter/table-list.js')}}?v=202204011155"></script>
 @endsection
