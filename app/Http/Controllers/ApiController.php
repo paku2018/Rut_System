@@ -136,7 +136,6 @@ class ApiController extends Controller
             $items = $request->items;
             $items = json_decode($items);
             foreach ($items as $key => $item){
-                Log::info('item: ' . $item);
                 if($item){
                     $data = [
                         'restaurant_id' => $table->restaurant_id,
