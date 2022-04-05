@@ -50,7 +50,7 @@ class HomeController extends Controller
         switch ($role){
             case 'admin':
             case 'restaurant':
-                $link = $role.".home";
+                $link = 'restaurant.list';
                 break;
             case 'waiter':
                 $link = $role.".tables";

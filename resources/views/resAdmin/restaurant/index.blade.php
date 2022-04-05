@@ -20,43 +20,26 @@
                 </ul>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center justify-content-between">
-                            <h4 class="card-title">@lang('information')</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="dt_table" class="display table table-striped table-hover" >
-                                    <thead>
-                                    <tr>
-                                        <th>@lang('ID')</th>
-                                        <th>@lang('name')</th>
-                                        <th>@lang('creation_date')</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($restaurants as $item)
-                                        <tr>
-                                            <td>{{$item->id}}</td>
-                                            <td>
-                                                <a href="{{ route('restaurant.detail',$item->id) }}">{{$item->name}}</a>
-                                            </td>
-                                            <td>{{$item->created_at}}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                @foreach($restaurants as $restaurant)
+                    <div class="col-md-4">
+                        <div class="card card-dark bg-secondary-gradient single-rest" data-index="{{$restaurant->id}}" style="cursor: pointer">
+                            <div class="card-body bubble-shadow">
+                                <h1>{{$restaurant->name}}</h1>
+                                <h5 class="op-8">{{count($restaurant->tables)}} @lang('tables')</h5>
+                                <div class="pull-right">
+                                    <h3 class="fw-bold op-8">{{$restaurant->tax_id}}</h3>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
 @endsection
 @section('page-js')
-    <!-- Datatable JS -->
-    <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
-    <script src="{{asset('custom/js/resAdmin/restaurant-list.js')}}?v=202112061555"></script>
+    <script>
+        var HOST_URL = '{{url('/')}}'
+    </script>
+    <script src="{{asset('custom/js/resAdmin/restaurant-list.js')}}?v=202204051555"></script>
 @endsection

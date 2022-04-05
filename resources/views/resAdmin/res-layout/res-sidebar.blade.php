@@ -26,8 +26,8 @@
             <ul class="nav nav-primary">
                 <li class="nav-item {{($main=="dashboard" || $link=="home")?'active':''}}">
                     <a href="{{route('home')}}">
-                        <i class="fas fa-home"></i>
-                        <p>@lang('dashboard')</p>
+                        <i class="fas fa-utensils"></i>
+                        <p>@lang('restaurants')</p>
                     </a>
                 </li>
                 <li class="nav-item {{$link=="members"?'active':''}}">

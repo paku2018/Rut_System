@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $restaurants = RestaurantManger::where('user_id', Auth::id())->count();
-        return view('resAdmin.home', compact('restaurants'));
-    }
-
     public function qrcode(){
         $resId = session()->get('resId');
         if ($resId){

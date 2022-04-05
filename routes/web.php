@@ -63,8 +63,6 @@ Route::group(['as' =>'admin.','prefix'=>'admin','middleware'=>'checkAdmin'],func
 });
 
 Route::group(['middleware'=>'checkResAdmin'],function () {
-    Route::get('/dashboard', [App\Http\Controllers\ResAdmin\HomeController::class, 'index'])->name('restaurant.home');
-
     Route::group(['prefix' => 'restaurant', 'as' => 'restaurant.'], function () {
         Route::get('/list', [App\Http\Controllers\ResAdmin\RestaurantController::class, 'index'])->name('list');
         Route::get('/detail/{id}', [App\Http\Controllers\ResAdmin\RestaurantController::class, 'detail'])->name('detail');

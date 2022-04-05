@@ -23,7 +23,7 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                @if($user->role == "admin" || $user->role == "restaurant")
+                @if($user->role == "admin")
                 <li class="nav-item {{($main=="dashboard" || $link=="home")?'active':''}}">
                     <a href="{{route('home')}}">
                         <i class="fas fa-home"></i>
