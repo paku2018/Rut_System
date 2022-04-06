@@ -75,13 +75,6 @@ class ApiController extends Controller
     public function index(Request $request){
         $resId = Auth::user()->restaurant_id;
         $responseData = new ApiResponseData($request);
-        $tables = Table::where('restaurant_id', $resId)->where(function ($q){
-            $q->where('type', 'real')
-                ->orWhere(function ($query){
-                    $query->where('type', '!=', 'real')
-                        ->where('status', '!=', 'closed');
-                });
-        })->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
 
         $tables = Table::where('restaurant_id', $resId)->where('type', 'real')->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
         $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
