@@ -38,13 +38,14 @@ class TableController extends Controller
     public function getList(Request $request) {
         $resId = Auth::user()->restaurant_id;
         if ($resId) {
-            $tables = Table::where('restaurant_id', $resId)->where(function ($q){
-                $q->where('type', 'real')
-                    ->orWhere(function ($query){
-                        $query->where('type', '!=', 'real')
-                            ->where('status', '!=', 'closed');
-                    });
-            })->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
+//            $tables = Table::where('restaurant_id', $resId)->where(function ($q){
+//                $q->where('type', 'real')
+//                    ->orWhere(function ($query){
+//                        $query->where('type', '!=', 'real')
+//                            ->where('status', '!=', 'closed');
+//                    });
+//            })->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
+            $tables = Table::where('restaurant_id', $resId)->where('type', 'real')->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
             return response()->json(['result'=>true, 'data'=>$tables]);
         }else {
             return response()->json(['result'=>true, 'data'=>array()]);
