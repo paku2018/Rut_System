@@ -82,6 +82,8 @@ class ApiController extends Controller
                         ->where('status', '!=', 'closed');
                 });
         })->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
+
+        $tables = Table::where('restaurant_id', $resId)->where('type', 'real')->orderBy('type', 'ASC')->orderBy('t_number', 'ASC')->get();
         $products = Product::where('restaurant_id', $resId)->where('status',1)->get();
         $agg_products = Product::with('category')->where('restaurant_id', $resId)->where('status',1)
             ->whereHas('category', function ($query) {
