@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckResAdmin
+class CheckWaiter
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,11 @@ class CheckResAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user();
-        if(Auth::guard()->check() === false || $user->role != 'restaurant'){
+        if(Auth::guard()->check() === false){
+            return redirect('/login');
+        }elseif (Auth::user()->role != 'waiter'){
             return redirect('/home');
-        }
-        if(checkStatus($user) == false){
+        }elseif(checkStatus(Auth::user()) == false){
             auth()->logout();
             return redirect('/login');
         }

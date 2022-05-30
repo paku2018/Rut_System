@@ -62,10 +62,27 @@ Route::group(['as' =>'admin.','prefix'=>'admin','middleware'=>'checkAdmin'],func
     });
 });
 
-Route::group(['middleware'=>'checkResAdmin'],function () {
-    Route::group(['prefix' => 'restaurant', 'as' => 'restaurant.'], function () {
+Route::group(['prefix' => 'restaurant', 'as' => 'restaurant.'],function () {
+    Route::group(['middleware'=>'checkResAdmin'], function () {
         Route::get('/list', [App\Http\Controllers\ResAdmin\RestaurantController::class, 'index'])->name('list');
         Route::get('/detail/{id}', [App\Http\Controllers\ResAdmin\RestaurantController::class, 'detail'])->name('detail');
+
+        Route::get('/members', [App\Http\Controllers\ResAdmin\UserController::class, 'index'])->name('members.list');
+        Route::get('/members/create', [App\Http\Controllers\ResAdmin\UserController::class, 'create'])->name('members.create');
+        Route::get('/members/edit/{id}', [App\Http\Controllers\ResAdmin\UserController::class, 'edit'])->name('members.edit');
+        Route::post('/members/store', [App\Http\Controllers\ResAdmin\UserController::class, 'store'])->name('members.store');
+        Route::post('/members/delete', [App\Http\Controllers\ResAdmin\UserController::class, 'delete'])->name('members.delete');
+
+        Route::get('/permission', [App\Http\Controllers\ResAdmin\PermissionController::class, 'index'])->name('permission.index');
+        Route::get('/permission/edit/{user}', [App\Http\Controllers\ResAdmin\PermissionController::class, 'edit'])->name('permission.edit');
+        Route::post('/permission/store', [App\Http\Controllers\ResAdmin\PermissionController::class, 'store'])->name('permission.store');
+
+        Route::get('/qrcode', [App\Http\Controllers\ResAdmin\HomeController::class, 'qrcode'])->name('qrcode');
+
+        Route::post('/closeTable', [App\Http\Controllers\ResAdmin\TableController::class, 'close'])->name('close-table');
+    });
+
+    Route::group(['middleware'=>'checkMember:tables.view'],function () {
         Route::get('/tables', [App\Http\Controllers\ResAdmin\TableController::class, 'index'])->name('tables.list');
         Route::get('/tables/create', [App\Http\Controllers\ResAdmin\TableController::class, 'create'])->name('tables.create');
         Route::get('/tables/create-delivery', [App\Http\Controllers\ResAdmin\TableController::class, 'createDelivery'])->name('tables.create-delivery');
@@ -74,52 +91,46 @@ Route::group(['middleware'=>'checkResAdmin'],function () {
         Route::post('/tables/store', [App\Http\Controllers\ResAdmin\TableController::class, 'store'])->name('tables.store');
         Route::post('/tables/delete', [App\Http\Controllers\ResAdmin\TableController::class, 'delete'])->name('tables.delete');
         Route::post('/tables/list', [App\Http\Controllers\ResAdmin\TableController::class, 'getList'])->name('tables.get-list');
+    });
 
-        Route::get('/members', [App\Http\Controllers\ResAdmin\UserController::class, 'index'])->name('members.list');
-        Route::get('/members/create', [App\Http\Controllers\ResAdmin\UserController::class, 'create'])->name('members.create');
-        Route::get('/members/edit/{id}', [App\Http\Controllers\ResAdmin\UserController::class, 'edit'])->name('members.edit');
-        Route::post('/members/store', [App\Http\Controllers\ResAdmin\UserController::class, 'store'])->name('members.store');
-        Route::post('/members/delete', [App\Http\Controllers\ResAdmin\UserController::class, 'delete'])->name('members.delete');
-
+    Route::group(['middleware'=>'checkMember:categories.view'],function () {
         Route::get('/categories', [App\Http\Controllers\ResAdmin\CategoryController::class, 'index'])->name('categories.list');
         Route::get('/categories/create', [App\Http\Controllers\ResAdmin\CategoryController::class, 'create'])->name('categories.create');
         Route::get('/categories/edit/{id}', [App\Http\Controllers\ResAdmin\CategoryController::class, 'edit'])->name('categories.edit');
         Route::post('/categories/store', [App\Http\Controllers\ResAdmin\CategoryController::class, 'store'])->name('categories.store');
         Route::post('/categories/delete', [App\Http\Controllers\ResAdmin\CategoryController::class, 'delete'])->name('categories.delete');
+    });
 
+    Route::group(['middleware'=>'checkMember:products.view'],function () {
         Route::get('/products', [App\Http\Controllers\ResAdmin\ProductController::class, 'index'])->name('products.list');
         Route::get('/products/create', [App\Http\Controllers\ResAdmin\ProductController::class, 'create'])->name('products.create');
         Route::get('/products/edit/{id}', [App\Http\Controllers\ResAdmin\ProductController::class, 'edit'])->name('products.edit');
         Route::post('/products/store', [App\Http\Controllers\ResAdmin\ProductController::class, 'store'])->name('products.store');
         Route::post('/products/delete', [App\Http\Controllers\ResAdmin\ProductController::class, 'delete'])->name('products.delete');
         Route::post('/products/change', [App\Http\Controllers\ResAdmin\ProductController::class, 'change'])->name('products.change');
+    });
 
-        Route::get('/qrcode', [App\Http\Controllers\ResAdmin\HomeController::class, 'qrcode'])->name('qrcode');
+    Route::group(['prefix' => 'sales', 'as' => 'sales.', 'middleware'=>'checkMember:sales.view'],function () {
+        Route::get('/index', [App\Http\Controllers\ResAdmin\SalesController::class, 'index'])->name('index');
+        Route::post('/get-products', [App\Http\Controllers\ResAdmin\SalesController::class, 'getProducts'])->name('get-products');
+    });
 
-        Route::post('/closeTable', [App\Http\Controllers\ResAdmin\TableController::class, 'close'])->name('close-table');
+    Route::group(['prefix' => 'statistics', 'as' => 'statistics.', 'middleware'=>'checkMember:statistics.view'],function () {
+        Route::get('/sales', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'salesIndex'])->name('sales');
+        Route::post('/sales/getData', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'getSalesData'])->name('sales.get-data');
+        Route::post('/sales/export', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'salesExport'])->name('sales.export');
 
-        Route::group(['prefix' => 'statistics', 'as' => 'statistics.'], function () {
-            Route::get('/sales', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'salesIndex'])->name('sales');
-            Route::post('/sales/getData', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'getSalesData'])->name('sales.get-data');
-            Route::post('/sales/export', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'salesExport'])->name('sales.export');
+        Route::get('/orders', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'ordersIndex'])->name('orders');
 
-            Route::get('/orders', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'ordersIndex'])->name('orders');
+        Route::get('/bestProducts', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductIndex'])->name('best-products');
+        Route::post('/bestProducts/getData', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductData'])->name('best-products.get-data');
+        Route::post('/bestProducts/export', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductExport'])->name('best-products.export');
 
-            Route::get('/bestProducts', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductIndex'])->name('best-products');
-            Route::post('/bestProducts/getData', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductData'])->name('best-products.get-data');
-            Route::post('/bestProducts/export', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'bestProductExport'])->name('best-products.export');
-
-            Route::get('/breakdown', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'breakdownIndex'])->name('breakdown');
-        });
-
-        Route::group(['prefix' => 'sales', 'as' => 'sales.'], function () {
-            Route::get('/index', [App\Http\Controllers\ResAdmin\SalesController::class, 'index'])->name('index');
-            Route::post('/get-products', [App\Http\Controllers\ResAdmin\SalesController::class, 'getProducts'])->name('get-products');
-        });
+        Route::get('/breakdown', [App\Http\Controllers\ResAdmin\StatisticsController::class, 'breakdownIndex'])->name('breakdown');
     });
 });
 
-Route::group(['middleware'=>'checkMember'],function () {
+Route::group(['middleware'=>'checkWaiter'],function () {
     Route::post('/getOrders', [App\Http\Controllers\Member\OrderController::class, 'getData'])->name('get-order-data');
     Route::post('/assignOrder', [App\Http\Controllers\Member\OrderController::class, 'assign'])->name('assign-orders');
 

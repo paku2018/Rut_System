@@ -68,6 +68,7 @@
                                         <select class="form-control selectpicker" id="role" name="role" required>
                                             <option value="" selected disabled>@lang('select')</option>
                                             <option value="waiter" {{isset($data)&&$data->role=="waiter"?'selected':''}}>@lang('waiter')</option>
+                                            <option value="member" {{isset($data)&&$data->role=="member"?'selected':''}}>@lang('business_user')</option>
                                         </select>
                                     </div>
                                 </div>

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'restaurant', 'waiter', 'cashier', 'client'])->default('restaurant');
+            $table->enum('role', ['admin', 'restaurant', 'waiter', 'member', 'client'])->default('restaurant');
             $table->string('avatar')->nullable();
             $table->string('verification_code',50)->nullable();
             $table->integer('restaurant_id')->nullable();

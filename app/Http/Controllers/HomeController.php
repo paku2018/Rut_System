@@ -49,8 +49,14 @@ class HomeController extends Controller
 
         switch ($role){
             case 'admin':
+                $link = 'admin.home';
+                break;
             case 'restaurant':
                 $link = 'restaurant.list';
+                break;
+            case 'member':
+                session()->put('resId', $user->restaurant_id);
+                $link = 'restaurant.tables.list';
                 break;
             case 'waiter':
                 $link = $role.".tables";

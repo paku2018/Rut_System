@@ -15,16 +15,24 @@ class CheckMember
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $permission = "home")
     {
         if(Auth::guard()->check() === false){
             return redirect('/login');
-        }elseif (Auth::user()->role != 'waiter'){
-            return redirect('/home');
-        }elseif(checkStatus(Auth::user()) == false){
+        }
+        $user = Auth::user();
+        if ($user->role != 'restaurant' && $user->role != "member"){
+            abort(404);
+        }
+        if(checkStatus($user) == false){
             auth()->logout();
             return redirect('/login');
         }
+        if (checkPermission($user, $permission) == false) {
+            auth()->logout();
+            return redirect('/login');
+        }
+
         return $next($request);
     }
 }

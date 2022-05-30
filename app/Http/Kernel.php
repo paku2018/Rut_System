@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckMember;
 use App\Http\Middleware\CheckResAdmin;
+use App\Http\Middleware\CheckWaiter;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -69,5 +70,6 @@ class Kernel extends HttpKernel
         'checkAdmin' => CheckAdmin::class,
         'checkResAdmin' => CheckResAdmin::class,
         'checkMember' => CheckMember::class,
+        'checkWaiter' => CheckWaiter::class,
     ];
 }

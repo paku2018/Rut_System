@@ -21,7 +21,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('restaurant.members.list') }}">@lang('members')</a>
+                        <a href="{{ route('restaurant.permission.index') }}">@lang('permission')</a>
                     </li>
                 </ul>
             </div>
@@ -29,8 +29,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
-                            <h4 class="card-title">@lang('member_list')</h4>
-                            <a href="{{ route('restaurant.members.create') }}" class="btn btn-black btn-round">@lang('create')</a>
+                            <h4 class="card-title">@lang('list')</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -40,8 +39,7 @@
                                         <th>@lang('ID')</th>
                                         <th>@lang('name')</th>
                                         <th>@lang('email')</th>
-                                        <th>@lang('role')</th>
-                                        <th class="text-center">@lang('action')</th>
+                                        <th class="text-center">@lang('permission')</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -50,15 +48,11 @@
                                             <td>{{$user->id}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
-                                            <td>{{$user->role=="waiter"?__('waiter'):__('business_user')}}</td>
                                             <td class="text-center">
                                                 <div class="form-button-action">
-                                                    <a href="{{ route('restaurant.members.edit', $user->id) }}" type="button" class="btn btn-link btn-primary btn-lg">
+                                                    <a href="{{ route('restaurant.permission.edit', $user->id) }}" type="button" class="btn btn-link btn-primary btn-lg">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <button type="button" onclick="delUser({{$user->id}})" class="btn btn-link btn-danger">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -77,8 +71,7 @@
     <!-- Datatable JS -->
     <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
     <script>
-        var path_delete = '{{ route('restaurant.members.delete') }}';
         var _token = '{{csrf_token()}}'
     </script>
-    <script src="{{asset('custom/js/resAdmin/member-list.js')}}?v=202112061555"></script>
+    <script src="{{asset('custom/js/resAdmin/permission-list.js')}}?v=2022053055"></script>
 @endsection

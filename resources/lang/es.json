@@ -265,5 +265,9 @@
     "stock_count": "Recuento de stock",
     "close": "Cerrar",
     "added_product": "Productos añadidos",
-    "quantity": "Cantidad"
+    "quantity": "Cantidad",
+
+    "business_user": "Usuario empresarial",
+    "permission": "Permiso",
+    "edit_permission": "Editar permiso"
 }

@@ -16,7 +16,7 @@ class UserController extends Controller
         $resId = session()->get('resId');
         if ($resId){
             $restaurant = Restaurant::find($resId);
-            $users = User::whereIn('role',['waiter','cashier'])->where('restaurant_id',$resId)->orderBy('id', 'desc')->get();
+            $users = User::whereIn('role',['waiter','member'])->where('restaurant_id',$resId)->orderBy('id', 'desc')->get();
 
             return view('resAdmin.user.index',compact('users','restaurant'));
         }else{

@@ -58,6 +58,14 @@ function checkStatus($user){
                     }
                 }
                 break;
+            case 'member':
+                $restaurant = \App\Models\Restaurant::find($user->restaurant_id);
+                if ($restaurant) {
+                    $owner = \App\Models\User::find($restaurant->owner_id);
+                    if ($owner->status == "active")
+                        $status = true;
+                }
+                break;
             case 'waiter':
                 $restaurant = \App\Models\Restaurant::find($user->restaurant_id);
                 $owner = \App\Models\User::find($restaurant->owner_id);
@@ -70,4 +78,44 @@ function checkStatus($user){
     }
 
     return $status;
+}
+
+function checkPermission($user, $permission_name){
+    $result = false;
+    if ($permission_name == "home") {
+        $result = true;
+    }else {
+        $role = $user->role;
+        $permission = \App\Models\Permission::where('name', $permission_name)->first();
+        if ($permission) {
+            switch ($role) {
+                case 'admin':
+                case 'restaurant':
+                    $result = true;
+                    break;
+                case 'member':
+                    $has_permission = \App\Models\UserHasPermission::where('user_id', $user->id)->where('permission_id', $permission->id)->first();
+                    if ($has_permission) {
+                        $result = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    return $result;
+}
+
+function getPermissions() {
+    $result = array();
+
+    $user_id = \Illuminate\Support\Facades\Auth::id();
+    if ($user_id) {
+        $has_permissions = \App\Models\UserHasPermission::where('user_id', $user_id)->pluck('permission_id')->toArray();
+        $result = \App\Models\Permission::whereIn('id', $has_permissions)->pluck('name')->toArray();
+    }
+
+    return $result;
 }
